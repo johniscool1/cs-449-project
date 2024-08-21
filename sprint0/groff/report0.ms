@@ -2,9 +2,10 @@
 Sprint #0 Report
 .AU
 John Chirpich
+
 .NH
 Key Decisions
-.pp
+
 .TS
 center, box;
 c | c.
@@ -20,10 +21,22 @@ Programming style guide	GNU Coding Standards
 _
 Project hosting site	Github.com
 .TE
+
 .NH
 Unit Testing
+
 .pp
+For Unit testing, I used Catch2. I choose it becuase I thought it was a lot simplier than the other ones I looked at and the source code was only 2 files.
 .PSPIC -C img/unit_testing_output_sc.ps
+
+
+.URL https://github.com/johniscool1/cs-449-project/tree/master/sprint0/unit_testing_ex source code
+
+
+.bp +1
 .NH
 GUI programming
+
 .pp
+I choose FLTK for the GUI library becuase it is similiar to Xforms (x11 library) which I have used before. I ultimatly choose FLTK over Xforms becuase FLTK is cross platform and more modern compared to Xforms.
+.PSPIC -C img/gui_exmaple_sc.ps
