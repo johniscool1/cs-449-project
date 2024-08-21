@@ -11,5 +11,6 @@ Create a build directory then run:
 ```
 cmake ..
 cmake --build .
-executable is in the debug file
 ```
+executable is in the debug folder
+
