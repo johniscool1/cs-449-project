@@ -20,4 +20,10 @@ Programming style guide	GNU Coding Standards
 _
 Project hosting site	Github.com
 .TE
-
+.NH
+Unit Testing
+.pp
+.PSPIC -C img/unit_testing_output_sc.ps
+.NH
+GUI programming
+.pp
