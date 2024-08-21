@@ -14,9 +14,9 @@ GUI library	FLTK
 _
 IDE (Integrated Development Environment)	VSCodium
 _
-xUnit framework	TBD
+xUnit framework	Catch2
 _
-Programming style guide	TBD
+Programming style guide	GNU Coding Standards	
 _
 Project hosting site	Github.com
 .TE
