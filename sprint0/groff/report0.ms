@@ -30,7 +30,8 @@ For Unit testing, I used Catch2. I choose it becuase I thought it was a lot simp
 .PSPIC -C img/unit_testing_output_sc.ps
 
 
-.URL https://github.com/johniscool1/cs-449-project/tree/master/sprint0/unit_testing_ex source code
+.UL 
+https://github.com/johniscool1/cs-449-project/tree/master/sprint0/unit_testing_ex
 
 
 .bp +1
@@ -40,3 +41,5 @@ GUI programming
 .pp
 I choose FLTK for the GUI library becuase it is similiar to Xforms (x11 library) which I have used before. I ultimatly choose FLTK over Xforms becuase FLTK is cross platform and more modern compared to Xforms.
 .PSPIC -C img/gui_exmaple_sc.ps
+.UL
+https://github.com/johniscool1/cs-449-project/tree/master/sprint0/gui_fltk_example
