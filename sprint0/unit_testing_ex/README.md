@@ -1,11 +1,11 @@
-Linux compilation:
+#Linux compilation:
 Create a build directory then run
 ```
 cmake ..
 make
 ```
 
-Windows Compilation:
+#Windows Compilation:
 In the windows terimnal
 Create a build directory then run:
 ```
