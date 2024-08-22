@@ -12,7 +12,7 @@ set(FLTK_DIR "${CMAKE_SOURCE_DIR}/fltk-1.3.9")
 add_subdirectory(${FLTK_DIR} ${CMAKE_BINARY_DIR}/fltk)
 
 # Include directories
-include_directories(${FLTK_DIR}/fltk/include)
+include_directories(${FLTK_DIR}/FL)
 
 # Add the executable
 add_executable(gui_exmaple src/example_fltk_main.cpp)
