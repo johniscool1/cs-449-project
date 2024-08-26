@@ -20,6 +20,7 @@ include_directories(${FLTK_INCLUDE_DIR})
 # Include directories
 #include_directories(../fltk-1.3.9)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # Add the executable
 add_executable(gui_exmaple example_fltk_main.cpp)
 
