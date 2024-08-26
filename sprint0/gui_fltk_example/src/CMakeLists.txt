@@ -7,18 +7,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Define the FLTK source directory
 # Set the FLTK include and library directories (where FLTK is built)
-set(FLTK_INCLUDE_DIR "${CMAKE_BINARY_DIR}/fltk-install/include")
-set(FLTK_LIBRARY_DIR "${CMAKE_BINARY_DIR}/fltk-install/lib")
+#set(FLTK_INCLUDE_DIR "${CMAKE_BINARY_DIR}/fltk-install/include")
+#set(FLTK_LIBRARY_DIR "${CMAKE_BINARY_DIR}/fltk-install/lib")
 
 # Include FLTK headers
-include_directories(${FLTK_INCLUDE_DIR})
+#include_directories(${FLTK_INCLUDE_DIR})
 
 
 # Add FLTK
 #add_subdirectory(${FLTK_DIR} ${CMAKE_BINARY_DIR}/fltk)
 
 # Include directories
-#include_directories(../fltk-1.3.9)
+include_directories(../_deps/fltk-src)
+include_directories(../_deps/fltk-build)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # Add the executable
