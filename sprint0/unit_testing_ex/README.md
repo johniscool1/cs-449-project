@@ -1,4 +1,4 @@
-# Linux compilation:
+# Linux & FreeBSD compilation:
 Create a build directory then run
 ```
 cmake ..
