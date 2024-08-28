@@ -1,4 +1,4 @@
-# Linux Compilation
+# Linux & FreeBSD Compilation
 ```
 mkdir build
 cd build
