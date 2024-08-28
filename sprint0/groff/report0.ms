@@ -23,7 +23,8 @@ Project hosting site	Github.com
 .TE
 GitHub Project Link:
 .UL https://github.com/johniscool1/cs-449-project/tree/master
-
+Sprint 0 pre-built windows executables:
+.UL https://github.com/johniscool1/cs-449-project/releases/tag/sprint0
 
 .NH
 Unit Testing
