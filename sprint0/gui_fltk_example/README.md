@@ -5,4 +5,12 @@ cd build
 cmake ..
 make
 ```
-#Windows Compilation
+Executable is in bin/
+# Windows Compilation
+```
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+Executable is in bin/Debug/
