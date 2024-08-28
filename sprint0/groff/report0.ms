@@ -17,10 +17,13 @@ IDE (Integrated Development Environment)	VSCodium
 _
 xUnit framework	Catch2
 _
-Programming style guide	GNU Coding Standards	
+Programming style guide	GNU Coding Standards 	
 _
 Project hosting site	Github.com
 .TE
+GitHub Project Link:
+.UL https://github.com/johniscool1/cs-449-project/tree/master
+
 
 .NH
 Unit Testing
