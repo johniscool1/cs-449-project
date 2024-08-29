@@ -20,6 +20,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Include directories
 include_directories(../_deps/fltk-src)
 include_directories(../_deps/fltk-build)
+include_directories(/usr/local/include)
+include_directories(/usr/local/lib)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # Add the executable
