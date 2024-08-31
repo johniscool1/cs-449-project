@@ -7,6 +7,9 @@ make
 ```
 Executable is in bin/
 # Windows Compilation
+WILL ONLY COMPILE ON WINDOWS 10 (COMPILING ON WINDOWS 11 WILL CAUSE PROGRAM TO CRASH)
+
+open visual studio code, in the top menu click view->terminal
 ```
 mkdir build
 cd build
