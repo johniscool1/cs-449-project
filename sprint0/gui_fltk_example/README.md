@@ -7,7 +7,7 @@ make
 ```
 Executable is in bin/
 # Windows Compilation
-WILL ONLY COMPILE ON WINDOWS 10 (COMPILING ON WINDOWS 11 WILL CAUSE PROGRAM TO CRASH) I have inclued the binaries in the release to avoid this.
+WILL ONLY COMPILE ON WINDOWS 10 (COMPILING ON WINDOWS 11 WILL COMPLE, BUT CAUSE PROGRAM TO CRASH) I have inclued the binaries in the release to avoid this.
 
 open visual studio code, in the top menu click view->terminal
 ```
