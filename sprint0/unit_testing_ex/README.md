@@ -6,7 +6,7 @@ make
 ```
 
 # Windows Compilation:
-In the windows terimnal
+open visual studio code, in the top menu click view->terminal
 Create a build directory then run:
 ```
 cmake ..
