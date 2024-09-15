@@ -10,7 +10,13 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Double_Window.H>
 
-#include <vector>
+#include <iostream>
+#include <stdlib.h>
+
+
+
+#include "game_logic.hpp"
+
 
 #define GAMEBOARD_WINDOW_X 700
 #define GAMEBOARD_WINDOW_Y 700
@@ -30,6 +36,7 @@ class GameBoard
   void initwin();
   bool SetBoardDimensions(int x, int y);
   void DrawButtons();
+  void DrawSettings();
   void show();
 
   Fl_Toggle_Button *BoardButton;
@@ -40,6 +47,6 @@ class GameBoard
 
 
 //main menu
-int game_main_menu();
-
+void game_main_menu();
+void playGameButtonCB();
 #endif

@@ -1,4 +1,5 @@
 #include "screen_def.hpp"
+#include "game_logic.hpp"
 #include <iostream>
 #include <stdlib.h>
 
@@ -24,6 +25,9 @@ int main()
  MainMenu->show();
 
 */
+
  game_main_menu();
+
+
  return Fl::run();
 }
