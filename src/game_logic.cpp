@@ -19,20 +19,24 @@ void GameLogic::RotatePlayerTurn()
 
 
 
-void PlayerLogic::ChangeSelectedPiece(char Selection)
+void PlayerLogic::ChangeSelectedPiece(int Selection)
 {
+
  SelectedPiece = Selection;
 }
 
 
 
-static void changePlayer1Piece(Player1Logic Player1Data, char Selection)
+void changePlayer1Piece(Fl_Widget*, void* data)
 {
- Player1Data.ChangeSelectedPiece(Selection);
+ SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
+ //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
+ CBdata->playerdata.ChangeSelectedPiece(CBdata->piece);
 }
-static void changePlayer2Piece(Player2Logic Player2Data, char Selection)
+static void changePlayer2Piece(Fl_Widget*, void* PlayerSlectedPiece)
 {
- Player2Data.ChangeSelectedPiece(Selection);
+ //Player2Data.ChangeSelectedPiece(PlayerSelectedPiece->value());
+ return;
 }
 
 

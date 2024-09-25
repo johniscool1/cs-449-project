@@ -30,11 +30,13 @@ bool GameBoard::SetBoardDimensions(int x, int y)
 }
 
 //draw the buttons for the game board
-void GameBoard::DrawButtons()
+void GameBoard::DrawButtons(Player1Logic player1data, Player2Logic player2data, GameLogic gameData)
 {
 //variables to later caluclate where to put the buttons.
  int ButtonDrawX = 0;
  int ButtonDrawY = 0;
+
+
  for(int i = 0; i < rows; i++)
  {
   for(int j = 0; j < cols; j++)
@@ -43,9 +45,11 @@ void GameBoard::DrawButtons()
    ButtonDrawX = i * 42 + 100;
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
+   //cbGameButtonData->Button = BoardButton;
+   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData.CurrentTurn };
 
    //set button callback
-   BoardButton->callback(GameBoardButtonPressed, BoardButton);
+   BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
    //make the buttons parent windows to the board
    BoardButton->parent(GameBoardWin);
   }
@@ -60,7 +64,14 @@ void GameBoard::DrawButtons()
  P1SRadio->type(FL_RADIO_BUTTON);
  P1ORadio->type(FL_RADIO_BUTTON);
 
- //P1SRadio->callback(changePlayer1Piece, Player1Data, "S");
+
+ SelectedPieceCBdata* P1RBSdata = new SelectedPieceCBdata{P1SRadio, 1, player1data};
+ SelectedPieceCBdata* P1RBOdata = new SelectedPieceCBdata{P1ORadio, 0, player1data};
+ //set default
+ P1SRadio->value(1);
+
+ P1SRadio->callback(changePlayer1Piece, P1RBSdata);
+ P1ORadio->callback(changePlayer1Piece, P1RBOdata);
  //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player1Controls->end();
@@ -73,6 +84,7 @@ void GameBoard::DrawButtons()
  Fl_Round_Button *P2ORadio = new Fl_Round_Button(630,120, 20, 10, "O");
  P2SRadio->type(FL_RADIO_BUTTON);
  P2ORadio->type(FL_RADIO_BUTTON);
+ SelectedPieceCBdata P2RadioButtonData;
 
  //P2SRadio->callback(GameData.Change);
 
@@ -118,9 +130,11 @@ void playGameButtonCB(Fl_Widget*, void* data)
  int yVal = static_cast<int>(menuSettings->y->value());
  GameLogic GameData;
  GameBoard sosGameBoard;
+ Player1Logic player1Data;
+ Player2Logic player2Data;
  sosGameBoard.initwin();
  sosGameBoard.SetBoardDimensions(xVal,yVal);
- sosGameBoard.DrawButtons();
+ sosGameBoard.DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
  sosGameBoard.show();
 
@@ -146,9 +160,19 @@ void game_main_menu()
  UserInputY->value(3);
  new Fl_Box(350,222, 70, 20, "Height");
 
+ //Gamemode selctionradio buttons
+ Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
+ SimpleGameModeRB->type(FL_RADIO_BUTTON);
+
+ Fl_Round_Button* GeneralGameModeRB = new Fl_Round_Button(410, 300, 70, 20, "General Gamemode");
+ GeneralGameModeRB->type(FL_RADIO_BUTTON);
+ //set defualt choosen gamemode
+ SimpleGameModeRB->value(1);
+
+
  //play button
  Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
- CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY};
+ CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB};
  playButton->callback(playGameButtonCB, cbGameMenuData);
  //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
  Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
@@ -162,26 +186,37 @@ void game_main_menu()
 }
 
 //callback for when a button is pressed
-void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* ButtonThatPressed)
+void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 {
+ //cout << " 1";
+ GameBoardButtonPressedData* ButtonPressedData = static_cast<GameBoardButtonPressedData*>(data);
+
  //variable to caluclate where the buttons are
  int ButtonX, ButtonY;
  //"grab" tjhe button to use it in this function
- Fl_Toggle_Button *ButtonThatWasPressed = (Fl_Toggle_Button*)ButtonThatPressed;
+ Fl_Toggle_Button *ButtonThatWasPressed = (Fl_Toggle_Button*)ButtonPressedData->Button;
  ButtonX = ButtonThatWasPressed->x();
  ButtonY = ButtonThatWasPressed->y();
  //find the button
  ButtonX = (ButtonX - 100) / 42;
  ButtonY = (ButtonY - 100) / 42;
 
- //print to console where the button was pressed
- //printf("Button %d,", ButtonX);
- //printf("%d\n", ButtonY);
+ int current_player = ButtonPressedData->currentPlayer;
+ printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
+ const char* piece;
+ switch (ButtonPressedData->Player1Data.SelectedPiece)
+ {
+   case 1:
+    piece = "S";
+    break;
+   case 0:
+    piece = "O";
+    break;
+ }
+ printf("Piece: %s\n", piece);
 
 
-
-
- ButtonThatWasPressed->label("S");
+ ButtonThatWasPressed->label(piece);
 
  //keep button down
  ButtonThatWasPressed->deactivate();
