@@ -9,6 +9,7 @@
 #include "FL/Fl_Toggle_Button.H"
 #include <FL/fl_draw.H>
 #include <FL/Fl_Double_Window.H>
+#include <FL/Fl_Counter.H>
 
 #include <iostream>
 #include <stdlib.h>
@@ -46,7 +47,15 @@ class GameBoard
 };
 
 
+struct CallbackDataMainMenu {
+    Fl_Window* window;
+    Fl_Counter* x;
+    Fl_Counter* y;
+};
+
+
+
 //main menu
 void game_main_menu();
-void playGameButtonCB();
+void playGameButtonCB(Fl_Widget*, void * data);
 #endif

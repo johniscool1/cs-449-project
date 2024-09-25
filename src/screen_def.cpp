@@ -109,14 +109,17 @@ void GameBoard::DrawSettings()
 
 
 
-void playGameButtonCB(Fl_Widget*, void * window)
+void playGameButtonCB(Fl_Widget*, void* data)
 {
- Fl_Window* win = static_cast<Fl_Double_Window*>(window); // Cast void* to Fl_Window*
+ CallbackDataMainMenu* menuSettings = static_cast<CallbackDataMainMenu*>(data);
+ Fl_Window* win = static_cast<Fl_Double_Window*>(menuSettings->window); // Cast void* to Fl_Window*
  win->hide();
+ int xVal = static_cast<int>(menuSettings->x->value());
+ int yVal = static_cast<int>(menuSettings->y->value());
  GameLogic GameData;
  GameBoard sosGameBoard;
  sosGameBoard.initwin();
- sosGameBoard.SetBoardDimensions(10,10);
+ sosGameBoard.SetBoardDimensions(xVal,yVal);
  sosGameBoard.DrawButtons();
  //sosGameBoard.DrawSettings();
  sosGameBoard.show();
@@ -130,11 +133,25 @@ void game_main_menu()
  Fl_Box* MM_text_box_title = new Fl_Box(50,40, 600, 200, "SOS GAME");
  MM_text_box_title->labelsize(100);
 
+ //counters for gameboard size
+ Fl_Counter *UserInputX = new Fl_Counter(200 , 200 , 70, 20);
+ UserInputX->type(FL_SIMPLE_COUNTER);
+ UserInputX->step(1);
+ UserInputX->value(3);
+ new Fl_Box(200,222, 70, 20, "Width");
+
+ Fl_Counter *UserInputY = new Fl_Counter(350 , 200 , 70, 20);
+ UserInputY->type(FL_SIMPLE_COUNTER);
+ UserInputY->step(1);
+ UserInputY->value(3);
+ new Fl_Box(350,222, 70, 20, "Height");
+
  //play button
- Fl_Button *playButton = new Fl_Button(200, 255,300, 50, "Play");
- playButton->callback(playGameButtonCB, GMainMenu);
- Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
- Fl_Button *quitButton = new Fl_Button(200, 365,300, 50, "quit");
+ Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
+ CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY};
+ playButton->callback(playGameButtonCB, cbGameMenuData);
+ //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
+ Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
 
 
  GMainMenu->end();
