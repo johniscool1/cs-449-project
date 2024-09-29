@@ -36,7 +36,7 @@ class GameBoard
 
   void initwin();
   bool SetBoardDimensions(int x, int y);
-  void DrawButtons(Player1Logic player1data, Player2Logic player2data, GameLogic gameData);
+  void DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData);
   void DrawSettings();
   void show();
 

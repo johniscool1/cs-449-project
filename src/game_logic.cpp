@@ -29,9 +29,9 @@ void PlayerLogic::ChangeSelectedPiece(int Selection)
 
 void changePlayer1Piece(Fl_Widget*, void* data)
 {
- SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
+ SelectedPieceCBdata* CBdata = reinterpret_cast<SelectedPieceCBdata*>(data);
  //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
- CBdata->playerdata.ChangeSelectedPiece(CBdata->piece);
+ CBdata->playerdata->SelectedPiece = CBdata->piece;
 }
 static void changePlayer2Piece(Fl_Widget*, void* PlayerSlectedPiece)
 {

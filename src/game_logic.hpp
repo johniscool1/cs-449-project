@@ -24,16 +24,16 @@ public:
  int ReturnCurrentPlayersTurn();
  void RotatePlayerTurn();
 
-
 };
 
 class PlayerLogic
 {
 public:
- int SelectedPiece = 1; // s=1, o=0
+ int SelectedPiece; // s=1, o=0
  int points;
-
  void ChangeSelectedPiece(int Selection);
+
+
 
 };
 
@@ -53,14 +53,14 @@ struct SelectedPieceCBdata
 {
  Fl_Button* SelectedButton;
  int piece;
- Player1Logic playerdata;
+ Player1Logic* playerdata;
 
 };
 struct GameBoardButtonPressedData
 {
  Fl_Toggle_Button* Button;
- Player1Logic Player1Data;
- Player2Logic Player2Data;
+ Player1Logic* Player1Data;
+ Player2Logic* Player2Data;
  int currentPlayer;
 };
 

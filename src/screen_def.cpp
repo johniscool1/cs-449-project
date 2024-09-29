@@ -30,7 +30,7 @@ bool GameBoard::SetBoardDimensions(int x, int y)
 }
 
 //draw the buttons for the game board
-void GameBoard::DrawButtons(Player1Logic player1data, Player2Logic player2data, GameLogic gameData)
+void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData)
 {
 //variables to later caluclate where to put the buttons.
  int ButtonDrawX = 0;
@@ -46,7 +46,7 @@ void GameBoard::DrawButtons(Player1Logic player1data, Player2Logic player2data, 
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
    //cbGameButtonData->Button = BoardButton;
-   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData.CurrentTurn };
+   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn };
 
    //set button callback
    BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
@@ -128,15 +128,16 @@ void playGameButtonCB(Fl_Widget*, void* data)
  win->hide();
  int xVal = static_cast<int>(menuSettings->x->value());
  int yVal = static_cast<int>(menuSettings->y->value());
- GameLogic GameData;
- GameBoard sosGameBoard;
- Player1Logic player1Data;
- Player2Logic player2Data;
- sosGameBoard.initwin();
- sosGameBoard.SetBoardDimensions(xVal,yVal);
- sosGameBoard.DrawButtons(player1Data, player2Data, GameData);
+ GameLogic* GameData = new GameLogic;
+ GameBoard* sosGameBoard = new GameBoard;
+ Player1Logic* player1Data = new Player1Logic;
+ Player2Logic* player2Data = new Player2Logic;
+ printf("DATA REDEF");
+ sosGameBoard->initwin();
+ sosGameBoard->SetBoardDimensions(xVal,yVal);
+ sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
- sosGameBoard.show();
+ sosGameBoard->show();
 
 
 }
@@ -189,7 +190,7 @@ void game_main_menu()
 void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 {
  //cout << " 1";
- GameBoardButtonPressedData* ButtonPressedData = static_cast<GameBoardButtonPressedData*>(data);
+ GameBoardButtonPressedData* ButtonPressedData = reinterpret_cast<GameBoardButtonPressedData*>(data);
 
  //variable to caluclate where the buttons are
  int ButtonX, ButtonY;
@@ -202,9 +203,10 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
  ButtonY = (ButtonY - 100) / 42;
 
  int current_player = ButtonPressedData->currentPlayer;
- printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
+ //printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
  const char* piece;
- switch (ButtonPressedData->Player1Data.SelectedPiece)
+
+ switch (ButtonPressedData->Player1Data->SelectedPiece)
  {
    case 1:
     piece = "S";
@@ -213,7 +215,7 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
     piece = "O";
     break;
  }
- printf("Piece: %s\n", piece);
+ //printf("Piece: %s\n", piece);
 
 
  ButtonThatWasPressed->label(piece);
