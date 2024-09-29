@@ -29,7 +29,7 @@ public:
 class PlayerLogic
 {
 public:
- int SelectedPiece; // s=1, o=0
+ int SelectedPiece = 1; // s=1, o=0
  int points;
  void ChangeSelectedPiece(int Selection);
 
