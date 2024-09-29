@@ -9,6 +9,7 @@
 #include "FL/Fl.H"
 #include "FL/Fl_Box.H"
 #include <FL/Fl_Group.H>
+#include <FL/Fl_Toggle_Button.H>
 
 using namespace std;
 
@@ -23,16 +24,16 @@ public:
  int ReturnCurrentPlayersTurn();
  void RotatePlayerTurn();
 
-
 };
 
 class PlayerLogic
 {
 public:
- char SelectedPiece;
+ int SelectedPiece; // s=1, o=0
  int points;
+ void ChangeSelectedPiece(int Selection);
 
- void ChangeSelectedPiece(char Selection);
+
 
 };
 
@@ -48,7 +49,21 @@ public:
 };
 
 
+struct SelectedPieceCBdata
+{
+ Fl_Button* SelectedButton;
+ int piece;
+ Player1Logic* playerdata;
 
-static void changePlayer1Piece(Player1Logic Player1Data, char Selection);
+};
+struct GameBoardButtonPressedData
+{
+ Fl_Toggle_Button* Button;
+ Player1Logic* Player1Data;
+ Player2Logic* Player2Data;
+ int currentPlayer;
+};
+
+void changePlayer1Piece(Fl_Widget*, void* data);
 static void changePlayer2Piece(Fl_Widget*, Player1Logic Player1Data, char Selection);
 #endif

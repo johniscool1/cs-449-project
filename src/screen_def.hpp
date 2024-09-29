@@ -36,12 +36,12 @@ class GameBoard
 
   void initwin();
   bool SetBoardDimensions(int x, int y);
-  void DrawButtons();
+  void DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData);
   void DrawSettings();
   void show();
 
   Fl_Toggle_Button *BoardButton;
-  static void GameBoardButtonPressed(Fl_Widget*, void *ButtonThatPressed);
+  static void GameBoardButtonPressed(Fl_Widget*, void *data);
 
 
 };
@@ -51,6 +51,8 @@ struct CallbackDataMainMenu {
     Fl_Window* window;
     Fl_Counter* x;
     Fl_Counter* y;
+    Fl_Round_Button* SimpleGamemodeRB;
+    Fl_Round_Button* GeneralGamemodeRB;
 };
 
 
