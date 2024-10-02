@@ -1,8 +1,9 @@
 #ifndef GAME_LOGIC_H_
 #define GAME_LOGIC_H_
 
-#include <map>
-#include <utility>
+//#include <map>
+//#include <utility>
+#include <vector>
 
 #include <FL/Fl_Widget.H>
 #include "FL/Fl_Round_Button.H"
@@ -11,6 +12,9 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Toggle_Button.H>
 
+//#include "screen_def.hpp"
+
+
 using namespace std;
 
 class GameLogic
@@ -18,14 +22,34 @@ class GameLogic
 public:
  int CurrentTurn = 1;
  int turn;
- map<pair<int, int>, char> SpacesPlayed;
-
+ struct filledSpace {
+     int x;
+     int y;
+     int piece;
+     int player;
+     bool Scored;
+ };
+ //map<pair<int, int>, int> SpacesPlayed;
+ vector <filledSpace> SpacesPlayed;
  //void InitGameLogic();
  int ReturnCurrentPlayersTurn();
  void RotatePlayerTurn();
 
-};
+ void addMovetoList(int x, int y, int Piece);
 
+ void SequenceFinder(int rows, int cols);
+
+  struct tempFilledSpace
+  {
+   int x;
+   int y;
+   int piece;
+   int player;
+   bool Scored;
+   int originalIndex;
+  };
+
+};
 class PlayerLogic
 {
 public:
@@ -62,7 +86,12 @@ struct GameBoardButtonPressedData
  Player1Logic* Player1Data;
  Player2Logic* Player2Data;
  int currentPlayer;
+ GameLogic* GameData;
+ int rows;
+ int cols;
 };
+
+
 
 void changePlayer1Piece(Fl_Widget*, void* data);
 static void changePlayer2Piece(Fl_Widget*, Player1Logic Player1Data, char Selection);

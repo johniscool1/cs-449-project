@@ -46,7 +46,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
    //cbGameButtonData->Button = BoardButton;
-   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn };
+   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols};
 
    //set button callback
    BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
@@ -222,6 +222,8 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 
  //keep button down
  ButtonThatWasPressed->deactivate();
+ ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
+ ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols);
 }
 
 

@@ -14,14 +14,10 @@
 #include <iostream>
 #include <stdlib.h>
 
-
-
 #include "game_logic.hpp"
-
 
 #define GAMEBOARD_WINDOW_X 700
 #define GAMEBOARD_WINDOW_Y 700
-
 
 //Gameboard class for creating the gameboard
 class GameBoard
