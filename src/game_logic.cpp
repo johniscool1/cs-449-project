@@ -6,6 +6,7 @@ int GameLogic::ReturnCurrentPlayersTurn()
  return CurrentTurn;
 }
 
+//TODO: needs to check more logic like if the palyer scord, they get to go again
 void GameLogic::RotatePlayerTurn()
 {
  switch(CurrentTurn) {
@@ -29,7 +30,7 @@ void PlayerLogic::ChangeSelectedPiece(int Selection)
 
 void changePlayer1Piece(Fl_Widget*, void* data)
 {
- SelectedPieceCBdata* CBdata = reinterpret_cast<SelectedPieceCBdata*>(data);
+ SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
  //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
  CBdata->playerdata->SelectedPiece = CBdata->piece;
 }

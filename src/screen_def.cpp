@@ -36,7 +36,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  int ButtonDrawX = 0;
  int ButtonDrawY = 0;
 
-
+ //draw in both x and y direction
  for(int i = 0; i < rows; i++)
  {
   for(int j = 0; j < cols; j++)
@@ -54,7 +54,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
    BoardButton->parent(GameBoardWin);
   }
  }
-
+ //draw the player controls: radio buttons for S and O
  Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
 
  Player1Controls->begin();
@@ -64,10 +64,10 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  P1SRadio->type(FL_RADIO_BUTTON);
  P1ORadio->type(FL_RADIO_BUTTON);
 
-
+ //set callbacks to set the selected piece for the player
  SelectedPieceCBdata* P1RBSdata = new SelectedPieceCBdata{P1SRadio, 1, player1data};
  SelectedPieceCBdata* P1RBOdata = new SelectedPieceCBdata{P1ORadio, 0, player1data};
- //set default
+ //set default to S selected
  P1SRadio->value(1);
 
  P1SRadio->callback(changePlayer1Piece, P1RBSdata);
@@ -75,7 +75,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player1Controls->end();
-
+ //Same as player 1 bu player 2
  Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
 
  Player2Controls->begin();
@@ -123,16 +123,20 @@ void GameBoard::DrawSettings()
 
 void playGameButtonCB(Fl_Widget*, void* data)
 {
+ //get data needed
  CallbackDataMainMenu* menuSettings = static_cast<CallbackDataMainMenu*>(data);
+ //create new windpw
  Fl_Window* win = static_cast<Fl_Double_Window*>(menuSettings->window); // Cast void* to Fl_Window*
  win->hide();
+
  int xVal = static_cast<int>(menuSettings->x->value());
  int yVal = static_cast<int>(menuSettings->y->value());
+ //create all the variables we need
  GameLogic* GameData = new GameLogic;
  GameBoard* sosGameBoard = new GameBoard;
  Player1Logic* player1Data = new Player1Logic;
  Player2Logic* player2Data = new Player2Logic;
- printf("DATA REDEF");
+ //intialize window
  sosGameBoard->initwin();
  sosGameBoard->SetBoardDimensions(xVal,yVal);
  sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
@@ -189,7 +193,7 @@ void game_main_menu()
 //callback for when a button is pressed
 void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 {
- //cout << " 1";
+
  GameBoardButtonPressedData* ButtonPressedData = reinterpret_cast<GameBoardButtonPressedData*>(data);
 
  //variable to caluclate where the buttons are
@@ -222,7 +226,10 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 
  //keep button down
  ButtonThatWasPressed->deactivate();
+
+ //add button to are list of played spaces
  ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
+ //See if sequence was created
  ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols);
 }
 
