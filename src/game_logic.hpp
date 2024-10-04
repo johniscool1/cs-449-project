@@ -22,6 +22,7 @@ class GameLogic
 public:
  int CurrentTurn = 1; //Player 1 goes first
  int turn;
+ int GameMode = 1; //1 for simple 0 for general game. set to 1 for default selected
  struct filledSpace { //used in a vector, stores data about the space a player uses
      int x; //location
      int y;

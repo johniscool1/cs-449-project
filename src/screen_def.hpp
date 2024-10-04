@@ -10,6 +10,7 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Counter.H>
+#include<FL/fl_ask.H>
 
 #include <iostream>
 #include <stdlib.h>
@@ -67,4 +68,22 @@ struct CallbackDataMainMenu {
 void game_main_menu();
 //callback for pressing the play button
 void playGameButtonCB(Fl_Widget*, void * data);
+
+//calback for selecting game board size
+static void MMcounter_check(Fl_Widget*, void* data);
+
+//struct to hold counter button data
+struct MMcounter_checkCBdata{
+  Fl_Counter* counter;
+  bool alertDisplayed;
+};
+
+//functions and struct for callbacks to set gamemode
+
+void GameModeSimpleSet(Fl_Widget*, void* data);
+void GameModeGeneralSet(Fl_Widget*, void* data);
+
+struct CBGameMode {
+  GameLogic GameData;
+};
 #endif

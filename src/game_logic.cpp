@@ -34,6 +34,8 @@ void changePlayer1Piece(Fl_Widget*, void* data)
  //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
  CBdata->playerdata->SelectedPiece = CBdata->piece;
 }
+
+
 static void changePlayer2Piece(Fl_Widget*, void* PlayerSlectedPiece)
 {
  //Player2Data.ChangeSelectedPiece(PlayerSelectedPiece->value());

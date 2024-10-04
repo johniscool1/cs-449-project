@@ -136,6 +136,17 @@ void playGameButtonCB(Fl_Widget*, void* data)
  GameBoard* sosGameBoard = new GameBoard;
  Player1Logic* player1Data = new Player1Logic;
  Player2Logic* player2Data = new Player2Logic;
+ //set gamemode
+ switch (menuSettings->GeneralGamemodeRB->value()) {
+   case 1:
+     GameData->GameMode = 1;
+   //if the General Gamemode radio button isn't checked, then it is simple gamemode
+   case 0:
+     GameData->GameMode = 0;
+ }
+
+
+
  //intialize window
  sosGameBoard->initwin();
  sosGameBoard->SetBoardDimensions(xVal,yVal);
@@ -146,49 +157,8 @@ void playGameButtonCB(Fl_Widget*, void* data)
 
 }
 
-void game_main_menu()
-{
- Fl_Double_Window* GMainMenu = new Fl_Double_Window(700, 700, "SOS GAME");
- Fl_Box* MM_text_box_title = new Fl_Box(50,40, 600, 200, "SOS GAME");
- MM_text_box_title->labelsize(100);
-
- //counters for gameboard size
- Fl_Counter *UserInputX = new Fl_Counter(200 , 200 , 70, 20);
- UserInputX->type(FL_SIMPLE_COUNTER);
- UserInputX->step(1);
- UserInputX->value(3);
- new Fl_Box(200,222, 70, 20, "Width");
-
- Fl_Counter *UserInputY = new Fl_Counter(350 , 200 , 70, 20);
- UserInputY->type(FL_SIMPLE_COUNTER);
- UserInputY->step(1);
- UserInputY->value(3);
- new Fl_Box(350,222, 70, 20, "Height");
-
- //Gamemode selctionradio buttons
- Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
- SimpleGameModeRB->type(FL_RADIO_BUTTON);
-
- Fl_Round_Button* GeneralGameModeRB = new Fl_Round_Button(410, 300, 70, 20, "General Gamemode");
- GeneralGameModeRB->type(FL_RADIO_BUTTON);
- //set defualt choosen gamemode
- SimpleGameModeRB->value(1);
 
 
- //play button
- Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
- CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB};
- playButton->callback(playGameButtonCB, cbGameMenuData);
- //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
- Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
-
-
- GMainMenu->end();
- GMainMenu->show();
-
-
-
-}
 
 //callback for when a button is pressed
 void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
@@ -234,3 +204,75 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 }
 
 
+/*
+ * Start of main menu procedures
+ */
+void game_main_menu()
+{
+ Fl_Double_Window* GMainMenu = new Fl_Double_Window(700, 700, "SOS GAME");
+ Fl_Box* MM_text_box_title = new Fl_Box(50,40, 600, 200, "SOS GAME");
+ MM_text_box_title->labelsize(100);
+
+ //counters for gameboard size
+ Fl_Counter *UserInputX = new Fl_Counter(200 , 200 , 70, 20);
+ UserInputX->type(FL_SIMPLE_COUNTER);
+ UserInputX->step(1);
+ UserInputX->value(3);
+ new Fl_Box(200,222, 70, 20, "Width");
+
+ Fl_Counter *UserInputY = new Fl_Counter(350 , 200 , 70, 20);
+ UserInputY->type(FL_SIMPLE_COUNTER);
+ UserInputY->step(1);
+ UserInputY->value(3);
+ new Fl_Box(350,222, 70, 20, "Height");
+
+ //set counter callback to check data UserInput
+ MMcounter_checkCBdata* CounterCheckDataX = new MMcounter_checkCBdata{UserInputX, false};
+ MMcounter_checkCBdata* CounterCheckDataY = new MMcounter_checkCBdata{UserInputY, false};
+
+
+ UserInputX->callback(MMcounter_check, CounterCheckDataX);
+ UserInputY->callback(MMcounter_check, CounterCheckDataY);
+
+ //Gamemode selctionradio buttons
+ Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
+ SimpleGameModeRB->type(FL_RADIO_BUTTON);
+
+ Fl_Round_Button* GeneralGameModeRB = new Fl_Round_Button(410, 300, 70, 20, "General Gamemode");
+ GeneralGameModeRB->type(FL_RADIO_BUTTON);
+ //set defualt choosen gamemode
+ SimpleGameModeRB->value(1);
+
+
+
+
+ //play button
+ Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
+ CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB};
+ playButton->callback(playGameButtonCB, cbGameMenuData);
+ //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
+ Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
+
+
+ GMainMenu->end();
+ GMainMenu->show();
+
+
+}
+
+
+void MMcounter_check(Fl_Widget*, void* data)
+{
+ //get the counter
+ MMcounter_checkCBdata* Cbdata = static_cast<MMcounter_checkCBdata*>(data);
+ //int counterVal = Cbdata->counter->value();
+ //printf("%d\n", counterVal);
+ Fl::wait();
+
+
+ if(Cbdata->counter->value() < 3.0 && !Cbdata->alertDisplayed)
+ {
+   fl_alert("GameBoard must be more than 3 x 3");
+   Cbdata->counter->value(3);
+ }
+}
