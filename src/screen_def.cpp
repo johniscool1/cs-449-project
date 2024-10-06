@@ -32,30 +32,15 @@ bool GameBoard::SetBoardDimensions(int x, int y)
 //draw the buttons for the game board
 void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData)
 {
-//variables to later caluclate where to put the buttons.
- int ButtonDrawX = 0;
- int ButtonDrawY = 0;
 
- //draw in both x and y direction
- for(int i = 0; i < rows; i++)
- {
-  for(int j = 0; j < cols; j++)
-  {
-   //If these calculations are changed. change them in the Button callback. TODO: implement function
-   ButtonDrawX = i * 42 + 100;
-   ButtonDrawY = j * 42 + 100;
-   BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
-   //cbGameButtonData->Button = BoardButton;
-   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols};
 
-   //set button callback
-   BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
-   //make the buttons parent windows to the board
-   BoardButton->parent(GameBoardWin);
-  }
- }
- //draw the player controls: radio buttons for S and O
+ //variables to later caluclate where to put the buttons.
+
+
+
+  //draw the player controls: radio buttons for S and O
  Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
+
 
  Player1Controls->begin();
  Fl_Box *P1TB = new Fl_Box(20, 80, 20, 10, "Player 1");
@@ -70,31 +55,67 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  //set default to S selected
  P1SRadio->value(1);
 
- P1SRadio->callback(changePlayer1Piece, P1RBSdata);
- P1ORadio->callback(changePlayer1Piece, P1RBOdata);
+ P1SRadio->callback(changePlayerPiece, P1RBSdata);
+ P1ORadio->callback(changePlayerPiece, P1RBOdata);
  //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player1Controls->end();
  //Same as player 1 bu player 2
- Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
 
+ Fl_Group* Player2Controls = new Fl_Group(620,80, 50, 100);
  Player2Controls->begin();
  Fl_Box *P2TB = new Fl_Box(620, 80, 20, 10, "Player 2");
  Fl_Round_Button *P2SRadio = new Fl_Round_Button(630,100, 20, 10, "S");
  Fl_Round_Button *P2ORadio = new Fl_Round_Button(630,120, 20, 10, "O");
  P2SRadio->type(FL_RADIO_BUTTON);
  P2ORadio->type(FL_RADIO_BUTTON);
- SelectedPieceCBdata P2RadioButtonData;
 
- //P2SRadio->callback(GameData.Change);
+ //set callbacks to set the selected piece for the player
+ SelectedPieceCBdata* P2RBSdata = new SelectedPieceCBdata{P2SRadio, 1, player2data};
+ SelectedPieceCBdata* P2RBOdata = new SelectedPieceCBdata{P2ORadio, 0, player2data};
+ //set default to S selected
+ P2SRadio->setonly();
 
+ P2SRadio->callback(changePlayerPiece, P2RBSdata);
+ P2ORadio->callback(changePlayerPiece, P2RBOdata);
+ //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player2Controls->end();
 
+ Player2Controls->deactivate();
 
- //make sure the are all drawn
+ int ButtonDrawX = 0;
+ int ButtonDrawY = 0;
+
+
+
+
+ //draw in both x and y direction
+ for(int i = 0; i < rows; i++)
+ {
+  for(int j = 0; j < cols; j++)
+  {
+   //If these calculations are changed. change them in the Button callback. TODO: implement function
+   ButtonDrawX = i * 42 + 100;
+   ButtonDrawY = j * 42 + 100;
+   BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
+   //cbGameButtonData->Button = BoardButton;
+   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls};
+
+   //set button callback
+   BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
+   //make the buttons parent windows to the board
+   BoardButton->parent(GameBoardWin);
+  }
+ }
+
+
+
+
+
  GameBoardWin->redraw();
 }
+
 
 
 /*
@@ -144,9 +165,6 @@ void playGameButtonCB(Fl_Widget*, void* data)
    case 0:
      GameData->GameMode = 0;
  }
-
-
-
  //intialize window
  sosGameBoard->initwin();
  sosGameBoard->SetBoardDimensions(xVal,yVal);
@@ -176,10 +194,11 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
  ButtonX = (ButtonX - 100) / 42;
  ButtonY = (ButtonY - 100) / 42;
 
- int current_player = ButtonPressedData->currentPlayer;
+
  //printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
  const char* piece;
-
+ if (ButtonPressedData->GameData->CurrentTurn == 1)
+ {
  switch (ButtonPressedData->Player1Data->SelectedPiece)
  {
    case 1:
@@ -189,21 +208,72 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
     piece = "O";
     break;
  }
+ //add button to are list of played spaces
+ ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
  //printf("Piece: %s\n", piece);
+ }
+ else
+ {
+ switch (ButtonPressedData->Player2Data->SelectedPiece)
+ {
+   case 1:
+    piece = "S";
+    break;
+   case 0:
+    piece = "O";
+    break;
+ }
+ //add button to are list of played spaces
+ ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player2Data->SelectedPiece);
 
+ }
 
  ButtonThatWasPressed->label(piece);
 
  //keep button down
  ButtonThatWasPressed->deactivate();
 
- //add button to are list of played spaces
- ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
+
  //See if sequence was created
  ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols);
+
+ //rotate CurrentTurn
+ ButtonPressedData->GameData->RotatePlayerTurn();
+ //deactivate and activate the radio buttons for players
+
+
+ switch(ButtonPressedData->GameData->CurrentTurn)
+ {
+   case 1:
+    ButtonPressedData->P2Group->deactivate();
+    ButtonPressedData->P1Group->activate();
+
+    break;
+   case 2:
+    ButtonPressedData->P1Group->deactivate();
+    ButtonPressedData->P2Group->activate();
+    break;
+ };
+
+
 }
 
+/*
+void ActivateP1(void* data)
+{
+ PlayerControlsCBdata* ControlData = static_cast<PlayerControlsCBdata*>(data);
+ P2->deactivate();
+ P1->deactivate();
 
+}
+
+void ActivateP2(void* data)
+{
+ P1->deactivate();
+ P2->deactivate();
+
+}
+*/
 /*
  * Start of main menu procedures
  */
@@ -227,8 +297,8 @@ void game_main_menu()
  new Fl_Box(350,222, 70, 20, "Height");
 
  //set counter callback to check data UserInput
- MMcounter_checkCBdata* CounterCheckDataX = new MMcounter_checkCBdata{UserInputX, false};
- MMcounter_checkCBdata* CounterCheckDataY = new MMcounter_checkCBdata{UserInputY, false};
+ MMcounter_checkCBdata* CounterCheckDataX = new MMcounter_checkCBdata{UserInputX};
+ MMcounter_checkCBdata* CounterCheckDataY = new MMcounter_checkCBdata{UserInputY};
 
 
  UserInputX->callback(MMcounter_check, CounterCheckDataX);
@@ -270,7 +340,7 @@ void MMcounter_check(Fl_Widget*, void* data)
  Fl::wait();
 
 
- if(Cbdata->counter->value() < 3.0 && !Cbdata->alertDisplayed)
+ if(Cbdata->counter->value() < 3.0)
  {
    fl_alert("GameBoard must be more than 3 x 3");
    Cbdata->counter->value(3);

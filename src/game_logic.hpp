@@ -34,7 +34,7 @@ public:
  vector <filledSpace> SpacesPlayed; //stores all the played spaces
  //void InitGameLogic();
  int ReturnCurrentPlayersTurn(); //Depreicated, I dont think its used anywhere
- void RotatePlayerTurn(); //TODO
+ void RotatePlayerTurn();
 
  void addMovetoList(int x, int y, int Piece); //add a space played to the SpacesPlayed vector
 
@@ -64,19 +64,18 @@ public:
  void ChangeSelectedPiece(int Selection); //change what piece the player has selected on the gameboard
 
 
-
 };
 
 //subclasses to store player specific data
 class Player1Logic : public PlayerLogic{
 public:
  void DrawPlayer1Selection();
- Fl_Group* Player1Controls;
+ //Fl_Group* Player1Controls;
 };
 class Player2Logic : public PlayerLogic{
 public:
  void DrawPlayer2Selection();
- Fl_Group* Player2Controls;
+ //Fl_Group* Player2Controls;
 };
 
 //the following 2 structs are used to pass data to callbacks
@@ -84,7 +83,7 @@ struct SelectedPieceCBdata
 {
  Fl_Button* SelectedButton;
  int piece;
- Player1Logic* playerdata;
+ PlayerLogic* playerdata;
 
 };
 struct GameBoardButtonPressedData
@@ -96,10 +95,17 @@ struct GameBoardButtonPressedData
  GameLogic* GameData;
  int rows;
  int cols;
+ Fl_Group* P1Group;
+ Fl_Group* P2Group;
+};
+
+struct PlayerControlsCBdata
+{
+ Fl_Group* P1;
+ Fl_Group* P2;
 };
 
 
-//TODO: Depreicate the following 2 functions and combine into 1 for both classes in PlayerLogic
-void changePlayer1Piece(Fl_Widget*, void* data);
-static void changePlayer2Piece(Fl_Widget*, Player1Logic Player1Data, char Selection);
+void changePlayerPiece(Fl_Widget*, void* data);
+//void changePlayer2Piece(Fl_Widget*, void* data);
 #endif

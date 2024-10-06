@@ -15,6 +15,7 @@ void GameLogic::RotatePlayerTurn()
    break;
   case 2:
    CurrentTurn = 1;
+
  }
 }
 
@@ -24,24 +25,27 @@ void PlayerLogic::ChangeSelectedPiece(int Selection)
 {
 
  SelectedPiece = Selection;
+ printf("%d", Selection);
 }
 
 
 
-void changePlayer1Piece(Fl_Widget*, void* data)
+void changePlayerPiece(Fl_Widget*, void* data)
+{
+ SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
+ //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
+ CBdata->playerdata->SelectedPiece = CBdata->piece;
+ printf("Selected Piece: %d. Current piece: %d\n", CBdata->playerdata->SelectedPiece , CBdata->piece);
+}
+
+/*
+void changePlayer2Piece(Fl_Widget*, void* data)
 {
  SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
  //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
  CBdata->playerdata->SelectedPiece = CBdata->piece;
 }
-
-
-static void changePlayer2Piece(Fl_Widget*, void* PlayerSlectedPiece)
-{
- //Player2Data.ChangeSelectedPiece(PlayerSelectedPiece->value());
- return;
-}
-
+*/
 
 
 void GameLogic::addMovetoList(int x, int y, int Piece)
@@ -59,6 +63,9 @@ void GameLogic::SequenceFinder(int rows, int cols)
 {
  //look up and down
  vector <tempFilledSpace> TempVect;
+
+
+
  //look through rows
  for(int j = 0; j < cols; j++) {
    //printf("looking at column %d", j);
@@ -98,7 +105,7 @@ void GameLogic::SequenceFinder(int rows, int cols)
        SpacesPlayed[TempVect[k].originalIndex].Scored = True;
        SpacesPlayed[TempVect[k-1].originalIndex].Scored = True;
        SpacesPlayed[TempVect[k-2].originalIndex].Scored = True;
-       printf("New SCored: %d", SpacesPlayed[k].Scored);
+       printf("Player %d scorred \n", CurrentTurn);
        //printf("\n-------------------------\n");
       }
      }

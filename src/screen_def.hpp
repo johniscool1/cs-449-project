@@ -11,7 +11,7 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Counter.H>
 #include<FL/fl_ask.H>
-
+#include <FL/Fl_Scroll.H>
 #include <iostream>
 #include <stdlib.h>
 
@@ -32,12 +32,11 @@ class GameBoard
   //window used for gameboard
   Fl_Double_Window* GameBoardWin;
 
-
+  Fl_Group* GameBoardButtons;
   //GameBoard FullGameboardInit();
   //function to intialize the gameboard
   void initwin();
 
-  //TODO: Needs to be reiplmented into main menu to check to make sure game board isnt to small or big
   bool SetBoardDimensions(int x, int y);
 
   //draw all the squares for gameplay
@@ -49,6 +48,10 @@ class GameBoard
 
   Fl_Toggle_Button *BoardButton;
   static void GameBoardButtonPressed(Fl_Widget*, void *data);
+  //Fl_Group* Player1Controls;
+  //Fl_Group* Player2Controls;
+
+  //Fl_Group* Player2Controls;
 
 
 };
@@ -66,6 +69,7 @@ struct CallbackDataMainMenu {
 
 //main menu functions
 void game_main_menu();
+
 //callback for pressing the play button
 void playGameButtonCB(Fl_Widget*, void * data);
 
@@ -75,7 +79,6 @@ static void MMcounter_check(Fl_Widget*, void* data);
 //struct to hold counter button data
 struct MMcounter_checkCBdata{
   Fl_Counter* counter;
-  bool alertDisplayed;
 };
 
 //functions and struct for callbacks to set gamemode
@@ -83,7 +86,9 @@ struct MMcounter_checkCBdata{
 void GameModeSimpleSet(Fl_Widget*, void* data);
 void GameModeGeneralSet(Fl_Widget*, void* data);
 
-struct CBGameMode {
-  GameLogic GameData;
-};
+static void ActivateP1(void* data);
+static void ActivateP2(void* data);
+
+
+
 #endif
