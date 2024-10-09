@@ -29,15 +29,10 @@ bool GameBoard::SetBoardDimensions(int x, int y)
  }
 }
 
+
 //draw the buttons for the game board
 void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData)
 {
-
-
- //variables to later caluclate where to put the buttons.
-
-
-
   //draw the player controls: radio buttons for S and O
  Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
 
@@ -55,8 +50,8 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  //set default to S selected
  P1SRadio->value(1);
 
- P1SRadio->callback(changePlayerPiece, P1RBSdata);
- P1ORadio->callback(changePlayerPiece, P1RBOdata);
+ P1SRadio->callback(changePlayerPieceCB, P1RBSdata);
+ P1ORadio->callback(changePlayerPieceCB, P1RBOdata);
  //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player1Controls->end();
@@ -76,8 +71,8 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  //set default to S selected
  P2SRadio->setonly();
 
- P2SRadio->callback(changePlayerPiece, P2RBSdata);
- P2ORadio->callback(changePlayerPiece, P2RBOdata);
+ P2SRadio->callback(changePlayerPieceCB, P2RBSdata);
+ P2ORadio->callback(changePlayerPieceCB, P2RBOdata);
  //P1SRadio->callback(DrawPlayer1Selection, "O");
 
  Player2Controls->end();
@@ -99,11 +94,10 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
    ButtonDrawX = i * 42 + 100;
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
-   //cbGameButtonData->Button = BoardButton;
-   GameBoardButtonPressedData* cbGameButtonData = new GameBoardButtonPressedData{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls};
+   GameBoardButtonCBdata* cbGameButtonData = new GameBoardButtonCBdata{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls};
 
    //set button callback
-   BoardButton->callback(GameBoardButtonPressed, cbGameButtonData);
+   BoardButton->callback(GameBoardButtonPressedCB, cbGameButtonData);
    //make the buttons parent windows to the board
    BoardButton->parent(GameBoardWin);
   }
@@ -118,34 +112,12 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
 
 
 
-/*
-void GameBoard::DrawSettings()
-{
- Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
-
- Player1Controls->begin();
- Fl_Box *P1TB = new Fl_Box(15, 80, 20, 10, "Player 1");
- Fl_Round_Button *P1SRadio = new Fl_Round_Button(10,100, 20, 10, "S");
- Fl_Round_Button *P2ORadio = new Fl_Round_Button(10,120, 20, 10, "O");
- P1SRadio->type(FL_RADIO_BUTTON);
- P2ORadio->type(FL_RADIO_BUTTON);
-
- P1SRadio->callback();
-
-
- Player1Controls->end();
-
-
-}
-*/
-
-
 
 
 void playGameButtonCB(Fl_Widget*, void* data)
 {
  //get data needed
- CallbackDataMainMenu* menuSettings = static_cast<CallbackDataMainMenu*>(data);
+ MainMenuCBdata* menuSettings = static_cast<MainMenuCBdata*>(data);
  //create new windpw
  Fl_Window* win = static_cast<Fl_Double_Window*>(menuSettings->window); // Cast void* to Fl_Window*
  win->hide();
@@ -158,13 +130,7 @@ void playGameButtonCB(Fl_Widget*, void* data)
  Player1Logic* player1Data = new Player1Logic;
  Player2Logic* player2Data = new Player2Logic;
  //set gamemode
- switch (menuSettings->GeneralGamemodeRB->value()) {
-   case 1:
-     GameData->GameMode = 1;
-   //if the General Gamemode radio button isn't checked, then it is simple gamemode
-   case 0:
-     GameData->GameMode = 0;
- }
+ GameData->setGameMode(menuSettings->GeneralGamemodeRB->value());
  //intialize window
  sosGameBoard->initwin();
  sosGameBoard->SetBoardDimensions(xVal,yVal);
@@ -179,10 +145,10 @@ void playGameButtonCB(Fl_Widget*, void* data)
 
 
 //callback for when a button is pressed
-void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
+void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
 {
 
- GameBoardButtonPressedData* ButtonPressedData = reinterpret_cast<GameBoardButtonPressedData*>(data);
+ GameBoardButtonCBdata* ButtonPressedData = reinterpret_cast<GameBoardButtonCBdata*>(data);
 
  //variable to caluclate where the buttons are
  int ButtonX, ButtonY;
@@ -259,22 +225,6 @@ void GameBoard::GameBoardButtonPressed(Fl_Widget*, void* data)
 }
 
 /*
-void ActivateP1(void* data)
-{
- PlayerControlsCBdata* ControlData = static_cast<PlayerControlsCBdata*>(data);
- P2->deactivate();
- P1->deactivate();
-
-}
-
-void ActivateP2(void* data)
-{
- P1->deactivate();
- P2->deactivate();
-
-}
-*/
-/*
  * Start of main menu procedures
  */
 void game_main_menu()
@@ -301,8 +251,8 @@ void game_main_menu()
  MMcounter_checkCBdata* CounterCheckDataY = new MMcounter_checkCBdata{UserInputY};
 
 
- UserInputX->callback(MMcounter_check, CounterCheckDataX);
- UserInputY->callback(MMcounter_check, CounterCheckDataY);
+ UserInputX->callback(MMcounter_checkCB, CounterCheckDataX);
+ UserInputY->callback(MMcounter_checkCB, CounterCheckDataY);
 
  //Gamemode selctionradio buttons
  Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
@@ -318,7 +268,7 @@ void game_main_menu()
 
  //play button
  Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
- CallbackDataMainMenu* cbGameMenuData = new CallbackDataMainMenu{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB};
+ MainMenuCBdata* cbGameMenuData = new MainMenuCBdata{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB};
  playButton->callback(playGameButtonCB, cbGameMenuData);
  //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
  Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
@@ -331,7 +281,7 @@ void game_main_menu()
 }
 
 
-void MMcounter_check(Fl_Widget*, void* data)
+void MMcounter_checkCB(Fl_Widget*, void* data)
 {
  //get the counter
  MMcounter_checkCBdata* Cbdata = static_cast<MMcounter_checkCBdata*>(data);

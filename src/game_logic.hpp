@@ -1,8 +1,5 @@
 #ifndef GAME_LOGIC_H_
 #define GAME_LOGIC_H_
-
-//#include <map>
-//#include <utility>
 #include <vector>
 
 #include <FL/Fl_Widget.H>
@@ -12,10 +9,8 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Toggle_Button.H>
 
-//#include "screen_def.hpp"
-
-
 using namespace std;
+
 //class to store game states
 class GameLogic
 {
@@ -32,9 +27,10 @@ public:
  };
 
  vector <filledSpace> SpacesPlayed; //stores all the played spaces
- //void InitGameLogic();
- int ReturnCurrentPlayersTurn(); //Depreicated, I dont think its used anywhere
- void RotatePlayerTurn();
+
+ void RotatePlayerTurn(); //Decides whos turn it should be TODO: once the sequence finder is finished, re implement this to work with game rules
+
+ void setGameMode(int x); //sets the gamemode
 
  void addMovetoList(int x, int y, int Piece); //add a space played to the SpacesPlayed vector
 
@@ -78,7 +74,9 @@ public:
  //Fl_Group* Player2Controls;
 };
 
-//the following 2 structs are used to pass data to callbacks
+//the following 2 structs are used to pass data to callbacks. Due to the callback having to be static, I cannot directly give them varaibles, instead use a struct and static cast it.
+
+//used for RadioButtons to set the players current piece
 struct SelectedPieceCBdata
 {
  Fl_Button* SelectedButton;
@@ -86,7 +84,8 @@ struct SelectedPieceCBdata
  PlayerLogic* playerdata;
 
 };
-struct GameBoardButtonPressedData
+//used for when a button on the board is pressed
+struct GameBoardButtonCBdata
 {
  Fl_Toggle_Button* Button;
  Player1Logic* Player1Data;
@@ -99,13 +98,6 @@ struct GameBoardButtonPressedData
  Fl_Group* P2Group;
 };
 
-struct PlayerControlsCBdata
-{
- Fl_Group* P1;
- Fl_Group* P2;
-};
-
-
-void changePlayerPiece(Fl_Widget*, void* data);
-//void changePlayer2Piece(Fl_Widget*, void* data);
+//callback for the radio buttons to set a players current piece
+void changePlayerPieceCB(Fl_Widget*, void* data);
 #endif

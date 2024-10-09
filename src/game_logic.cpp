@@ -1,10 +1,6 @@
 #include "game_logic.hpp"
 #include "screen_def.hpp"
 
-int GameLogic::ReturnCurrentPlayersTurn()
-{
- return CurrentTurn;
-}
 
 //TODO: needs to check more logic like if the palyer scord, they get to go again
 void GameLogic::RotatePlayerTurn()
@@ -28,24 +24,19 @@ void PlayerLogic::ChangeSelectedPiece(int Selection)
  printf("%d", Selection);
 }
 
+void GameLogic::setGameMode(int x) // takes the simple gamemode radio button
+{
+  //1 for simple 0 for general game. set to 1 for default selected
+ GameMode = x;
+}
 
-
-void changePlayerPiece(Fl_Widget*, void* data)
+void changePlayerPieceCB(Fl_Widget*, void* data)
 {
  SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
  //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
  CBdata->playerdata->SelectedPiece = CBdata->piece;
- printf("Selected Piece: %d. Current piece: %d\n", CBdata->playerdata->SelectedPiece , CBdata->piece);
+ //printf("Selected Piece: %d. Current piece: %d\n", CBdata->playerdata->SelectedPiece , CBdata->piece);
 }
-
-/*
-void changePlayer2Piece(Fl_Widget*, void* data)
-{
- SelectedPieceCBdata* CBdata = static_cast<SelectedPieceCBdata*>(data);
- //Fl_Button* menuSettings = static_cast<Fl_Button*>(PlayerSlectedPiece);
- CBdata->playerdata->SelectedPiece = CBdata->piece;
-}
-*/
 
 
 void GameLogic::addMovetoList(int x, int y, int Piece)

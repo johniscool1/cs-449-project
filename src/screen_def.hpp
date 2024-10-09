@@ -32,32 +32,27 @@ class GameBoard
   //window used for gameboard
   Fl_Double_Window* GameBoardWin;
 
-  Fl_Group* GameBoardButtons;
-  //GameBoard FullGameboardInit();
   //function to intialize the gameboard
   void initwin();
 
   bool SetBoardDimensions(int x, int y);
 
-  //draw all the squares for gameplay
+  //draw all the buttons for gameplay
   void DrawButtons(Player1Logic* player1data, Player2Logic* player2data, GameLogic* gameData);
 
-  void DrawSettings();
+  //buttons for the gameboard
+  Fl_Toggle_Button *BoardButton;
+
+  //CB for when a button on the gameboard is pressed
+  static void GameBoardButtonPressedCB(Fl_Widget*, void *data);
 
   void show();
-
-  Fl_Toggle_Button *BoardButton;
-  static void GameBoardButtonPressed(Fl_Widget*, void *data);
-  //Fl_Group* Player1Controls;
-  //Fl_Group* Player2Controls;
-
-  //Fl_Group* Player2Controls;
 
 
 };
 
-//data used to pass to callback
-struct CallbackDataMainMenu {
+//data used to pass to callback from the main menu
+struct MainMenuCBdata {
     Fl_Window* window;
     Fl_Counter* x;
     Fl_Counter* y;
@@ -67,28 +62,17 @@ struct CallbackDataMainMenu {
 
 
 
-//main menu functions
+//draws the main menu
 void game_main_menu();
 
 //callback for pressing the play button
 void playGameButtonCB(Fl_Widget*, void * data);
 
 //calback for selecting game board size
-static void MMcounter_check(Fl_Widget*, void* data);
+void MMcounter_checkCB(Fl_Widget*, void* data);
 
 //struct to hold counter button data
 struct MMcounter_checkCBdata{
   Fl_Counter* counter;
 };
-
-//functions and struct for callbacks to set gamemode
-
-void GameModeSimpleSet(Fl_Widget*, void* data);
-void GameModeGeneralSet(Fl_Widget*, void* data);
-
-static void ActivateP1(void* data);
-static void ActivateP2(void* data);
-
-
-
 #endif
