@@ -81,10 +81,10 @@ void GameLogic::SequenceFinder(int rows, int cols)
   {
 
 
-   if(TempVect[k].piece == 1 && !(TempVect[k].Scored)){
+   if(TempVect[k].piece == 1 && !(TempVect[k].Scored) && TempVect.size() > 3){
      //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
      k++;
-     if(TempVect[k].piece == 0 && k < TempVect.size())
+     if(TempVect[k].piece == 0 && k < TempVect.size() )
      {
       //printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
       k++;
