@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "test_lib/catch_amalgamated.hpp"
+#include "unit_testing/catch_amalgamated.hpp"
 #include "screen_def.hpp"
 #include "game_logic.hpp"
 
