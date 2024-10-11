@@ -19,13 +19,13 @@ bool GameBoard::SetBoardDimensions(int x, int y)
 {
  if( x <= 2 || y <= 2)
  {
-  return False;
+  return false;
  }
  else
  {
   rows = x;
   cols = y;
-  return True;
+  return true;
  }
 }
 

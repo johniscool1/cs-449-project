@@ -45,7 +45,7 @@ void GameLogic::addMovetoList(int x, int y, int Piece)
  SpaceData.piece = Piece;
  SpaceData.x = x;
  SpaceData.y = y;
- SpaceData.Scored = False;
+ SpaceData.Scored = false;
  SpacesPlayed.push_back(SpaceData);
 
 }
@@ -93,9 +93,9 @@ void GameLogic::SequenceFinder(int rows, int cols)
        //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
        //printf("Found a Sequence\n");
        //Mark the spaces as being scored already
-       SpacesPlayed[TempVect[k].originalIndex].Scored = True;
-       SpacesPlayed[TempVect[k-1].originalIndex].Scored = True;
-       SpacesPlayed[TempVect[k-2].originalIndex].Scored = True;
+       SpacesPlayed[TempVect[k].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
        printf("Player %d scorred \n", CurrentTurn);
        //printf("\n-------------------------\n");
       }
