@@ -7,8 +7,10 @@ For linux/unix compilation:
 
 binaries are in the bin folder
 
+
 For Windows 10
 (NOTE: WILL NOT COMPILE ON WINDOWS 11, EXE WILL WORK)
+(NOTE 2: The unit tests will not compile on windows due to differences in the math libary locations)
 Prebuilt Windows binaries are included in the Sprint2 github release
 
 1. open visual studio code, in the visual studio code terminal, run
