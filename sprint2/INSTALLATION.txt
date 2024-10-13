@@ -1,0 +1,8 @@
+For linux/unix compilation:
+
+mkdir build
+cd build
+cmake ..
+make
+
+
