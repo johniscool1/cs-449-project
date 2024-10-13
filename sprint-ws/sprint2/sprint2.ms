@@ -17,19 +17,19 @@ box, center;
 cb | cb | cb
 c | c | c.
 Source Code file name	Production or testcode?	# of lines
-main.cpp	pro	15
+main.cpp	pro	14
 _
-screen_def.hpp	pro	95
+screen_def.hpp	pro	78
 _
-screen_def.cpp	pro	305
+screen_def.cpp	pro	298
 _
-game_logic.hpp	pro	114
+game_logic.hpp	pro	103
 _
-game_logic.cpp	pro	124
+game_logic.cpp	pro	109
 _
-tests.cpp	test	143
+unit_tests.cpp	test	143
 _
-	total	TODO
+	total	745	
 .TE
 .NH 1
 Production Code vs User stories/Acceptance Criteria
@@ -58,7 +58,9 @@ T{
 3. Start a new game of the chosen board and game size
 T}	3.1	GameBoard, GameLogic	T{
 GameBoard::SetBoardDimensions, GameBoard::DrawButtons, playGameButtonCB, GameLogic::setGameMode
-T}	done	
+T}	Inprogress	T{
+Only thing left is that the program needs to do something if the board size is too big.
+T}	
 _
 T{
 4. Make a move in a simple game
@@ -105,6 +107,8 @@ T}
 Tests vs User stories/Acceptance Criteria
 .LP
 .I "Class Names Have been left out of the table beucase classes were not used in test code."
+.br
+Tests 2.1 and 2.2 were ai generated, screenshots are at the end.
 .TS
 center, box;
 cb | cb | cb | cb
@@ -165,3 +169,7 @@ T}	T{
 Becuase scoring and sequence finding has not been fully implemented, this AC shares a test with 4.1 becuase the gameplay is the same in both gamemodes until a sequence is formed. Future tests will test for what happens when sequences are formed
 T}
 .TE
+.PSPIC img/prompt.ps
+.PSPIC img/resp1.ps
+.PSPIC img/promt3.ps
+.PSPIC img/res2.ps

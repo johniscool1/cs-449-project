@@ -17,6 +17,7 @@ TEST_CASE("ID 1.1: Choose Gameboard Size is > 3")
  MMcounter_checkCBdata* CounterCheck = new MMcounter_checkCBdata{UserInputX};
  MMcounter_checkCB(nullptr, CounterCheck);
  int Counter_val = UserInputX->value();
+  //checks if the function changed the value that is under 3 to 3
  REQUIRE(Counter_val == 3);
 
  delete UserInputX;
@@ -36,6 +37,7 @@ TEST_CASE("ID 1.2: Choose Gameboard Size is < 3")
  MMcounter_checkCBdata* CounterCheck = new MMcounter_checkCBdata{UserInputX};
  MMcounter_checkCB(nullptr, CounterCheck);
  int Counter_val = UserInputX->value();
+ //checks if the function changed the value that is under 3 to 3
  REQUIRE(Counter_val == 3);
 
 
@@ -48,21 +50,25 @@ TEST_CASE("ID 1.2: Choose Gameboard Size is < 3")
 
 /*
  *
- *  AC 2
+ *  AC 2 AI generated test cases
  *
  */
 
 
 TEST_CASE("ID 2.1 User presses Simple Gamemode")
 {
+ // Initialize game logic
  GameLogic* GameData = new GameLogic;
+ // Create the radio buttons for game modes
  Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
  SimpleGameModeRB->type(FL_RADIO_BUTTON);
  Fl_Round_Button* GeneralGameModeRB = new Fl_Round_Button(410, 300, 70, 20, "General Gamemode");
  GeneralGameModeRB->type(FL_RADIO_BUTTON);
- //user chooses simple gamemode
+ // Simulate user selecting the simple game mode
  SimpleGameModeRB->value(1);
+ // Call the game logic to set the mode based on the user's selection
  GameData->setGameMode(SimpleGameModeRB->value());
+ // Check that the simple game mode was correctly set in GameLogic
  REQUIRE(GameData->GameMode == 1);
 
  delete GameData;
@@ -72,16 +78,21 @@ TEST_CASE("ID 2.1 User presses Simple Gamemode")
 
 TEST_CASE("ID 2.2 User presses General Gamemode")
 {
+ // Initialize game logic
  GameLogic* GameData = new GameLogic;
+ // Create the radio buttons for game modes
  Fl_Round_Button* SimpleGameModeRB = new Fl_Round_Button(200, 300, 70, 20, "Simple Gamemode");
  SimpleGameModeRB->type(FL_RADIO_BUTTON);
-
  Fl_Round_Button* GeneralGameModeRB = new Fl_Round_Button(410, 300, 70, 20, "General Gamemode");
  GeneralGameModeRB->type(FL_RADIO_BUTTON);
- //user chooses General gamemode
+ // Simulate user selecting the general game mode
  GeneralGameModeRB->value(1);
+ // Call the game logic to set the mode based on the user's selection
  GameData->setGameMode(SimpleGameModeRB->value());
+ // Check that the general game mode was correctly set in GameLogic
  REQUIRE(GameData->GameMode == 0);
+
+ // Clean up
  delete GameData;
  delete SimpleGameModeRB;
  delete GeneralGameModeRB;
