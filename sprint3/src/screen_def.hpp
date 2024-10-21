@@ -32,6 +32,7 @@ class GameBoard
   //window used for gameboard
   Fl_Double_Window* GameBoardWin;
 
+
   //function to intialize the gameboard
   void initwin();
 
@@ -47,7 +48,7 @@ class GameBoard
   static void GameBoardButtonPressedCB(Fl_Widget*, void *data);
 
   void show();
-
+  void close();
 
 };
 
@@ -60,7 +61,35 @@ struct MainMenuCBdata {
     Fl_Round_Button* GeneralGamemodeRB;
 };
 
+class Draw_lineP1 : public Fl_Widget {
+public:
+    Draw_lineP1(int X, int Y, int W, int H, const char*L=0) : Fl_Widget(X,Y,W,H,L) {
+    }
+    void draw() {
+        fl_color(FL_BLUE);
+        int x1 = x(),       y1 = y();
+        int x2 = w()-1, y2 = h();
 
+
+        fl_line(x1, y1, x2, y2);
+
+    }
+};
+
+class Draw_lineP2 : public Fl_Widget {
+public:
+    Draw_lineP2(int X, int Y, int W, int H, const char*L=0) : Fl_Widget(X,Y,W,H,L) {
+    }
+    void draw() {
+        fl_color(FL_RED);
+        int x1 = x(),       y1 = y();
+        int x2 = w()-1, y2 = h();
+
+
+        fl_line(x1, y1, x2, y2);
+
+    }
+};
 
 //draws the main menu
 void game_main_menu();
@@ -74,5 +103,12 @@ void MMcounter_checkCB(Fl_Widget*, void* data);
 //struct to hold counter button data
 struct MMcounter_checkCBdata{
   Fl_Counter* counter;
+};
+
+
+struct drawLineData {
+  GameBoard GameScreen;
+  GameLogic GameData;
+  char direction;
 };
 #endif

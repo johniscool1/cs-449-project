@@ -15,6 +15,10 @@ void GameLogic::RotatePlayerTurn()
  }
 }
 
+void PlayerLogic::addPoint()
+{
+ points++;
+}
 
 
 void PlayerLogic::ChangeSelectedPiece(int Selection)
@@ -50,11 +54,11 @@ void GameLogic::addMovetoList(int x, int y, int Piece)
 
 }
 
-void GameLogic::SequenceFinder(int rows, int cols)
+int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, PlayerLogic* Player2Data)
 {
  //look up and down
  vector <tempFilledSpace> TempVect;
-
+ Last_Player_Scored = 0;
 
 
  //look through rows
@@ -75,29 +79,55 @@ void GameLogic::SequenceFinder(int rows, int cols)
      TempSpaceData.originalIndex = i;
      TempVect.push_back(TempSpaceData);
    }
-
   //Find Sequences
   for(int k = 0; k < TempVect.size(); k++)
   {
 
 
-   if(TempVect[k].piece == 1 && !(TempVect[k].Scored) && TempVect.size() > 3){
-     //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
+   if(TempVect[k].piece == 1 && !(TempVect[k].Scored) && TempVect.size() >= 3){
+   //  printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
      k++;
      if(TempVect[k].piece == 0 && k < TempVect.size() )
      {
-      //printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
+     // printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
       k++;
       if(TempVect[k].piece == 1 && k < TempVect.size())
       {
        //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
-       //printf("Found a Sequence\n");
+      // printf("Found a Sequence\n");
+       //check if it has been scored already using a nand gate
+       if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))
+       {
+       //printf("Added point to Player %d\n", CurrentTurn);
        //Mark the spaces as being scored already
        SpacesPlayed[TempVect[k].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
-       printf("Player %d scorred \n", CurrentTurn);
+       printf("HERE: %d", CurrentTurn);
+        //subtract 1 from score becuase we run this after the turn has changed
+       switch (CurrentTurn - 1)
+       {
+         case 1:
+          Player1Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 11;
+          } else {
+              Last_Player_Scored++;
+          }
+          break;
+         case 0: // since we are subtracting one, player 2 is now 0
+          Player2Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 21;
+          } else {
+            Last_Player_Scored++;
+          }
+          break;
+       }
        //printf("\n-------------------------\n");
+      }
       }
      }
     }
@@ -105,5 +135,37 @@ void GameLogic::SequenceFinder(int rows, int cols)
   }
   TempVect.clear();
  }
+
+
+
+ if (SpacesPlayed.size() == rows * cols)
+ {
+   char message[120];
+   //printf("%s",message);
+ //if all spaces have been played, end the game
+   int winner;
+   if (Player1Data->points > Player2Data->points)
+   {
+     winner = 1;
+   } else if (Player1Data->points < Player2Data->points)
+   {
+     winner = 2;
+   } else //check if it was a tie
+   {
+     winner = 0;
+   }
+   int menuchoice;
+   if (winner != 0) {
+     sprintf(message, "GAME OVER.\nPlayer %d WON!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.", winner, Player1Data->points, Player2Data->points);
+     menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+   } else
+  {
+     sprintf(message, "GAME OVER.\nGame was a tie!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.", Player1Data->points, Player2Data->points);
+     menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+  }
+  return menuchoice;
+
+ }
+ return 3;
 }
 

@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 //intialize the game board
 void GameBoard::initwin() {
     GameBoardWin = new Fl_Double_Window(GAMEBOARD_WINDOW_X, GAMEBOARD_WINDOW_Y, "SOS GAME");
@@ -13,6 +15,7 @@ void GameBoard::show()
 {
  GameBoardWin->show();
 }
+
 
 //Set the Board Dimensions, checks if it is out of range. TODO: check if too large
 bool GameBoard::SetBoardDimensions(int x, int y)
@@ -136,12 +139,22 @@ void playGameButtonCB(Fl_Widget*, void* data)
  sosGameBoard->SetBoardDimensions(xVal,yVal);
  sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
- sosGameBoard->show();
+ sosGameBoard->GameBoardWin->show();
 
 
 }
 
+static void playAgain(Fl_Double_Window GameScreen)
+{
+  GameScreen.hide();
+  game_main_menu();
 
+}
+
+void GameBoard::close()
+{
+  GameBoardWin->hide();
+}
 
 
 //callback for when a button is pressed
@@ -200,14 +213,34 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
  ButtonThatWasPressed->deactivate();
 
 
- //See if sequence was created
- ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols);
+
 
  //rotate CurrentTurn
  ButtonPressedData->GameData->RotatePlayerTurn();
  //deactivate and activate the radio buttons for players
 
+  //See if sequence was created
+ ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols, ButtonPressedData->Player1Data, ButtonPressedData->Player2Data);
+ //Draw Line
 
+
+
+
+ /*
+ if(ButtonPressedData->GameData->Last_Player_Scored > 10 && ButtonPressedData->GameData->Last_Player_Scored < 20) //player 1 scored
+ {
+   cout << "draw" << endl;
+    Draw_lineP1 drawp1(ButtonThatWasPressed->x(), ButtonThatWasPressed->y(), ButtonThatWasPressed->x(), ButtonThatWasPressed->y()+ 80);
+    GameBoardWin->resizable(drawp1);
+
+ }
+ else if (ButtonPressedData->GameData->Last_Player_Scored > 20 && ButtonPressedData->GameData->Last_Player_Scored < 30)
+ {
+   cout << "draw" << endl;
+    Draw_lineP2 Drawp2(ButtonThatWasPressed->x(), ButtonThatWasPressed->y(), ButtonThatWasPressed->x(), ButtonThatWasPressed->y()+ 80);
+    GameBoardWin->resizable(Drawp2);
+ }
+*/
  switch(ButtonPressedData->GameData->CurrentTurn)
  {
    case 1:
@@ -296,3 +329,5 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
    Cbdata->counter->value(3);
  }
 }
+
+
