@@ -244,6 +244,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
  ButtonPressedData->GameData->CheckOutcome();
  //Change the color of the buttons to indiacte they have been scored we also.
+ //we also roate out the turn os that the player goes again
  if(ButtonPressedData->GameData->Last_Player_Scored > 10 && ButtonPressedData->GameData->Last_Player_Scored < 20) //player 1 scored
  {
     for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
@@ -254,7 +255,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_BLUE);
       }
-
+    ButtonPressedData->GameData->RotatePlayerTurn();
     }
    //ButtonThatWasPressed->down_color(FL_BLUE);
    ButtonPressedData->GameData->FoundSequences.clear();
@@ -272,7 +273,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_RED);
       }
-
+    ButtonPressedData->GameData->RotatePlayerTurn();
     }
     ButtonPressedData->GameData->FoundSequences.clear();
    Fl::redraw();
@@ -287,13 +288,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
      case 0: //simple gm
      {
         char message[120];
-        int winner;
-        if(ButtonPressedData->GameData->CurrentTurn == 2) {  //the player turn has been already rotated so we have to check it better
-          winner = 1;
-        } else {
-          winner = 2;
-        }
-        sprintf(message, "GAME OVER.\nPlayer %d WON!\n", winner);
+        sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->GameData->CurrentTurn);
         menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
         break;
 
@@ -324,6 +319,14 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
         menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
         }
       }
+     }
+     switch (menuchoice)
+     {
+       case 0:
+         //win->close();
+         //game_main_menu();
+         break;
+
      }
     }
         // deactive players controls
@@ -416,4 +419,8 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
  }
 }
 
-
+void HideAndResetToMainMenu(void* data)
+{
+  Fl_Double_Window* win = static_cast<Fl_Double_Window*>(data);
+  win->hide();
+}

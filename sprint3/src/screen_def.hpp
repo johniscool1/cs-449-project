@@ -66,6 +66,7 @@ struct MainMenuCBdata {
     Fl_Round_Button* GeneralGamemodeRB;
 };
 
+
 class Draw_lineP1 : public Fl_Widget {
 public:
     Draw_lineP1(int X, int Y, int W, int H, const char*L=0) : Fl_Widget(X,Y,W,H,L) {
@@ -111,5 +112,5 @@ struct MMcounter_checkCBdata{
 
 int GetButtonXY(int x);
 
-
+static void HideAndResetToMainMenu(void* data);
 #endif
