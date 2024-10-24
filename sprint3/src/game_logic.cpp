@@ -52,6 +52,7 @@ void GameLogic::addMovetoList(int x, int y, int Piece, Fl_Toggle_Button* Button_
  SpaceData.y = y;
  SpaceData.Scored = false;
  SpaceData.Button = Button_Used;
+ SpaceData.player = CurrentTurn;
  SpacesPlayed.push_back(SpaceData);
 }
 
@@ -441,6 +442,7 @@ for(int j = 0; j < rows; j++) {
 
 
 
+ /*
  cout << "-------------" << endl;
  if (SpacesPlayed.size() == rows * cols)
  {
@@ -471,5 +473,24 @@ for(int j = 0; j < rows; j++) {
 
  }
  return 3;
+ */
+ return 0;
+}
+
+
+void GeneralGameMode::CheckOutcome()
+{
+  if(SpacesPlayed.size() == rows * cols)
+  {
+    EndGame = true;
+  }
+}
+
+void SimpleGameMode::CheckOutcome()
+{
+  if(FoundSequences.size() != 0)
+  {
+    EndGame = true;
+  }
 }
 

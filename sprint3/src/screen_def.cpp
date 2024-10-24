@@ -130,15 +130,26 @@ void playGameButtonCB(Fl_Widget*, void* data)
  int xVal = static_cast<int>(menuSettings->x->value());
  int yVal = static_cast<int>(menuSettings->y->value());
  //create all the variables we need
- GameLogic* GameData = new GameLogic;
+ GameLogic* GameData;
+ if(menuSettings->GeneralGamemodeRB->value() == 0)
+ {
+    GameData = new SimpleGameMode;
+ } else {
+   GameData = new GeneralGameMode;
+ }
+
+ //GameLogic* GameData = new GameLogic;
  GameBoard* sosGameBoard = new GameBoard;
  Player1Logic* player1Data = new Player1Logic;
  Player2Logic* player2Data = new Player2Logic;
  //set gamemode
  GameData->setGameMode(menuSettings->GeneralGamemodeRB->value());
+
  //intialize window
  sosGameBoard->initwin();
  sosGameBoard->SetBoardDimensions(xVal,yVal);
+ GameData->cols = xVal;
+ GameData->rows = yVal;
  sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
  sosGameBoard->GameBoardWin->show();
@@ -231,17 +242,19 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
-
- //Change the color of the buttons to indiacte they have been scored
+ ButtonPressedData->GameData->CheckOutcome();
+ //Change the color of the buttons to indiacte they have been scored we also.
  if(ButtonPressedData->GameData->Last_Player_Scored > 10 && ButtonPressedData->GameData->Last_Player_Scored < 20) //player 1 scored
  {
     for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
     {
-      if(ButtonPressedData->GameData->FoundSequences[i].Scored) {
+      //we check if the space has already been played and check if the square color
+      if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_BLUE);
       }
+
     }
    //ButtonThatWasPressed->down_color(FL_BLUE);
    ButtonPressedData->GameData->FoundSequences.clear();
@@ -254,7 +267,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
     //ButtonThatWasPressed->down_color(FL_RED);
    for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
     {
-       if(ButtonPressedData->GameData->FoundSequences[i].Scored) {
+       if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_RED);
@@ -265,7 +278,55 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
    Fl::redraw();
  }
 
-//
+ //check if the game has ended
+ if(ButtonPressedData->GameData->EndGame)
+ {
+   int menuchoice;
+   switch(ButtonPressedData->GameData->GameMode)
+   {
+     case 0: //simple gm
+     {
+        char message[120];
+        int winner;
+        if(ButtonPressedData->GameData->CurrentTurn == 2) {  //the player turn has been already rotated so we have to check it better
+          winner = 1;
+        } else {
+          winner = 2;
+        }
+        sprintf(message, "GAME OVER.\nPlayer %d WON!\n", winner);
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        break;
+
+    }
+     case 1:  //general gm
+     {
+        char message[120];
+        //printf("%s",message);
+        //if all spaces have been played, end the game
+        int winner;
+        if ( ButtonPressedData->Player1Data->points >  ButtonPressedData->Player2Data->points)
+        {
+        winner = 1;
+        } else if ( ButtonPressedData->Player1Data->points <  ButtonPressedData->Player2Data->points)
+        {
+        winner = 2;
+        } else //check if it was a tie
+        {
+        winner = 0;
+        }
+
+        if (winner != 0) {
+        sprintf(message, "GAME OVER.\nPlayer %d WON!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.", winner,  ButtonPressedData->Player1Data->points,  ButtonPressedData->Player2Data->points);
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        } else
+        {
+        sprintf(message, "GAME OVER.\nGame was a tie!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.",  ButtonPressedData->Player1Data->points,  ButtonPressedData->Player2Data->points);
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        }
+      }
+     }
+    }
+        // deactive players controls
  switch(ButtonPressedData->GameData->CurrentTurn)
  {
    case 1:

@@ -26,8 +26,9 @@ public:
  int turn;
  int GameMode = 1; //1 for simple 0 for general game. set to 1 for default selected
  int Last_Player_Scored = 0; // 0= no one scored, XY= player x, scored y times
-
-
+ bool EndGame = false;
+ int rows;
+ int cols;
 
  struct filledSpace { //used in a vector, stores data about the space a player uses
      Fl_Toggle_Button* Button;
@@ -63,10 +64,22 @@ public:
    bool Scored;
    int originalIndex;
   };
-  vector <tempFilledSpace> FoundSequences;
+  vector <tempFilledSpace> FoundSequences; // used to pass the buttons to the screen class
 
+  virtual void CheckOutcome() = 0;
+  virtual ~GameLogic() {}
 };
 
+class GeneralGameMode : public GameLogic
+{
+public:
+  void CheckOutcome();
+};
+class SimpleGameMode : public GameLogic
+{
+public:
+  void CheckOutcome();
+};
 
 //the following 2 structs are used to pass data to callbacks. Due to the callback having to be static, I cannot directly give them varaibles, instead use a struct and static cast it.
 

@@ -111,9 +111,5 @@ struct MMcounter_checkCBdata{
 
 int GetButtonXY(int x);
 
-struct drawLineData {
-  GameBoard GameScreen;
-  GameLogic GameData;
-  char direction;
-};
+
 #endif
