@@ -3,7 +3,7 @@
 
 using namespace std;
 
-
+Fl_Color purple_Button = fl_rgb_color(128, 0, 128);
 
 //intialize the game board
 void GameBoard::initwin() {
@@ -42,6 +42,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
 
  Player1Controls->begin();
  Fl_Box *P1TB = new Fl_Box(20, 80, 20, 10, "Player 1");
+ P1TB->labelcolor(FL_BLUE);
  Fl_Round_Button *P1SRadio = new Fl_Round_Button(10,100, 20, 10, "S");
  Fl_Round_Button *P1ORadio = new Fl_Round_Button(10,120, 20, 10, "O");
  P1SRadio->type(FL_RADIO_BUTTON);
@@ -63,6 +64,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  Fl_Group* Player2Controls = new Fl_Group(620,80, 50, 100);
  Player2Controls->begin();
  Fl_Box *P2TB = new Fl_Box(620, 80, 20, 10, "Player 2");
+ P2TB->labelcolor(FL_RED);
  Fl_Round_Button *P2SRadio = new Fl_Round_Button(630,100, 20, 10, "S");
  Fl_Round_Button *P2ORadio = new Fl_Round_Button(630,120, 20, 10, "O");
  P2SRadio->type(FL_RADIO_BUTTON);
@@ -144,6 +146,11 @@ void playGameButtonCB(Fl_Widget*, void* data)
 
 }
 
+int GetButtonXY(int x)
+{
+  return (x - 100) / 42;
+}
+
 static void playAgain(Fl_Double_Window GameScreen)
 {
   GameScreen.hide();
@@ -170,8 +177,8 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
  ButtonX = ButtonThatWasPressed->x();
  ButtonY = ButtonThatWasPressed->y();
  //find the button
- ButtonX = (ButtonX - 100) / 42;
- ButtonY = (ButtonY - 100) / 42;
+ ButtonX =  GetButtonXY(ButtonX);
+ ButtonY = GetButtonXY(ButtonY);
 
 
  //printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
@@ -188,7 +195,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
     break;
  }
  //add button to are list of played spaces
- ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
+ ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece, ButtonThatWasPressed);
  //printf("Piece: %s\n", piece);
  }
  else
@@ -203,7 +210,7 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
     break;
  }
  //add button to are list of played spaces
- ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player2Data->SelectedPiece);
+ ButtonPressedData->GameData->addMovetoList(ButtonX, ButtonY, ButtonPressedData->Player2Data->SelectedPiece, ButtonThatWasPressed);
 
  }
 
@@ -221,26 +228,44 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
   //See if sequence was created
  ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols, ButtonPressedData->Player1Data, ButtonPressedData->Player2Data);
- //Draw Line
 
 
 
 
- /*
+ //Change the color of the buttons to indiacte they have been scored
  if(ButtonPressedData->GameData->Last_Player_Scored > 10 && ButtonPressedData->GameData->Last_Player_Scored < 20) //player 1 scored
  {
-   cout << "draw" << endl;
-    Draw_lineP1 drawp1(ButtonThatWasPressed->x(), ButtonThatWasPressed->y(), ButtonThatWasPressed->x(), ButtonThatWasPressed->y()+ 80);
-    GameBoardWin->resizable(drawp1);
+    for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
+    {
+      if(ButtonPressedData->GameData->FoundSequences[i].Scored) {
+        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
+      } else {
+        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_BLUE);
+      }
+    }
+   //ButtonThatWasPressed->down_color(FL_BLUE);
+   ButtonPressedData->GameData->FoundSequences.clear();
+   Fl::redraw();
 
  }
- else if (ButtonPressedData->GameData->Last_Player_Scored > 20 && ButtonPressedData->GameData->Last_Player_Scored < 30)
+ else if (ButtonPressedData->GameData->Last_Player_Scored > 20 && ButtonPressedData->GameData->Last_Player_Scored < 30) //player 2 scored
  {
-   cout << "draw" << endl;
-    Draw_lineP2 Drawp2(ButtonThatWasPressed->x(), ButtonThatWasPressed->y(), ButtonThatWasPressed->x(), ButtonThatWasPressed->y()+ 80);
-    GameBoardWin->resizable(Drawp2);
+
+    //ButtonThatWasPressed->down_color(FL_RED);
+   for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
+    {
+       if(ButtonPressedData->GameData->FoundSequences[i].Scored) {
+        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
+      } else {
+        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_RED);
+      }
+
+    }
+    ButtonPressedData->GameData->FoundSequences.clear();
+   Fl::redraw();
  }
-*/
+
+//
  switch(ButtonPressedData->GameData->CurrentTurn)
  {
    case 1:

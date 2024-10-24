@@ -21,6 +21,8 @@
 #define GAMEBOARD_WINDOW_X 700
 #define GAMEBOARD_WINDOW_Y 700
 
+
+
 //Gameboard class for creating the gameboard
 class GameBoard
 {
@@ -50,6 +52,9 @@ class GameBoard
   void show();
   void close();
 
+
+
+
 };
 
 //data used to pass to callback from the main menu
@@ -76,20 +81,19 @@ public:
     }
 };
 
-class Draw_lineP2 : public Fl_Widget {
+class MyBox : public Fl_Widget {
 public:
-    Draw_lineP2(int X, int Y, int W, int H, const char*L=0) : Fl_Widget(X,Y,W,H,L) {
+    MyBox(int X, int Y, int W, int H, Fl_Color color) : Fl_Widget(X, Y, W, H), vcolor(color) {}
+
+    void draw() override {
+        // Draw a simple box with the specified color
+        fl_draw_box(FL_FLAT_BOX, x(), y(), w(), h(), vcolor);
     }
-    void draw() {
-        fl_color(FL_RED);
-        int x1 = x(),       y1 = y();
-        int x2 = w()-1, y2 = h();
 
-
-        fl_line(x1, y1, x2, y2);
-
-    }
+private:
+    Fl_Color vcolor; // Variable color
 };
+
 
 //draws the main menu
 void game_main_menu();
@@ -105,6 +109,7 @@ struct MMcounter_checkCBdata{
   Fl_Counter* counter;
 };
 
+int GetButtonXY(int x);
 
 struct drawLineData {
   GameBoard GameScreen;

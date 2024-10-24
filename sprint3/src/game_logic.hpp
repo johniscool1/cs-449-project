@@ -2,6 +2,9 @@
 #define GAME_LOGIC_H_
 #include <vector>
 #include <stdio.h>
+#include <algorithm>
+
+
 
 #include <FL/Fl_Widget.H>
 #include "FL/Fl_Round_Button.H"
@@ -27,6 +30,7 @@ public:
 
 
  struct filledSpace { //used in a vector, stores data about the space a player uses
+     Fl_Toggle_Button* Button;
      int x; //location
      int y;
      int piece; //what piece was played
@@ -40,7 +44,9 @@ public:
 
  void setGameMode(int x); //sets the gamemode
 
- void addMovetoList(int x, int y, int Piece); //add a space played to the SpacesPlayed vector
+ void addMovetoList(int x, int y, int Piece, Fl_Toggle_Button* Button_Used); //add a space played to the SpacesPlayed vector
+
+
 
  int SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, PlayerLogic* Player2Data); //find if a sequence was created using the size of the board and the SpacesPlayed vector
   /* This structure is only used with SequenceFinder and is identical to filledSpace with the exception of the Orignal index.
@@ -49,6 +55,7 @@ public:
    */
   struct tempFilledSpace
   {
+   Fl_Toggle_Button* Button;
    int x;
    int y;
    int piece;
@@ -56,6 +63,7 @@ public:
    bool Scored;
    int originalIndex;
   };
+  vector <tempFilledSpace> FoundSequences;
 
 };
 

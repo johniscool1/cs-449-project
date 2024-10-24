@@ -1,6 +1,7 @@
 #include "game_logic.hpp"
 #include "screen_def.hpp"
 
+using namespace std;
 
 //TODO: needs to check more logic like if the palyer scord, they get to go again
 void GameLogic::RotatePlayerTurn()
@@ -43,20 +44,24 @@ void changePlayerPieceCB(Fl_Widget*, void* data)
 }
 
 
-void GameLogic::addMovetoList(int x, int y, int Piece)
+void GameLogic::addMovetoList(int x, int y, int Piece, Fl_Toggle_Button* Button_Used)
 {
  filledSpace SpaceData;
  SpaceData.piece = Piece;
  SpaceData.x = x;
  SpaceData.y = y;
  SpaceData.Scored = false;
+ SpaceData.Button = Button_Used;
  SpacesPlayed.push_back(SpaceData);
-
 }
+
+
+
+
 
 int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, PlayerLogic* Player2Data)
 {
- //look up and down
+ //look N to S
  vector <tempFilledSpace> TempVect;
  Last_Player_Scored = 0;
 
@@ -77,25 +82,34 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
      TempSpaceData.player = SpacesPlayed[i].player;
      TempSpaceData.Scored = SpacesPlayed[i].Scored;
      TempSpaceData.originalIndex = i;
+     TempSpaceData.Button = SpacesPlayed[i].Button;
      TempVect.push_back(TempSpaceData);
    }
+  }
+  //sort the vector from low to high to ensure we have the spaces ordered right
+  sort(TempVect.begin(), TempVect.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
+  {
+    return a.y < b.y;
+  });
   //Find Sequences
-  for(int k = 0; k < TempVect.size(); k++)
+
+  for(int f = 0; f < TempVect.size(); f++)
   {
 
-
+    int k = f;
    if(TempVect[k].piece == 1 && TempVect.size() >= 3){
-   //  printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
+     printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
      k++;
-     if(TempVect[k].piece == 0 && k < TempVect.size() )
+     if(TempVect[k].piece == 0 && k < TempVect.size() && TempVect[k].y == TempVect[k-1].y + 1)
      {
-     // printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
+      printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
       k++;
-      if(TempVect[k].piece == 1 && k < TempVect.size())
+      if(TempVect[k].piece == 1 && k < TempVect.size()&& TempVect[k].y == TempVect[k-1].y + 1)
       {
-       //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
-      // printf("Found a Sequence\n");
+       printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
+      printf("Found a Sequence\n");
        //check if it has been scored already using a nand gate
+      cout << "1 " << SpacesPlayed[TempVect[k].originalIndex].Scored << " 2 " << SpacesPlayed[TempVect[k-1].originalIndex].Scored << " 3 " << SpacesPlayed[TempVect[k-2].originalIndex].Scored << endl;
        if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))
        {
        //printf("Added point to Player %d\n", CurrentTurn);
@@ -103,7 +117,13 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
        SpacesPlayed[TempVect[k].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
-        //subtract 1 from score becuase we run this after the turn has changed
+
+       //add the sequences to this vector to later indiacte who scored
+       FoundSequences.push_back(TempVect[k]);
+       FoundSequences.push_back(TempVect[k-1]);
+       FoundSequences.push_back(TempVect[k-2]);
+
+       //subtract 1 from score becuase we run this after the turn has changeds
        switch (CurrentTurn - 1)
        {
          case 1:
@@ -131,11 +151,10 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
      }
     }
    }
-
+TempVect.clear();
   }
   TempVect.clear();
- }
-  TempVect.clear();
+
 
 
 
@@ -156,22 +175,28 @@ for(int j = 0; j < rows; j++) {
      TempSpaceData.piece = SpacesPlayed[i].piece;
      TempSpaceData.player = SpacesPlayed[i].player;
      TempSpaceData.Scored = SpacesPlayed[i].Scored;
+     TempSpaceData.Button = SpacesPlayed[i].Button;
      TempSpaceData.originalIndex = i;
      TempVect.push_back(TempSpaceData);
    }
-  //Find Sequences
-  for(int k = 0; k < TempVect.size(); k++)
+  }
+  //sort the vector from low to high to ensure we have the spaces ordered right
+  sort(TempVect.begin(), TempVect.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
   {
-
+    return a.x < b.x;
+  });
+  for(int d = 0; d < TempVect.size(); d++)
+  {
+    int k = d;
 
    if(TempVect[k].piece == 1 && TempVect.size() >= 3){
      //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
      k++;
-     if(TempVect[k].piece == 0 && k < TempVect.size() )
+     if(TempVect[k].piece == 0 && k < TempVect.size() && TempVect[k].x == TempVect[k-1].x + 1)
      {
       //printf("Found O at %d,%d", TempVect[k].x, TempVect[k].y);
       k++;
-      if(TempVect[k].piece == 1 && k < TempVect.size())
+      if(TempVect[k].piece == 1 && k < TempVect.size() && TempVect[k].x == TempVect[k-1].x + 1)
       {
        //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
        //printf("Found a Sequence\n");
@@ -183,6 +208,10 @@ for(int j = 0; j < rows; j++) {
        SpacesPlayed[TempVect[k].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
        SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
+       //add the sequences to this vector to later indiacte who scored
+       FoundSequences.push_back(TempVect[k]);
+       FoundSequences.push_back(TempVect[k-1]);
+       FoundSequences.push_back(TempVect[k-2]);
         //subtract 1 from score becuase we run this after the turn has changed
        switch (CurrentTurn - 1)
        {
@@ -211,13 +240,208 @@ for(int j = 0; j < rows; j++) {
      }
     }
    }
+  TempVect.clear();
+  }
+
+
+/*
+ *******************************************************************
+ * CHECK PARRELLELS
+ ********************************************************************
+
+ */
+
+
+
+
+
+//check SW to NW
+
+
+  for(int i = 0; i < cols; i++)
+  {
+    int counter = i;
+    for (int j = 0; j < rows; j++){
+      //cout << "X: " << j << "Y: " << counter << endl;
+      for(int l = 0; l < SpacesPlayed.size(); l++)
+     {
+   if(SpacesPlayed[l].y == counter && SpacesPlayed[l].x == j)
+   {
+     //create temp var
+     //cout << "ADDED " << SpacesPlayed[k].x << SpacesPlayed[k].y <<  endl;
+     tempFilledSpace TempSpaceData;
+     TempSpaceData.x = SpacesPlayed[l].x;
+     TempSpaceData.y = SpacesPlayed[l].y;
+     TempSpaceData.piece = SpacesPlayed[l].piece;
+     TempSpaceData.player = SpacesPlayed[l].player;
+     TempSpaceData.Scored = SpacesPlayed[l].Scored;
+     TempSpaceData.Button = SpacesPlayed[l].Button;
+     TempSpaceData.originalIndex = l;
+     TempVect.push_back(TempSpaceData);
+   }
+
+    }
+    counter = counter -1;
+  }
+  sort(TempVect.begin(), TempVect.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
+  {
+    return a.x < b.x;
+  });
+  for(int d = 0; d < TempVect.size(); d++)
+  {
+   int k = d;
+   if(TempVect[k].piece == 1 && TempVect.size() >= 3){
+     printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
+     k++;
+     if(TempVect[k].piece == 0 && k < TempVect.size() && TempVect[k].x -1 == TempVect[k-1].x)
+     {
+      printf("Found O at %d,%d\n", TempVect[k].x, TempVect[k].y);
+      k++;
+      if(TempVect[k].piece == 1 && k < TempVect.size() && TempVect[k].x -1 == TempVect[k-1].x)
+      {
+       printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
+       printf("Found a Sequence\n");
+       //check if it has been scored already using a nand gate
+       if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))
+       {
+       //printf("Added point to Player %d\n", CurrentTurn);
+       //Mark the spaces as being scored already
+       SpacesPlayed[TempVect[k].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
+       //add the sequences to this vector to later indiacte who scored
+       FoundSequences.push_back(TempVect[k]);
+       FoundSequences.push_back(TempVect[k-1]);
+       FoundSequences.push_back(TempVect[k-2]);
+        //subtract 1 from score becuase we run this after the turn has changed
+       switch (CurrentTurn - 1)
+       {
+         case 1:
+          Player1Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 11;
+          } else {
+              Last_Player_Scored++;
+          }
+          break;
+         case 0: // since we are subtracting one, player 2 is now 0
+          Player2Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 21;
+          } else {
+            Last_Player_Scored++;
+          }
+          break;
+       }
+       //printf("\n-------------------------\n");
+      }
+      }
+     }
+   }
 
   }
   TempVect.clear();
 
  }
+ TempVect.clear();
+
+ //check SE to NE
+
+  for(int i = 0; i < cols; i++)
+  {
+    int counter = i;
+    for (int j = 0; j < rows; j++){
+      //cout << "X: " << counter << "Y: " << j << endl;
+      for(int l = 0; l < SpacesPlayed.size(); l++)
+     {
+   if(SpacesPlayed[l].y == j && SpacesPlayed[l].x == counter)
+   {
+     //create temp var
+     //cout << "ADDED " << SpacesPlayed[k].x << SpacesPlayed[k].y <<  endl;
+     tempFilledSpace TempSpaceData;
+     TempSpaceData.x = SpacesPlayed[l].x;
+     TempSpaceData.y = SpacesPlayed[l].y;
+     TempSpaceData.piece = SpacesPlayed[l].piece;
+     TempSpaceData.player = SpacesPlayed[l].player;
+     TempSpaceData.Scored = SpacesPlayed[l].Scored;
+     TempSpaceData.Button = SpacesPlayed[l].Button;
+     TempSpaceData.originalIndex = l;
+     TempVect.push_back(TempSpaceData);
+   }
+
+    }
+    counter = counter +1;
+  }
+  sort(TempVect.begin(), TempVect.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
+  {
+    return a.x < b.x;
+  });
+  for(int d = 0; d < TempVect.size(); d++)
+  {
+    int k = d;
+   if(TempVect[k].piece == 1 && TempVect.size() >= 3){
+     printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
+     k++;
+     if(TempVect[k].piece == 0 && k < TempVect.size() )
+     {
+      printf("Found O at %d,%d\n", TempVect[k].x, TempVect[k].y);
+      k++;
+      if(TempVect[k].piece == 1 && k < TempVect.size())
+      {
+       printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
+       printf("Found a Sequence\n");
+       //check if it has been scored already using a nand gate
+       if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))
+       {
+       //printf("Added point to Player %d\n", CurrentTurn);
+       //Mark the spaces as being scored already
+       SpacesPlayed[TempVect[k].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-1].originalIndex].Scored = true;
+       SpacesPlayed[TempVect[k-2].originalIndex].Scored = true;
+       //add the sequences to this vector to later indiacte who scored
+       FoundSequences.push_back(TempVect[k]);
+       FoundSequences.push_back(TempVect[k-1]);
+       FoundSequences.push_back(TempVect[k-2]);
+        //subtract 1 from score becuase we run this after the turn has changed
+       switch (CurrentTurn - 1)
+       {
+         case 1:
+          Player1Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 11;
+          } else {
+              Last_Player_Scored++;
+          }
+          break;
+         case 0: // since we are subtracting one, player 2 is now 0
+          Player2Data->addPoint();
+          if( Last_Player_Scored == 0)
+          {
+            Last_Player_Scored = 21;
+          } else {
+            Last_Player_Scored++;
+          }
+          break;
+       }
+       //printf("\n-------------------------\n");
+      }
+      }
+     }
+   }
+
+  }
+  TempVect.clear();
+
+ }
+ TempVect.clear();
 
 
+
+
+ cout << "-------------" << endl;
  if (SpacesPlayed.size() == rows * cols)
  {
    char message[120];
