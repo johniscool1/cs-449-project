@@ -16,7 +16,10 @@ void GameBoard::show()
  GameBoardWin->show();
 }
 
-
+void GameBoard::hide()
+{
+ GameBoardWin->hide();
+}
 //Set the Board Dimensions, checks if it is out of range. TODO: check if too large
 bool GameBoard::SetBoardDimensions(int x, int y)
 {
@@ -99,7 +102,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
    ButtonDrawX = i * 42 + 100;
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
-   GameBoardButtonCBdata* cbGameButtonData = new GameBoardButtonCBdata{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls};
+   GameBoardButtonCBdata* cbGameButtonData = new GameBoardButtonCBdata{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls, GameBoardWin};
 
    //set button callback
    BoardButton->callback(GameBoardButtonPressedCB, cbGameButtonData);
@@ -126,7 +129,6 @@ void playGameButtonCB(Fl_Widget*, void* data)
  //create new windpw
  Fl_Window* win = static_cast<Fl_Double_Window*>(menuSettings->window); // Cast void* to Fl_Window*
  win->hide();
-
  int xVal = static_cast<int>(menuSettings->x->value());
  int yVal = static_cast<int>(menuSettings->y->value());
  //create all the variables we need
@@ -169,14 +171,10 @@ static void playAgain(Fl_Double_Window GameScreen)
 
 }
 
-void GameBoard::close()
-{
-  GameBoardWin->hide();
-}
 
 
 //callback for when a button is pressed
-void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
+void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 {
 
  GameBoardButtonCBdata* ButtonPressedData = reinterpret_cast<GameBoardButtonCBdata*>(data);
@@ -324,8 +322,13 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
      {
        case 0:
          //win->close();
-         //game_main_menu();
+         ButtonPressedData->GameScreen->hide();
+         game_main_menu();
+         //HideAndResetToMainMenu(GameBoardWin);
+         //Fl::handle(FL_CLOSE, (Fl_Double_Window*) GameBoardWin);
          break;
+       case 1:
+         ButtonPressedData->GameScreen->hide();
 
      }
     }
@@ -345,6 +348,17 @@ void GameBoard::GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 }
+
+
+
+void GameBoard::idle_check_gameover(void* data)
+{
+  if(EndOfGame)
+  {
+    GameBoardWin->hide();
+  }
+}
+
 
 /*
  * Start of main menu procedures
@@ -419,8 +433,4 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
  }
 }
 
-void HideAndResetToMainMenu(void* data)
-{
-  Fl_Double_Window* win = static_cast<Fl_Double_Window*>(data);
-  win->hide();
-}
+

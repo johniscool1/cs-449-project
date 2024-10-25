@@ -92,19 +92,10 @@ struct SelectedPieceCBdata
 
 };
 //used for when a button on the board is pressed
-struct GameBoardButtonCBdata
-{
- Fl_Toggle_Button* Button;
- Player1Logic* Player1Data;
- Player2Logic* Player2Data;
- int currentPlayer;
- GameLogic* GameData;
- int rows;
- int cols;
- Fl_Group* P1Group;
- Fl_Group* P2Group;
-};
+
 
 //callback for the radio buttons to set a players current piece
 void changePlayerPieceCB(Fl_Widget*, void* data);
+
+void HideAndResetToMainMenu(void* data);
 #endif

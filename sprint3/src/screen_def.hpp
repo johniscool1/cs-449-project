@@ -30,6 +30,7 @@ class GameBoard
    //store how big the gameboard is
   int rows;
   int cols;
+  bool EndOfGame = false;
 
   //window used for gameboard
   Fl_Double_Window* GameBoardWin;
@@ -47,16 +48,16 @@ class GameBoard
   Fl_Toggle_Button *BoardButton;
 
   //CB for when a button on the gameboard is pressed
-  static void GameBoardButtonPressedCB(Fl_Widget*, void *data);
+  //static void GameBoardButtonPressedCB(Fl_Widget*, void *data);
 
   void show();
-  void close();
-
+  void hide();
+  void idle_check_gameover(void *data);
 
 
 
 };
-
+void GameBoardButtonPressedCB(Fl_Widget*, void *data);
 //data used to pass to callback from the main menu
 struct MainMenuCBdata {
     Fl_Window* window;
@@ -82,18 +83,7 @@ public:
     }
 };
 
-class MyBox : public Fl_Widget {
-public:
-    MyBox(int X, int Y, int W, int H, Fl_Color color) : Fl_Widget(X, Y, W, H), vcolor(color) {}
 
-    void draw() override {
-        // Draw a simple box with the specified color
-        fl_draw_box(FL_FLAT_BOX, x(), y(), w(), h(), vcolor);
-    }
-
-private:
-    Fl_Color vcolor; // Variable color
-};
 
 
 //draws the main menu
@@ -112,5 +102,18 @@ struct MMcounter_checkCBdata{
 
 int GetButtonXY(int x);
 
-static void HideAndResetToMainMenu(void* data);
+struct GameBoardButtonCBdata
+{
+ Fl_Toggle_Button* Button;
+ Player1Logic* Player1Data;
+ Player2Logic* Player2Data;
+ int currentPlayer;
+ GameLogic* GameData;
+ int rows;
+ int cols;
+ Fl_Group* P1Group;
+ Fl_Group* P2Group;
+ Fl_Double_Window* GameScreen;
+};
+
 #endif

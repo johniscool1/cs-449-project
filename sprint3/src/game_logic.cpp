@@ -494,3 +494,8 @@ void SimpleGameMode::CheckOutcome()
   }
 }
 
+void HideAndResetToMainMenu(void* data)
+{
+  Fl_Double_Window* win = static_cast<Fl_Double_Window*>(data);
+  win->hide();
+}
