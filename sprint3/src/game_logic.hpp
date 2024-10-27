@@ -47,7 +47,7 @@ public:
 
  void addMovetoList(int x, int y, int Piece, Fl_Toggle_Button* Button_Used); //add a space played to the SpacesPlayed vector
 
-
+ int GetWinner(int p1score, int p2score); // if it returns 0, there was a tie, otherwise returns the winner
 
  int SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, PlayerLogic* Player2Data); //find if a sequence was created using the size of the board and the SpacesPlayed vector
   /* This structure is only used with SequenceFinder and is identical to filledSpace with the exception of the Orignal index.

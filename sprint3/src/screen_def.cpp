@@ -428,5 +428,3 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
    Cbdata->counter->value(3);
  }
 }
-
-

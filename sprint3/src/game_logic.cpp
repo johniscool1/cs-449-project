@@ -478,18 +478,6 @@ for(int j = 0; j < rows; j++) {
 }
 
 
-int GameLogic::GetWinner(int p1score, int p2score)
-{
-  if(p1score > p2score)
-  {
-    return 1;
-  } else if (p2score > p1score)
-  {
-    return 2;
-  } else {
-    return 0;
-  }
-}
 
 
 void GeneralGameMode::CheckOutcome()
