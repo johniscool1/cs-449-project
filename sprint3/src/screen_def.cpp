@@ -419,9 +419,12 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
  Fl::wait();
 
 
- if(Cbdata->counter->value() < 3.0 && !debug)
+ if(Cbdata->counter->value() < 3.0)
  {
+   if(!debug)
+   {
    fl_alert("GameBoard must be more than 3 x 3");
+   }
    Cbdata->counter->value(3);
  }
 }
