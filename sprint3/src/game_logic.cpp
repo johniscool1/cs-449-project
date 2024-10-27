@@ -385,11 +385,11 @@ for(int j = 0; j < rows; j++) {
    if(TempVect[k].piece == 1 && TempVect.size() >= 3){
      //printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
      k++;
-     if(TempVect[k].piece == 0 && k < TempVect.size() )
+     if(TempVect[k].piece == 0 && k < TempVect.size() && TempVect[k].y -1 == TempVect[k-1].y)
      {
       //printf("Found O at %d,%d\n", TempVect[k].x, TempVect[k].y);
       k++;
-      if(TempVect[k].piece == 1 && k < TempVect.size())
+      if(TempVect[k].piece == 1 && k < TempVect.size() && TempVect[k].y -1 == TempVect[k-1].y)
       {
       // printf("Found S at %d,%d\n", TempVect[k].x, TempVect[k].y);
        //printf("Found a Sequence\n");
