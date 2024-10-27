@@ -99,7 +99,7 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
 
     int k = f;
    if(TempVect[k].piece == 1 && TempVect.size() >= 3){
-    // printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
+     //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
      k++;
      if(TempVect[k].piece == 0 && k < TempVect.size() && TempVect[k].y == TempVect[k-1].y + 1)
      {
@@ -107,8 +107,8 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
       k++;
       if(TempVect[k].piece == 1 && k < TempVect.size()&& TempVect[k].y == TempVect[k-1].y + 1)
       {
-       //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
-       // printf("Found a Sequence\n");
+      //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
+        //printf("Found a Sequence\n");
        //check if it has been scored already using a nand gate
       //cout << "1 " << SpacesPlayed[TempVect[k].originalIndex].Scored << " 2 " << SpacesPlayed[TempVect[k-1].originalIndex].Scored << " 3 " << SpacesPlayed[TempVect[k-2].originalIndex].Scored << endl;
        if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))

@@ -98,7 +98,7 @@ void GameBoard::DrawButtons(Player1Logic* player1data, Player2Logic* player2data
  {
   for(int j = 0; j < cols; j++)
   {
-   //If these calculations are changed. change them in the Button callback. TODO: implement function
+
    ButtonDrawX = i * 42 + 100;
    ButtonDrawY = j * 42 + 100;
    BoardButton = new Fl_Toggle_Button(ButtonDrawX, ButtonDrawY, 40, 40, "");
@@ -135,7 +135,7 @@ void playGameButtonCB(Fl_Widget*, void* data)
  GameLogic* GameData;
  if(menuSettings->GeneralGamemodeRB->value() == 0)
  {
-    GameData = new SimpleGameMode;
+   GameData = new SimpleGameMode;
  } else {
    GameData = new GeneralGameMode;
  }
@@ -278,7 +278,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
  }
 
  //check if the game has ended
- if(ButtonPressedData->GameData->EndGame)
+ if(ButtonPressedData->GameData->EndGame && !debug)
  {
    int menuchoice;
    switch(ButtonPressedData->GameData->GameMode)
@@ -351,13 +351,6 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
-void GameBoard::idle_check_gameover(void* data)
-{
-  if(EndOfGame)
-  {
-    GameBoardWin->hide();
-  }
-}
 
 
 /*
@@ -426,7 +419,7 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
  Fl::wait();
 
 
- if(Cbdata->counter->value() < 3.0)
+ if(Cbdata->counter->value() < 3.0 && !debug)
  {
    fl_alert("GameBoard must be more than 3 x 3");
    Cbdata->counter->value(3);

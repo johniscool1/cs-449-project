@@ -21,7 +21,7 @@
 #define GAMEBOARD_WINDOW_X 700
 #define GAMEBOARD_WINDOW_Y 700
 
-
+extern bool debug;
 
 //Gameboard class for creating the gameboard
 class GameBoard
