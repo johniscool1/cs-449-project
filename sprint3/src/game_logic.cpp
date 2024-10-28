@@ -345,8 +345,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-  TempVect.clear();
+
   }
+  TempVect.clear();
   }
 
 
@@ -437,8 +438,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-  TempVect.clear();
+
   }
+  TempVect.clear();
   }
 
   /*
@@ -630,9 +632,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-  TempVect.clear();
-  }
 
+  }
+  TempVect.clear();
 
  }
  TempVect.clear();
@@ -722,9 +724,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-  TempVect.clear();
-  }
 
+  }
+  TempVect.clear();
 
  }
  TempVect.clear();
