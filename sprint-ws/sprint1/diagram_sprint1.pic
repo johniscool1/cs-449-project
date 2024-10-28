@@ -1,0 +1,32 @@
+.SH 
+DFD: SOS Game application
+.PS
+A: box "User Player 1";
+move down from last box;
+B: box "User Player 2";
+move right from A;
+move 3;
+C: circle rad 1;
+circle fillval 0 rad .75 at last circle "SOS game application";
+arrow from B .e  to C .sw above "Game input"; 
+arrow from A .e to C .w above "game input";
+arrow from C .nw to A .ne "UI / gameboard";
+arrow from C .s to B .se "UI/ gameboard";
+.PE
+.SH
+DFD: SOS Game application Level 1
+.PS
+move left 10i;
+A: box "Players";
+move right from A 2;
+B: circle rad .5 "Web Site UI";
+move up from B 1;
+C: circle rad .5 "Scorboard";
+move down from B 1;
+D: circle rad .5 "Game logic";
+arrow from B .n to C .s "score";
+arrow from A .ne to B .nw "Game play request";
+arrow from B .sw to A .se "Game play response";
+arrow from B .sw to D .nw 
+arrow from D .ne to B .se "Game play data I/O"
+.PE

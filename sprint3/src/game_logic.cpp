@@ -151,8 +151,9 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
       }
      }
     }
+    TempVect.clear();
    }
-TempVect.clear();
+
   }
   TempVect.clear();
 
@@ -240,11 +241,12 @@ for(int j = 0; j < rows; j++) {
       }
      }
     }
+    TempVect.clear();
    }
-  TempVect.clear();
+
   }
 
-
+  TempVect.clear();
 /*
  *******************************************************************
  * CHECK PARRELLELS
@@ -341,9 +343,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-
-  }
   TempVect.clear();
+  }
+
 
  }
  TempVect.clear();
@@ -432,9 +434,9 @@ for(int j = 0; j < rows; j++) {
       }
      }
    }
-
-  }
   TempVect.clear();
+  }
+
 
  }
  TempVect.clear();
