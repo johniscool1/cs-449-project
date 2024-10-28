@@ -25,7 +25,7 @@ screen_def.cpp	pro	431
 _
 game_logic.hpp	pro	102
 _
-game_logic.cpp	pro	516
+game_logic.cpp	pro	690
 _
 unit_tests.cpp	test	323
 _

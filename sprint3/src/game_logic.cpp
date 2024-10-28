@@ -63,7 +63,7 @@ void GameLogic::addMovetoList(int x, int y, int Piece, Fl_Toggle_Button* Button_
 int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, PlayerLogic* Player2Data)
 {
  //look N to S
- vector <tempFilledSpace> TempVect;
+
  Last_Player_Scored = 0;
 
 
@@ -71,8 +71,10 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
  for(int j = 0; j < cols; j++) {
    //printf("looking at column %d", j);
   //look through the vector to find specific row
+   vector <tempFilledSpace> TempVect;
   for(int i = 0; i < SpacesPlayed.size(); i++)
   {
+
    if(SpacesPlayed[i].x == j)
    {
      //create temp var
@@ -155,7 +157,7 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
    }
   TempVect.clear();
   }
-  TempVect.clear();
+
 
 
 
@@ -164,6 +166,7 @@ int GameLogic::SequenceFinder(int rows, int cols, PlayerLogic* Player1Data, Play
   //vector <tempFilledSpace> TempVect;
  //Last_Player_Scored = 0;
 for(int j = 0; j < rows; j++) {
+  vector <tempFilledSpace> TempVect;
    //printf("looking at row %d\n", j);
   //look through the vector to find specific row
   for(int i = 0; i < SpacesPlayed.size(); i++)
@@ -247,7 +250,7 @@ for(int j = 0; j < rows; j++) {
     TempVect.clear();
   }
 
-  TempVect.clear();
+
 /*
  *******************************************************************
  * CHECK PARRELLELS
@@ -264,6 +267,7 @@ for(int j = 0; j < rows; j++) {
 
   for(int i = 0; i < cols; i++)
   {
+    vector <tempFilledSpace> TempVect;
     int counter = i;
     for (int j = 0; j < rows; j++){
       //cout << "X: " << j << "Y: " << counter << endl;
@@ -357,6 +361,7 @@ for(int j = 0; j < rows; j++) {
 
   for(int i = 1; i < cols; i++)
   {
+    vector <tempFilledSpace> TempVect;
     int counter = i;
     for(int j = rows; j > 0; j--)
     {
@@ -546,12 +551,12 @@ for(int j = 0; j < rows; j++) {
 
 
 
- TempVect.clear();
 
  //check SE to NW
 
   for(int i = 0; i < cols; i++)
   {
+    vector <tempFilledSpace> TempVect;
     int counter = i;
     for (int j = 0; j < rows; j++){
       //cout << "X: " << counter << "Y: " << j << endl;
@@ -637,13 +642,14 @@ for(int j = 0; j < rows; j++) {
   TempVect.clear();
 
  }
- TempVect.clear();
+
 
  //check after the middle
 
 
  for(int i = cols; i > 0; i--)
   {
+    vector <tempFilledSpace> TempVect;
     int counter = i;
     for (int j = rows; j > 0; j--){
       //cout << "X: " << counter << "Y: " << j << endl;
@@ -729,7 +735,7 @@ for(int j = 0; j < rows; j++) {
   TempVect.clear();
 
  }
- TempVect.clear();
+
 
  /*
  cout << "-------------" << endl;
