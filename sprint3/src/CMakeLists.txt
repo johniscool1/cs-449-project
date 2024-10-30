@@ -29,10 +29,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 # Add the executable
-add_executable(sprint2sos main.cpp screen_def.cpp game_logic.cpp)
+add_executable(sprint3sos main.cpp screen_def.cpp game_logic.cpp)
 
 # Link the FLTK library
-target_link_libraries(sprint2sos PRIVATE fltk)
+target_link_libraries(sprint3sos PRIVATE fltk)
 
 #Build unit tests
 # Add the executable
