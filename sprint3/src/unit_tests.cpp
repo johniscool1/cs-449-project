@@ -229,14 +229,6 @@ TEST_CASE("ID 5.2 Board is filled & 5.3 Declare a draw in simple game")
 
 //6.1 AC is with 4.1
 
-struct filledSpace { //used in a vector, stores data about the space a player uses
-     Fl_Toggle_Button* Button;
-     int x; //location
-     int y;
-     int piece; //what piece was played
-     int player; //what player placed it
-     bool Scored; //has the space been scored on
- };
 
 
 TEST_CASE("ID 7.2 Declare the winner")

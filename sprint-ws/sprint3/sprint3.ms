@@ -91,7 +91,7 @@ T{
 6. Make a move in a general game
 T}	6.1	GameBoard, GameLogic	T{
 GameBoard::GameBoardButtonPressed (uses data from game logic)
-T}	done	
+T}	done
 _
 	6.2	GameBoard, GameLogic	T{
 GameBoard::GameBoardButtonPressed, GameLogic::SequenceFinder
@@ -143,11 +143,13 @@ TEST_CASE("ID 2.1 User presses Simple Gamemode")
 T}	T{
 Simulates the radio buttons a user uses on the main menu to select a gamemode. Then Uses a class setter to set the gamemode. I am unable to use the whole function that contians this setter becuase it also creates the window for the gameboard. Altough I created both buttons, the code only checks if the simple GM one is checked or not.
 T}
+_
 	2.2	T{
 TEST_CASE("ID 2.2 User presses General Gamemode")
 T}	T{
 Same as the last one but checks for the general gamemode.
 T}
+_
 T{
 3. Start a new game of the chosen board and game size
 T}	3.1	T{
@@ -181,12 +183,12 @@ Fills up the board with all s, creating a filled board and a tie. Check if the g
 T}
 _
 
-6. Make a move in a general game	6.1
-T{
+6. Make a move in a general game	6.1	T{
 TEST_CASE("ID 4.1 & 6.1 Player places a S or O"
 T}	T{
 Becuase scoring and sequence finding has not been fully implemented, this AC shares a test with 4.1 becuase the gameplay is the same in both gamemodes until a sequence is formed.
 T}
+_
 	6.2	T{
 TEST_CASE("ID 5.1 & 6.1 Simple Game is over, someone wins")
 T}	T{
@@ -198,6 +200,7 @@ TEST_CASE("ID 7.1 Board is filled & 7.3 Declare a draw in general game")
 T}	T{
 Fills up the board with all s, creating a filled board and a tie. Check if the game ended and both players points are 0
 T}
+_
 	7.2	T{
 TEST_CASE("ID 7.2 Declare the winner")
 T}	T{

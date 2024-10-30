@@ -286,7 +286,15 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
      case 0: //simple gm
      {
         char message[120];
-        sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->GameData->CurrentTurn);
+        if(ButtonPressedData->Player1Data->points > ButtonPressedData->Player2Data->points)
+        {
+           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->Player1Data->points);
+        } else if (ButtonPressedData->Player2Data->points > ButtonPressedData->Player1Data->points)
+        {
+           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->Player1Data->points);
+        } else {
+           sprintf(message, "GAME OVER.\nIt Was a Tie!\n");
+        }
         menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
         break;
 

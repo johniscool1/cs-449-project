@@ -36,7 +36,7 @@ target_link_libraries(sprint2sos PRIVATE fltk)
 
 #Build unit tests
 # Add the executable
-add_executable(unit_tests unit_tests.cpp screen_def.cpp game_logic.cpp unit_testing/catch_amalgamated.cpp)
+add_executable(unit_tests unit_tests.cpp screen_def.cpp game_logic.cpp test_lib/catch_amalgamated.cpp)
 
 # Link the FLTK library
 target_link_libraries(unit_tests PRIVATE fltk m stdc++)
