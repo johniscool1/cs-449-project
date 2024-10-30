@@ -205,7 +205,7 @@ for(int j = 0; j < rows; j++) {
       if(TempVect[k].piece == 1 && k < TempVect.size() && TempVect[k].x == TempVect[k-1].x + 1)
       {
        //printf("Found S at %d,%d", TempVect[k].x, TempVect[k].y);
-       printf("Found a Sequence e to w\n");
+       //printf("Found a Sequence e to w\n");
        //check if it has been scored already using a nand gate
        if (!(SpacesPlayed[TempVect[k].originalIndex].Scored && SpacesPlayed[TempVect[k-1].originalIndex].Scored && SpacesPlayed[TempVect[k-2].originalIndex].Scored))
        {
