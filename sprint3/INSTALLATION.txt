@@ -1,5 +1,7 @@
 For linux/unix compilation:
-
+G++ is the only tested, working compiler, there is a bug in the program where clang will not work. Plan to fix on next release.
+(for freebsd run: export GXX=/usr/local/bin/g++)
+	
 	mkdir build
 	cd build
 	cmake ..
