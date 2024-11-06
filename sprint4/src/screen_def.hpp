@@ -15,6 +15,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <FL/Fl_Choice.H>
+#include <unistd.h>
 
 #include "game_logic.hpp"
 
@@ -53,7 +54,7 @@ class GameBoard
 
   void show();
   void hide();
-  void idle_check_gameover(void *data);
+
 
 
 
@@ -96,6 +97,10 @@ void playGameButtonCB(Fl_Widget*, void * data);
 
 //calback for selecting game board size
 void MMcounter_checkCB(Fl_Widget*, void* data);
+
+//have to color the buttons differently due to CPU player
+void ColorButton(Fl_Double_Window* win,int x, int y, Fl_Color ColorB, int piece);
+
 
 //struct to hold counter button data
 struct MMcounter_checkCBdata{

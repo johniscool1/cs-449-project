@@ -5,7 +5,7 @@
 #include <algorithm>
 
 
-
+#include <cstdlib>
 #include <FL/Fl_Widget.H>
 #include "FL/Fl_Round_Button.H"
 #include "FL/Fl.H"
@@ -15,6 +15,7 @@
 #include <FL/Fl_Toggle_Button.H>
 #include <FL/Fl_Choice.H>
 #include "playerlogic.hpp"
+#include <time.h>
 
 using namespace std;
 //class to store player states
@@ -76,6 +77,10 @@ public:
 
   void CPUseek(Fl_Double_Window* win);
   Fl_Toggle_Button* FindButton(Fl_Double_Window* win, int x, int y);
+
+  bool CheckIfScore(int rows, int cols);
+
+  void printAllSequences(const vector<tempFilledSpace>& sequences);
 
 };
 

@@ -234,11 +234,19 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
   if(ButtonPressedData->GameData->CPUplayernum == 1)
   {
     ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
-
+    //add artifical pause
+    ButtonPressedData->P1Group->deactivate();
+    Fl::wait();
+    sleep(1);
 
   } else if (ButtonPressedData->GameData->CPUplayernum == 2)
   {
+    Fl::wait();
+    sleep(1);
     ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
+    Fl::redraw();
+
+
   } else if (ButtonPressedData->GameData->CPUplayernum == 3)
   {
     //TODO: both cpus
@@ -309,8 +317,11 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
       //we check if the space has already been played and check if the square color
       if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
+        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, purple_Button, ButtonPressedData->GameData->FoundSequences[i].piece);
+
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_BLUE);
+        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, FL_BLUE, ButtonPressedData->GameData->FoundSequences[i].piece);
       }
     ButtonPressedData->GameData->RotatePlayerTurn();
     }
@@ -327,8 +338,10 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
     {
        if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
+        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, purple_Button, ButtonPressedData->GameData->FoundSequences[i].piece);
       } else {
         ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_RED);
+        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, FL_RED, ButtonPressedData->GameData->FoundSequences[i].piece);
       }
     ButtonPressedData->GameData->RotatePlayerTurn();
     }
@@ -406,6 +419,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
         // deactive players controls
+ if(!ButtonPressedData->GameData->CPUpresent) {
  switch(ButtonPressedData->GameData->CurrentTurn)
  {
    case 1:
@@ -418,6 +432,18 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
     ButtonPressedData->P2Group->activate();
     break;
  };
+ } else {
+   if(ButtonPressedData->GameData->CurrentTurn == ButtonPressedData->GameData->CPUplayernum && ButtonPressedData->GameData->CPUplayernum == 2){
+     ButtonPressedData->P1Group->deactivate();
+   } else if (ButtonPressedData->GameData->CurrentTurn != ButtonPressedData->GameData->CPUplayernum && ButtonPressedData->GameData->CPUplayernum == 2)
+   {
+     ButtonPressedData->P1Group->activate();
+   } else if(ButtonPressedData->GameData->CurrentTurn == ButtonPressedData->GameData->CPUplayernum && ButtonPressedData->GameData->CPUplayernum == 1) {
+     ButtonPressedData->P2Group->deactivate();
+   } else if(ButtonPressedData->GameData->CurrentTurn != ButtonPressedData->GameData->CPUplayernum && ButtonPressedData->GameData->CPUplayernum == 1) {
+     ButtonPressedData->P2Group->activate();
+   }
+  }
 
 
 
@@ -511,4 +537,30 @@ void MMcounter_checkCB(Fl_Widget*, void* data)
    }
    Cbdata->counter->value(3);
  }
+}
+
+void ColorButton(Fl_Double_Window* win, int x, int y, Fl_Color ColorB, int piece)
+{
+  x = x * 42 + 100;
+  y = y * 42 + 100;
+
+  //look at all the widgets in the window, looking for the one that matches the x and y corrdinates fot he game board
+  for(int i = 0; i < win->children(); i ++)
+  {
+    Fl_Widget *widget = win->child(i);
+    if(Fl_Toggle_Button *button = dynamic_cast<Fl_Toggle_Button *> (widget))
+    {
+      if(button->x() == x && button->y() == y)
+      {
+        button->color(ColorB);
+        char pieceChar[10];
+        sprintf(pieceChar, "%d", piece);
+        const char* pieceConstChar = pieceChar;
+
+        //button->label(pieceConstChar);
+        break;
+      }
+    }
+
+  }
 }

@@ -688,21 +688,14 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
  vector <filledSpace> TempSpacesPlayed = SpacesPlayed;
  //keep track of who the current player was
  int TempCurrentTurn = CurrentTurn;
-
- //std::copy(SpacesPlayed.begin(), SpacesPlayed.end(), TempSpacesPlayed.begin());
- //TempSpacesPlayed = SpacesPlayed;
- // Fl_Toggle_Button* Button;
- //   int x;
- //   int y;
- //   int piece;
- //   int player;
- //   bool Scored;
- //   int originalIndex;
-
-
+ FoundSequences.clear();
 
  SpacesPlayed.clear();
+ filledSpace CPUmove;
+
+
  //fill temp board with s to look for ez sequences
+ printf("Seeking EZ s\n");
  CurrentTurn = 1;
  for(int i=0; i < cols; i++)
  {
@@ -731,9 +724,9 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
  SequenceFinder(rows, cols, Player1tempdata, Player2tempdata);
 
- int counter = 0;
- filledSpace CPUmove;
 
+
+/*
  if(FoundSequences.size() > 0)
  {
      sort(FoundSequences.begin(), FoundSequences.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
@@ -746,9 +739,84 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
         counter++;
         CPUmove.x = FoundSequences[i].x;
         CPUmove.y = FoundSequences[i].y;
+        CPUmove.piece = 1;
+        printf("X: %d Y: %d \n", CPUmove.x, CPUmove.y);
       }
     }
  }
+*/
+
+
+ if(FoundSequences.size() == 0) {
+
+ //keep track of who the current player was
+
+ //std::copy(SpacesPlayed.begin(), SpacesPlayed.end(), TempSpacesPlayed.begin());
+ //TempSpacesPlayed = SpacesPlayed;
+ // Fl_Toggle_Button* Button;
+ //   int x;
+ //   int y;
+ //   int piece;
+ //   int player;
+ //   bool Scored;
+ //   int originalIndex;
+
+
+
+ SpacesPlayed.clear();
+
+
+ printf("Seeking EZ o\n");
+ //fill temp board with o to look for ez sequences
+ CurrentTurn = 1;
+ SpacesPlayed.clear();
+ for(int i=0; i < cols; i++)
+ {
+   for(int j=0; j < rows; j++)
+   {
+
+       addMovetoList(i, j, 0, NULL);
+       }
+
+    }
+
+ for(int k=0; k < TempSpacesPlayed.size(); k++)
+      {
+        for(int j = 0; j < SpacesPlayed.size(); j++){
+        if(SpacesPlayed[j].x == TempSpacesPlayed[k].x && SpacesPlayed[j].y == TempSpacesPlayed[k].y)
+        {
+          SpacesPlayed[j].piece = TempSpacesPlayed[k].piece;
+          SpacesPlayed[j].Scored = TempSpacesPlayed[k].Scored;
+          SpacesPlayed[j].player = 2;
+        }
+        }
+      }
+
+ PlayerLogic* Player1tempdata = new PlayerLogic;
+ PlayerLogic* Player2tempdata = new PlayerLogic;
+
+ SequenceFinder(rows, cols, Player1tempdata, Player2tempdata);
+
+
+
+/*
+ if(FoundSequences.size() > 0)
+ {
+     sort(FoundSequences.begin(), FoundSequences.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
+  {
+    return a.x < b.x;
+  });
+     for(int i=0; i < FoundSequences.size();i++){
+       if(!FoundSequences[i].Scored  && FoundSequences[i].player == 1)
+       {
+        counter++;
+        CPUmove.x = FoundSequences[i].x;
+        CPUmove.y = FoundSequences[i].y;
+        CPUmove.piece = 0;
+      }
+    }
+ }
+ */
  //if the counter is mroe than one, we can play
 
   //return values to what they were before calling the function
@@ -757,25 +825,108 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
  CurrentTurn = TempCurrentTurn;
  SpacesPlayed = TempSpacesPlayed;
 
- //play the piece
- if(counter > 0)
- {
- printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
- //look for the button
- Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
- addMovetoList(CPUmove.x, CPUmove.y, 1, button);
- button->label("S");
- //keep button down
- button->deactivate();
  }
 
- //cleanup
+
+
+
+
+ //check found sequences for the one we'll score with
+  if(FoundSequences.size() != 0)
+  {
+    //printf("Seeking score");
+    vector<tempFilledSpace> TempSeqFound;
+    TempSeqFound = FoundSequences;
+    for(int i =0; i < TempSeqFound.size(); i++)
+    {
+      FoundSequences.clear();
+      SpacesPlayed.clear();
+      SpacesPlayed = TempSpacesPlayed;
+      addMovetoList(TempSeqFound[i].x, TempSeqFound[i].y, TempSeqFound[i].piece, NULL);
+      //printf("SEEKER %d: %d, %d\n", i, TempSeqFound[i].x, TempSeqFound[i].y);
+      if(CheckIfScore(rows, cols))
+      {
+        CPUmove.x = TempSeqFound[i].x;
+        CPUmove.y = TempSeqFound[i].y;
+        CPUmove.piece = TempSeqFound[i].piece;
+        //printf("Choose: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+        break;
+      }
+    }
+  }
+
+
+  if(CPUmove.x > rows || CPUmove.x < 0 || CPUmove.y > cols || CPUmove.x < 0)
+  {
+    printf("----------------------\n");
+    printf("MAJOR ERROR, OUT OF BOUNDS\n");
+    printf("%d, Y: %d\n", CPUmove.x, CPUmove.y);
+    printAllSequences(FoundSequences);
+    printf("----------------------\n");
+    FoundSequences.clear();
+  }
+  if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0)
+ {
+   printf("Giving up, rand placement\n");
+   SpacesPlayed.clear();
+  SpacesPlayed = TempSpacesPlayed;
+   bool exitLoop = false;
+   srand (time(NULL));
+   while(!exitLoop)
+   {
+
+    int randx = rand() % cols;  // Bitwise AND with max positive int
+    int randy = rand() % rows;
+    int randp = rand() % 2;
+     for(int i =0; i < SpacesPlayed.size(); i++)
+     {
+       //cout << i << endl;
+
+       if(SpacesPlayed[i].x != randx && SpacesPlayed[i].y != randy)
+       {
+        //printf("Rand look here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+         CPUmove.x = randx;
+         CPUmove.y = randy;
+         CPUmove.piece = randp;
+         exitLoop = true;
+         break;
+       }
+     }
+
+  }
+
+ }
+
+
+
+ //printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+  //look for the button
+  Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
+  button->down_color(FL_GREEN);
+  switch(CPUmove.piece) {
+    case 0:
+    button->label("O");
+    break;
+    case 1:
+    button->label("S");
+    break;
+  }
+  //keep button down
+  button->deactivate();
+
 
  FoundSequences.clear();
+ CurrentTurn = TempCurrentTurn;
+ SpacesPlayed = TempSpacesPlayed;
+
+ //CPU makes move
+ addMovetoList(CPUmove.x, CPUmove.y, CPUmove.piece, button);
+ printf("---------DONE----------\n");
  delete Player1tempdata;
  delete Player2tempdata;
  Player1tempdata = nullptr;
  Player2tempdata = nullptr;
+
 }
 
 Fl_Toggle_Button* GameLogic::FindButton(Fl_Double_Window* win, int x, int y)
@@ -799,3 +950,27 @@ Fl_Toggle_Button* GameLogic::FindButton(Fl_Double_Window* win, int x, int y)
   return NULL;
 }
 
+
+bool GameLogic::CheckIfScore(int rows, int cols)
+{
+   PlayerLogic* Player1tempdata = new PlayerLogic;
+   PlayerLogic* Player2tempdata = new PlayerLogic;
+   SequenceFinder(rows, cols, Player1tempdata, Player2tempdata);
+   if(Player2tempdata->points > Player1tempdata->points)
+   {
+     return true;
+   } else {
+     return false;
+  }
+
+
+
+}
+void GameLogic::printAllSequences(const vector<tempFilledSpace>& sequences) {
+    printf("\n=== All Found Sequences (%zu total) ===\n", sequences.size());
+    for (size_t i = 0; i < sequences.size(); i++) {
+        printf("Sequence[%zu]: x=%d, y=%d, piece=%d\n",
+               i, sequences[i].x, sequences[i].y, sequences[i].piece);
+    }
+    printf("=====================================\n");
+}
