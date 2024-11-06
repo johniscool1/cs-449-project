@@ -1,0 +1,23 @@
+For linux/unix compilation:
+G++ is the only tested, working compiler, there is a bug in the program where clang will not work. Plan to fix on next release.
+(for freebsd run: export GXX=/usr/local/bin/g++)
+	
+	mkdir build
+	cd build
+	cmake ..
+	make
+
+binaries are in the bin folder
+
+
+For Windows 10
+(NOTE: The unit tests will not compile on windows due to differences in the math libary locations)
+Prebuilt Windows binaries are included in the Sprint3 github release
+
+MinGW is required to build the program
+
+	run 
+	mingw64\bin\cmake -G "MinGW Makefiles"
+	mingw64\bin\mingw32-make.exe
+
+Binaries are in the bin folder
