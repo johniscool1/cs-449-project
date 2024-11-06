@@ -212,6 +212,7 @@ static void playAgain(Fl_Double_Window GameScreen)
 void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 {
 
+ startOfButton:
  GameBoardButtonCBdata* ButtonPressedData = reinterpret_cast<GameBoardButtonCBdata*>(data);
 
  //variable to caluclate where the buttons are
@@ -227,6 +228,23 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
+
+ if(ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn)
+ {
+  if(ButtonPressedData->GameData->CPUplayernum == 1)
+  {
+    ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
+
+
+  } else if (ButtonPressedData->GameData->CPUplayernum == 2)
+  {
+    ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
+  } else if (ButtonPressedData->GameData->CPUplayernum == 3)
+  {
+    //TODO: both cpus
+  }
+
+ } else {
 
 
  //printf("Piece int: %d  ", ButtonPressedData->Player1Data.SelectedPiece);
@@ -266,7 +284,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
  //keep button down
  ButtonThatWasPressed->deactivate();
-
+ }
 
 
 
@@ -385,22 +403,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
- if(ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn)
- {
-  if(ButtonPressedData->GameData->CPUplayernum == 1)
-  {
-    ButtonPressedData->GameData->CPUseek();
 
-
-  } else if (ButtonPressedData->GameData->CPUplayernum == 2)
-  {
-    ButtonPressedData->GameData->CPUseek();
-  } else if (ButtonPressedData->GameData->CPUplayernum == 3)
-  {
-    //TODO: both cpus
-  }
-  ButtonPressedData->GameData->RotatePlayerTurn();
- }
 
         // deactive players controls
  switch(ButtonPressedData->GameData->CurrentTurn)
@@ -418,13 +421,15 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
-
+ if(ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn && !ButtonPressedData->GameData->EndGame)
+ {
+   //goes to the start of this function. Please dont take off point for this, I know its bad practice, but this was the easiest way to do this.
+   goto startOfButton;
+ }
  //check cpu player
 
-
-
-
 }
+
 
 
 /*

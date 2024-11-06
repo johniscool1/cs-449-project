@@ -675,7 +675,7 @@ void HideAndResetToMainMenu(void* data)
 
 
 
-void GameLogic::CPUseek()
+void GameLogic::CPUseek(Fl_Double_Window* win)
 {
   /*
    *
@@ -685,8 +685,9 @@ void GameLogic::CPUseek()
 
  printf("Seeking\n");
  //create temp copy of FoundSequences to return it to later
- //vector <tempFilledSpace> FoundSequences;
  vector <filledSpace> TempSpacesPlayed = SpacesPlayed;
+ //keep track of who the current player was
+ int TempCurrentTurn = CurrentTurn;
 
  //std::copy(SpacesPlayed.begin(), SpacesPlayed.end(), TempSpacesPlayed.begin());
  //TempSpacesPlayed = SpacesPlayed;
@@ -702,6 +703,7 @@ void GameLogic::CPUseek()
 
  SpacesPlayed.clear();
  //fill temp board with s to look for ez sequences
+ CurrentTurn = 1;
  for(int i=0; i < cols; i++)
  {
    for(int j=0; j < rows; j++)
@@ -719,7 +721,7 @@ void GameLogic::CPUseek()
         {
           SpacesPlayed[j].piece = TempSpacesPlayed[k].piece;
           SpacesPlayed[j].Scored = TempSpacesPlayed[k].Scored;
-          SpacesPlayed[j].player = TempSpacesPlayed[k].player;
+          SpacesPlayed[j].player = 2;
         }
         }
       }
@@ -729,17 +731,46 @@ void GameLogic::CPUseek()
 
  SequenceFinder(rows, cols, Player1tempdata, Player2tempdata);
 
+ int counter = 0;
+ filledSpace CPUmove;
+
  if(FoundSequences.size() > 0)
  {
-     printf("Found\n");
+     sort(FoundSequences.begin(), FoundSequences.end(), [](const tempFilledSpace& a, const tempFilledSpace& b)
+  {
+    return a.x < b.x;
+  });
+     for(int i=0; i < FoundSequences.size();i++){
+       if(!FoundSequences[i].Scored  && FoundSequences[i].player == 1)
+       {
+        counter++;
+        CPUmove.x = FoundSequences[i].x;
+        CPUmove.y = FoundSequences[i].y;
+      }
+    }
  }
+ //if the counter is mroe than one, we can play
+
+  //return values to what they were before calling the function
 
  SpacesPlayed.clear();
-
- //FoundSequences = TempSpacesPlayed;
+ CurrentTurn = TempCurrentTurn;
  SpacesPlayed = TempSpacesPlayed;
- //std::copy(TempSpacesPlayed.begin(), TempSpacesPlayed.end(), SpacesPlayed.begin());
+
+ //play the piece
+ if(counter > 0)
+ {
+ printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+ //look for the button
+ Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
+ addMovetoList(CPUmove.x, CPUmove.y, 1, button);
+ button->label("S");
+ //keep button down
+ button->deactivate();
+ }
+
  //cleanup
+
  FoundSequences.clear();
  delete Player1tempdata;
  delete Player2tempdata;
@@ -747,5 +778,24 @@ void GameLogic::CPUseek()
  Player2tempdata = nullptr;
 }
 
+Fl_Toggle_Button* GameLogic::FindButton(Fl_Double_Window* win, int x, int y)
+{
+  x = x * 42 + 100;
+  y = y * 42 + 100;
 
+  //look at all the widgets in the window, looking for the one that matches the x and y corrdinates fot he game board
+  for(int i = 0; i < win->children(); i ++)
+  {
+    Fl_Widget *widget = win->child(i);
+    if(Fl_Toggle_Button *button = dynamic_cast<Fl_Toggle_Button *> (widget))
+    {
+      if(button->x() == x && button->y() == y)
+      {
+        return button;
+      }
+    }
+
+  }
+  return NULL;
+}
 
