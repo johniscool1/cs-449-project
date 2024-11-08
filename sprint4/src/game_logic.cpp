@@ -944,33 +944,36 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
  CurrentTurn = TempCurrentTurn;
  SpacesPlayed = TempSpacesPlayed;
  //printAllSequences();
- for(int i=0; i < SpacesPlayed.size(); i++)
+ for(int i=0; i < TempSpacesPlayed.size(); i++)
  {
-   if(SpacesPlayed[i].x == CPUmove.x && SpacesPlayed[i].y == CPUmove.y)
+   if(TempSpacesPlayed[i].x == CPUmove.x && TempSpacesPlayed[i].y == CPUmove.y)
    {
-     bool exitLoop = false;
-     RandomGenerator RandNum;
-    while(!exitLoop)
+    int counter =0;
+    RandomGenerator RandNum;
+    while(true)
     {
 
     int randx = RandNum.getRandomNumber(0,cols-1);
     int randy = RandNum.getRandomNumber(0,rows-1);
     int randp = RandNum.getRandomNumber(0,1);
-     for(int i =0; i < SpacesPlayed.size(); i++)
+     for(int i =0; i < TempSpacesPlayed.size(); i++)
      {
        //cout << i << endl;
 
-       if(SpacesPlayed[i].x != randx && SpacesPlayed[i].y != randy)
+       if(TempSpacesPlayed[i].x == randx && TempSpacesPlayed[i].y == randy)
        {
         //printf("Rand look here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
-         CPUmove.x = randx;
-         CPUmove.y = randy;
-         CPUmove.piece = randp;
-         exitLoop = true;
-         break;
+         counter ++;
        }
      }
-
+     if(counter == 0)
+     {
+       CPUmove.x = randx;
+       CPUmove.y = randy;
+       CPUmove.piece = randp;
+       break;
+     }
+     counter = 0;
    }
   }
  }
