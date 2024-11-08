@@ -370,9 +370,10 @@ for(int j = 0; j < rows; j++) {
   {
     vector <tempFilledSpace> TempVect;
     int counter = i;
-    for(int j = rows; j > 0; j--)
+    for(int j = rows-1; j > 0; j--)
     {
       //cout << "X: " << counter << "Y: " << j << endl;
+      //printf("X: %d Y: %d\n", counter, j);
       for(int l = 0; l < SpacesPlayed.size(); l++)
      {
         if(SpacesPlayed[l].y == counter && SpacesPlayed[l].x == j)
