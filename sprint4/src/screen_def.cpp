@@ -3,7 +3,6 @@
 
 using namespace std;
 
-Fl_Color purple_Button = fl_rgb_color(128, 0, 128);
 
 //intialize the game board
 void GameBoard::initwin() {
@@ -91,11 +90,15 @@ void GameBoard::DrawButtons(PlayerLogic* player1data, PlayerLogic* player2data, 
  int ButtonDrawY = 0;
 
  //if cpu Plays first
- if(gameData->CPUplayernum == 3 || gameData->CPUplayernum == 1)
+ if(gameData->CPUplayernum == 1)
   {
     Player1Controls->deactivate();
     Player2Controls->activate();
 
+  } else if(gameData->CPUplayernum == 3)
+  {
+    Player1Controls->deactivate();
+    Player2Controls->deactivate();
   }
 
 
@@ -199,18 +202,22 @@ void playGameButtonCB(Fl_Widget*, void* data)
  //If cpu goes first......
 
  sosGameBoard->GameBoardWin->show();
+ Fl::check();
 
 
  //if cpu plays first
- if(GameData->CPUplayernum == 3 || GameData->CPUplayernum == 1)
+ if(GameData->CPUplayernum == 1)
   {
     GameData->CPUseek(sosGameBoard->GameBoardWin);
     GameData->RotatePlayerTurn();
 
   }
-
+  if(GameData->CPUplayernum == 3)
+  {
+  CPUdualCBdata* v = new CPUdualCBdata {sosGameBoard->GameBoardWin, player1Data, player2Data, GameData};
+  Fl::repeat_timeout(1.0, CPUdual, v);
+ }
 }
-
 int GetButtonXY(int x)
 {
   return (x - 100) / 42;
@@ -223,6 +230,21 @@ static void playAgain(Fl_Double_Window GameScreen)
 
 }
 
+void CPUdual(void* v)
+{
+ CPUdualCBdata* CBdata = static_cast<CPUdualCBdata*>(v);
+
+ while(!CBdata->GameData->EndGame) {
+
+
+    CBdata->GameData->CPUseek(CBdata->win);
+    CBdata->GameData->HandleButtonPlayed(CBdata->Player1Data, CBdata->Player2Data, CBdata->win);
+    //sleep(1);
+    Fl::check();
+    Fl::redraw();
+
+ }
+}
 
 
 //callback for when a button is pressed
@@ -318,120 +340,10 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
- //rotate CurrentTurn
- ButtonPressedData->GameData->RotatePlayerTurn();
- //deactivate and activate the radio buttons for players
-
-  //See if sequence was created
- ButtonPressedData->GameData->SequenceFinder(ButtonPressedData->rows, ButtonPressedData->cols, ButtonPressedData->Player1Data, ButtonPressedData->Player2Data);
+ ButtonPressedData->GameData->HandleButtonPlayed(ButtonPressedData->Player1Data, ButtonPressedData->Player2Data, ButtonPressedData->GameScreen);
 
 
 
- ButtonPressedData->GameData->CheckOutcome();
- //Change the color of the buttons to indiacte they have been scored we also.
- //we also roate out the turn os that the player goes again
- if(ButtonPressedData->GameData->Last_Player_Scored > 10 && ButtonPressedData->GameData->Last_Player_Scored < 20) //player 1 scored
- {
-    for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
-    {
-      //we check if the space has already been played and check if the square color
-      if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
-        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
-        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, purple_Button, ButtonPressedData->GameData->FoundSequences[i].piece);
-
-      } else {
-        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_BLUE);
-        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, FL_BLUE, ButtonPressedData->GameData->FoundSequences[i].piece);
-      }
-    ButtonPressedData->GameData->RotatePlayerTurn();
-    }
-   //ButtonThatWasPressed->down_color(FL_BLUE);
-   ButtonPressedData->GameData->FoundSequences.clear();
-   Fl::redraw();
-
- }
- else if (ButtonPressedData->GameData->Last_Player_Scored > 20 && ButtonPressedData->GameData->Last_Player_Scored < 30) //player 2 scored
- {
-
-    //ButtonThatWasPressed->down_color(FL_RED);
-   for(int i = 0; i < ButtonPressedData->GameData->FoundSequences.size(); i++)
-    {
-       if(ButtonPressedData->GameData->FoundSequences[i].Scored && ButtonPressedData->GameData->FoundSequences[i].player == ButtonPressedData->GameData->CurrentTurn) {
-        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(purple_Button);
-        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, purple_Button, ButtonPressedData->GameData->FoundSequences[i].piece);
-      } else {
-        ButtonPressedData->GameData->FoundSequences[i].Button->down_color(FL_RED);
-        ColorButton(ButtonPressedData->GameScreen, ButtonPressedData->GameData->FoundSequences[i].x, ButtonPressedData->GameData->FoundSequences[i].y, FL_RED, ButtonPressedData->GameData->FoundSequences[i].piece);
-      }
-    ButtonPressedData->GameData->RotatePlayerTurn();
-    }
-    ButtonPressedData->GameData->FoundSequences.clear();
-   Fl::redraw();
- }
-
- //check if the game has ended
- if(ButtonPressedData->GameData->EndGame && !debug)
- {
-   int menuchoice;
-   switch(ButtonPressedData->GameData->GameMode)
-   {
-     case 0: //simple gm
-     {
-        char message[120];
-        if(ButtonPressedData->Player1Data->points > ButtonPressedData->Player2Data->points)
-        {
-           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->Player1Data->points);
-        } else if (ButtonPressedData->Player2Data->points > ButtonPressedData->Player1Data->points)
-        {
-           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", ButtonPressedData->Player1Data->points);
-        } else {
-           sprintf(message, "GAME OVER.\nIt Was a Tie!\n");
-        }
-        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
-        break;
-
-    }
-     case 1:  //general gm
-     {
-        char message[120];
-        //printf("%s",message);
-        //if all spaces have been played, end the game
-        int winner;
-        if ( ButtonPressedData->Player1Data->points >  ButtonPressedData->Player2Data->points)
-        {
-        winner = 1;
-        } else if ( ButtonPressedData->Player1Data->points <  ButtonPressedData->Player2Data->points)
-        {
-        winner = 2;
-        } else //check if it was a tie
-        {
-        winner = 0;
-        }
-
-        if (winner != 0) {
-        sprintf(message, "GAME OVER.\nPlayer %d WON!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.", winner,  ButtonPressedData->Player1Data->points,  ButtonPressedData->Player2Data->points);
-        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
-        } else
-        {
-        sprintf(message, "GAME OVER.\nGame was a tie!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.",  ButtonPressedData->Player1Data->points,  ButtonPressedData->Player2Data->points);
-        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
-        }
-      }
-     }
-     switch (menuchoice)
-     {
-       case 0:
-         //win->close();
-         ButtonPressedData->GameScreen->hide();
-         game_main_menu();
-         //HideAndResetToMainMenu(GameBoardWin);
-         //Fl::handle(FL_CLOSE, (Fl_Double_Window*) GameBoardWin);
-         break;
-       case 1:
-         ButtonPressedData->GameScreen->hide();
-
-     }
-    }
 
 
 
@@ -469,10 +381,10 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
  if(ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn && !ButtonPressedData->GameData->EndGame)
  {
-   //goes to the start of this function. Please dont take off point for this, I know its bad practice, but this was the easiest way to do this.
+   //goes to the start of this function. Please dont take off points for this, I know its bad practice, but this was the easiest way to do this with this function having to be static.
    goto startOfButton;
  }
- //check cpu player
+
 
 }
 

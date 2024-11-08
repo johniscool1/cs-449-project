@@ -3,7 +3,9 @@
 #include <vector>
 #include <stdio.h>
 #include <algorithm>
-
+#include <random>
+#include <chrono>
+#include <iostream>
 
 #include <cstdlib>
 #include <FL/Fl_Widget.H>
@@ -84,6 +86,8 @@ public:
 
   void printAllSequences();
 
+  void HandleButtonPlayed(PlayerLogic* Player1Data, PlayerLogic* Player2Data, Fl_Double_Window* win);
+
 };
 
 class GeneralGameMode : public GameLogic
@@ -115,7 +119,19 @@ void changePlayerPieceCB(Fl_Widget*, void* data);
 
 void HideAndResetToMainMenu(void* data);
 
+class RandomGenerator {
+private:
+    std::random_device rd;
+    std::mt19937 gen;
 
+public:
+    RandomGenerator() : gen(rd()) {}  // Constructor initializes the generator
+
+    int getRandomNumber(int min, int max) {
+        std::uniform_int_distribution<> dis(min, max);
+        return dis(gen);
+    }
+};
 
 
 #endif

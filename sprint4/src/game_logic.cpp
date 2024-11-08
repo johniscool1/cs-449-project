@@ -3,6 +3,12 @@
 
 using namespace std;
 
+//DEBUG
+
+
+
+
+
 //TODO: needs to check more logic like if the palyer scord, they get to go again
 void GameLogic::RotatePlayerTurn()
 {
@@ -838,6 +844,18 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
     //printf("Seeking score");
     vector<tempFilledSpace> TempSeqFound;
     TempSeqFound = FoundSequences;
+    //remove spaces that have already been played
+
+    for(int i =0; i < TempSeqFound.size(); i ++)
+    {
+      for(int j =0; j< TempSpacesPlayed.size(); j++)
+      {
+        if(TempSeqFound[i].x == TempSpacesPlayed[j].x && TempSeqFound[i].y == TempSpacesPlayed[j].y)
+        {
+          TempSeqFound.erase(TempSeqFound.begin() + i);
+        }
+      }
+    }
     for(int i =0; i < TempSeqFound.size(); i++)
     {
       FoundSequences.clear();
@@ -845,9 +863,9 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
       SpacesPlayed = TempSpacesPlayed;
       addMovetoList(TempSeqFound[i].x, TempSeqFound[i].y, TempSeqFound[i].piece, NULL);
       //printf("SEEKER %d: %d, %d\n", i, TempSeqFound[i].x, TempSeqFound[i].y);
+
       if(CheckIfScore(rows, cols))
       {
-
         CPUmove.x = TempSeqFound[i].x;
         CPUmove.y = TempSeqFound[i].y;
         CPUmove.piece = TempSeqFound[i].piece;
@@ -868,20 +886,20 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
     printf("----------------------\n");
     FoundSequences.clear();
   }
-  if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0 || (CPUmove.x == -1 && CPUmove.y == -1) || (CPUmove.x == CPUlastXplayed && CPUmove.y == CPUlastYplayed))
+  if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0 || (CPUmove.x == -1 && CPUmove.y == -1))
  {
    printf("Giving up, rand placement\n");
    SpacesPlayed.clear();
   SpacesPlayed = TempSpacesPlayed;
    bool exitLoop = false;
-   srand (time(NULL));
+   RandomGenerator RandNum;
    if(TempSpacesPlayed.size() != 0) {
     while(!exitLoop)
     {
 
-    int randx = rand() % cols;  // Bitwise AND with max positive int
-    int randy = rand() % rows;
-    int randp = rand() % 2;
+    int randx = RandNum.getRandomNumber(0,cols-1);
+    int randy = RandNum.getRandomNumber(0,rows-1);
+    int randp = RandNum.getRandomNumber(0,1);
      for(int i =0; i < SpacesPlayed.size(); i++)
      {
        //cout << i << endl;
@@ -893,28 +911,70 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
          CPUmove.y = randy;
          CPUmove.piece = randp;
          exitLoop = true;
-         //break;
+         break;
        }
      }
 
+
     }
    } else {
-    int randx = rand() % cols;  // Bitwise AND with max positive int
-    int randy = rand() % rows;
-    int randp = rand() % 2;
-    CPUmove.x = randx;
-    CPUmove.y = randy;
-    CPUmove.piece = randp;
-   }
+    int randx = RandNum.getRandomNumber(0,cols-1);
+    int randy = RandNum.getRandomNumber(0,rows-1);
+    int randp = RandNum.getRandomNumber(0,1);
 
-  }
+         CPUmove.x = randx;
+         CPUmove.y = randy;
+         CPUmove.piece = randp;
+
+       }
+ }
+ //printf("Rand look here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+
 
 
 
 
 
  //
-  //look for the button
+
+
+
+ FoundSequences.clear();
+ SpacesPlayed.clear();
+ CurrentTurn = TempCurrentTurn;
+ SpacesPlayed = TempSpacesPlayed;
+ //printAllSequences();
+ for(int i=0; i < SpacesPlayed.size(); i++)
+ {
+   if(SpacesPlayed[i].x == CPUmove.x && SpacesPlayed[i].y == CPUmove.y)
+   {
+     bool exitLoop = false;
+     RandomGenerator RandNum;
+    while(!exitLoop)
+    {
+
+    int randx = RandNum.getRandomNumber(0,cols-1);
+    int randy = RandNum.getRandomNumber(0,rows-1);
+    int randp = RandNum.getRandomNumber(0,1);
+     for(int i =0; i < SpacesPlayed.size(); i++)
+     {
+       //cout << i << endl;
+
+       if(SpacesPlayed[i].x != randx && SpacesPlayed[i].y != randy)
+       {
+        //printf("Rand look here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+         CPUmove.x = randx;
+         CPUmove.y = randy;
+         CPUmove.piece = randp;
+         exitLoop = true;
+         break;
+       }
+     }
+
+   }
+  }
+ }
+ //look for the button
   Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
   button->down_color(FL_GREEN);
   switch(CPUmove.piece) {
@@ -927,27 +987,13 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
   }
   //keep button down
   button->deactivate();
-
-
- FoundSequences.clear();
- SpacesPlayed.clear();
- CurrentTurn = TempCurrentTurn;
- SpacesPlayed = TempSpacesPlayed;
- //printAllSequences();
- for(int i=0; i < SpacesPlayed.size(); i++)
- {
-   if(SpacesPlayed[i].x == CPUmove.x && SpacesPlayed[i].y == CPUmove.y)
-   {
-     printf("Move has already been played\n");
-     printAllSequences();
-     getchar();
-  }
- }
-
  //CPU makes move
  addMovetoList(CPUmove.x, CPUmove.y, CPUmove.piece, button);
  printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
  printf("---------DONE----------\n");
+ FILE *seqFile = fopen("debug.txt", "a");
+ fprintf(seqFile, "%d, %d\n", CPUmove.x, CPUmove.y);
+ fclose(seqFile);
 
  CPUlastXplayed = CPUmove.x;
  CPUlastYplayed = CPUmove.y;
@@ -1002,3 +1048,126 @@ void GameLogic::printAllSequences() {
     }
     printf("=====================================\n");
 }
+
+
+
+Fl_Color purple_Button = fl_rgb_color(128, 0, 128);
+
+void GameLogic::HandleButtonPlayed(PlayerLogic* Player1Data, PlayerLogic* Player2Data, Fl_Double_Window* win)
+{
+ //rotate CurrentTurn
+ RotatePlayerTurn();
+ //deactivate and activate the radio buttons for players
+
+  //See if sequence was created
+ SequenceFinder(rows, cols, Player1Data, Player2Data);
+
+
+
+ CheckOutcome();
+ //Change the color of the buttons to indiacte they have been scored we also.
+ //we also roate out the turn os that the player goes again
+ if(Last_Player_Scored > 10 && Last_Player_Scored < 20) //player 1 scored
+ {
+    for(int i = 0; i < FoundSequences.size(); i++)
+    {
+      //we check if the space has already been played and check if the square color
+      if(FoundSequences[i].Scored && FoundSequences[i].player == CurrentTurn) {
+        FoundSequences[i].Button->down_color(purple_Button);
+        ColorButton(win, FoundSequences[i].x, FoundSequences[i].y, purple_Button, FoundSequences[i].piece);
+
+      } else {
+        FoundSequences[i].Button->down_color(FL_BLUE);
+        ColorButton(win, FoundSequences[i].x, FoundSequences[i].y, FL_BLUE, FoundSequences[i].piece);
+      }
+    RotatePlayerTurn();
+    }
+   //ButtonThatWasPressed->down_color(FL_BLUE);
+   FoundSequences.clear();
+   Fl::redraw();
+
+ }
+ else if (Last_Player_Scored > 20 && Last_Player_Scored < 30) //player 2 scored
+ {
+
+    //ButtonThatWasPressed->down_color(FL_RED);
+   for(int i = 0; i < FoundSequences.size(); i++)
+    {
+       if(FoundSequences[i].Scored && FoundSequences[i].player == CurrentTurn) {
+        FoundSequences[i].Button->down_color(purple_Button);
+        ColorButton(win, FoundSequences[i].x, FoundSequences[i].y, purple_Button, FoundSequences[i].piece);
+      } else {
+        FoundSequences[i].Button->down_color(FL_RED);
+        ColorButton(win, FoundSequences[i].x, FoundSequences[i].y, FL_RED, FoundSequences[i].piece);
+      }
+    RotatePlayerTurn();
+    }
+    FoundSequences.clear();
+   Fl::redraw();
+ }
+
+ //check if the game has ended
+ if(EndGame && !debug)
+ {
+   int menuchoice;
+   switch(GameMode)
+   {
+     case 0: //simple gm
+     {
+        char message[120];
+        if(Player1Data->points > Player2Data->points)
+        {
+           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", Player1Data->points);
+        } else if (Player2Data->points > Player1Data->points)
+        {
+           sprintf(message, "GAME OVER.\nPlayer %d WON!\n", Player1Data->points);
+        } else {
+           sprintf(message, "GAME OVER.\nIt Was a Tie!\n");
+        }
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        break;
+
+    }
+     case 1:  //general gm
+     {
+        char message[120];
+        //printf("%s",message);
+        //if all spaces have been played, end the game
+        int winner;
+        if ( Player1Data->points >  Player2Data->points)
+        {
+        winner = 1;
+        } else if ( Player1Data->points <  Player2Data->points)
+        {
+        winner = 2;
+        } else //check if it was a tie
+        {
+        winner = 0;
+        }
+
+        if (winner != 0) {
+        sprintf(message, "GAME OVER.\nPlayer %d WON!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.", winner,  Player1Data->points,  Player2Data->points);
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        } else
+        {
+        sprintf(message, "GAME OVER.\nGame was a tie!\nPlayer 1 Score: %d.\nPlayer 2 Score: %d.",  Player1Data->points,  Player2Data->points);
+        menuchoice = fl_choice((const char*)message, "Play Again", "Quit", 0,0);
+        }
+      }
+     }
+     switch (menuchoice)
+     {
+       case 0:
+         //win->close();
+         win->hide();
+         game_main_menu();
+         //HideAndResetToMainMenu(GameBoardWin);
+         //Fl::handle(FL_CLOSE, (Fl_Double_Window*) GameBoardWin);
+         break;
+       case 1:
+         win->hide();
+
+     }
+    }
+}
+

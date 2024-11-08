@@ -123,4 +123,10 @@ struct GameBoardButtonCBdata
  Fl_Double_Window* GameScreen;
 };
 
+void CPUdual(void* v);
+struct CPUdualCBdata
+{
+  Fl_Double_Window* win; PlayerLogic* Player1Data; PlayerLogic* Player2Data; GameLogic* GameData;
+};
+
 #endif
