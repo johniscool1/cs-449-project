@@ -76,11 +76,13 @@ public:
 
 
   void CPUseek(Fl_Double_Window* win);
+  int CPUlastXplayed;
+  int CPUlastYplayed;
   Fl_Toggle_Button* FindButton(Fl_Double_Window* win, int x, int y);
 
   bool CheckIfScore(int rows, int cols);
 
-  void printAllSequences(const vector<tempFilledSpace>& sequences);
+  void printAllSequences();
 
 };
 

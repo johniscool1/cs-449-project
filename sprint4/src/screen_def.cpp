@@ -90,7 +90,13 @@ void GameBoard::DrawButtons(PlayerLogic* player1data, PlayerLogic* player2data, 
  int ButtonDrawX = 0;
  int ButtonDrawY = 0;
 
+ //if cpu Plays first
+ if(gameData->CPUplayernum == 3 || gameData->CPUplayernum == 1)
+  {
+    Player1Controls->deactivate();
+    Player2Controls->activate();
 
+  }
 
 
  //draw in both x and y direction
@@ -109,6 +115,7 @@ void GameBoard::DrawButtons(PlayerLogic* player1data, PlayerLogic* player2data, 
    //make the buttons parent windows to the board
    BoardButton->parent(GameBoardWin);
   }
+
  }
 
 
@@ -189,8 +196,18 @@ void playGameButtonCB(Fl_Widget*, void* data)
  GameData->rows = yVal;
  sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
+ //If cpu goes first......
+
  sosGameBoard->GameBoardWin->show();
 
+
+ //if cpu plays first
+ if(GameData->CPUplayernum == 3 || GameData->CPUplayernum == 1)
+  {
+    GameData->CPUseek(sosGameBoard->GameBoardWin);
+    GameData->RotatePlayerTurn();
+
+  }
 
 }
 
@@ -229,7 +246,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
 
 
- if(ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn)
+ if((ButtonPressedData->GameData->CPUpresent && ButtonPressedData->GameData->CPUplayernum == ButtonPressedData->GameData->CurrentTurn) || ButtonPressedData->GameData->CPUplayernum == 3)
  {
   if(ButtonPressedData->GameData->CPUplayernum == 1)
   {
@@ -249,7 +266,10 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
   } else if (ButtonPressedData->GameData->CPUplayernum == 3)
   {
-    //TODO: both cpus
+    Fl::wait();
+    sleep(1);
+    ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
+    Fl::redraw();
   }
 
  } else {

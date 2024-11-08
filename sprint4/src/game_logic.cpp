@@ -685,13 +685,15 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
  printf("Seeking\n");
  //create temp copy of FoundSequences to return it to later
- vector <filledSpace> TempSpacesPlayed = SpacesPlayed;
+ const vector <filledSpace> TempSpacesPlayed = SpacesPlayed;
  //keep track of who the current player was
  int TempCurrentTurn = CurrentTurn;
  FoundSequences.clear();
 
  SpacesPlayed.clear();
  filledSpace CPUmove;
+ CPUmove.x = -1;
+ CPUmove.y = -1;
 
 
  //fill temp board with s to look for ez sequences
@@ -830,7 +832,6 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
 
 
-
  //check found sequences for the one we'll score with
   if(FoundSequences.size() != 0)
   {
@@ -846,34 +847,37 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
       //printf("SEEKER %d: %d, %d\n", i, TempSeqFound[i].x, TempSeqFound[i].y);
       if(CheckIfScore(rows, cols))
       {
+
         CPUmove.x = TempSeqFound[i].x;
         CPUmove.y = TempSeqFound[i].y;
         CPUmove.piece = TempSeqFound[i].piece;
         //printf("Choose: %d, Y: %d\n", CPUmove.x, CPUmove.y);
-        break;
+        }
       }
-    }
+
+    FoundSequences = TempSeqFound;
+
   }
 
-
-  if(CPUmove.x > rows || CPUmove.x < 0 || CPUmove.y > cols || CPUmove.x < 0)
+  if((CPUmove.x > rows || CPUmove.x < 0 || CPUmove.y > cols || CPUmove.x < 0) && CPUmove.x != -1)
   {
     printf("----------------------\n");
     printf("MAJOR ERROR, OUT OF BOUNDS\n");
     printf("%d, Y: %d\n", CPUmove.x, CPUmove.y);
-    printAllSequences(FoundSequences);
+    printAllSequences();
     printf("----------------------\n");
     FoundSequences.clear();
   }
-  if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0)
+  if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0 || (CPUmove.x == -1 && CPUmove.y == -1) || (CPUmove.x == CPUlastXplayed && CPUmove.y == CPUlastYplayed))
  {
    printf("Giving up, rand placement\n");
    SpacesPlayed.clear();
   SpacesPlayed = TempSpacesPlayed;
    bool exitLoop = false;
    srand (time(NULL));
-   while(!exitLoop)
-   {
+   if(TempSpacesPlayed.size() != 0) {
+    while(!exitLoop)
+    {
 
     int randx = rand() % cols;  // Bitwise AND with max positive int
     int randy = rand() % rows;
@@ -889,17 +893,27 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
          CPUmove.y = randy;
          CPUmove.piece = randp;
          exitLoop = true;
-         break;
+         //break;
        }
      }
 
+    }
+   } else {
+    int randx = rand() % cols;  // Bitwise AND with max positive int
+    int randy = rand() % rows;
+    int randp = rand() % 2;
+    CPUmove.x = randx;
+    CPUmove.y = randy;
+    CPUmove.piece = randp;
+   }
+
   }
 
- }
 
 
 
- //printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+
+ //
   //look for the button
   Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
   button->down_color(FL_GREEN);
@@ -916,12 +930,27 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
 
  FoundSequences.clear();
+ SpacesPlayed.clear();
  CurrentTurn = TempCurrentTurn;
  SpacesPlayed = TempSpacesPlayed;
+ //printAllSequences();
+ for(int i=0; i < SpacesPlayed.size(); i++)
+ {
+   if(SpacesPlayed[i].x == CPUmove.x && SpacesPlayed[i].y == CPUmove.y)
+   {
+     printf("Move has already been played\n");
+     printAllSequences();
+     getchar();
+  }
+ }
 
  //CPU makes move
  addMovetoList(CPUmove.x, CPUmove.y, CPUmove.piece, button);
+ printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
  printf("---------DONE----------\n");
+
+ CPUlastXplayed = CPUmove.x;
+ CPUlastYplayed = CPUmove.y;
  delete Player1tempdata;
  delete Player2tempdata;
  Player1tempdata = nullptr;
@@ -966,11 +995,10 @@ bool GameLogic::CheckIfScore(int rows, int cols)
 
 
 }
-void GameLogic::printAllSequences(const vector<tempFilledSpace>& sequences) {
-    printf("\n=== All Found Sequences (%zu total) ===\n", sequences.size());
-    for (size_t i = 0; i < sequences.size(); i++) {
-        printf("Sequence[%zu]: x=%d, y=%d, piece=%d\n",
-               i, sequences[i].x, sequences[i].y, sequences[i].piece);
+void GameLogic::printAllSequences() {
+    printf("\n=== All Found Sequences (%zu total) ===\n", SpacesPlayed.size());
+    for (int i = 0; i < SpacesPlayed.size(); i++) {
+        printf("Sequence[%d: x=%d, y=%d, piece=%d\n", i, SpacesPlayed[i].x, SpacesPlayed[i].y, SpacesPlayed[i].piece);
     }
     printf("=====================================\n");
 }
