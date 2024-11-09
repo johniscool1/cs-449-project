@@ -142,8 +142,8 @@ TEST_CASE("ID 4.1 & 6.1 Player places a S or O")
  SimpleGameMode* GameData;
  GameData = new SimpleGameMode;
  GameBoard* GameScreen = new GameBoard;
- PlayerLogic* player1Data = new Player1Logic;
- PlayerLogic* player2Data = new Player2Logic;
+ PlayerLogic* player1Data = new PlayerLogic;
+ PlayerLogic* player2Data = new PlayerLogic;
  //set piece to s
  player1Data->SelectedPiece = 1;
  //create the groups
@@ -164,10 +164,12 @@ TEST_CASE("ID 5.1 & 6.1 Simple Game is over, someone wins")
 {
  GameLogic* GameData;
  GameData = new SimpleGameMode;
+ GameData->rows =3;
+ GameData->cols=3;
  //GameData = new SimpleGameMode;
  GameBoard* GameScreen = new GameBoard;
- PlayerLogic* player1Data = new Player1Logic;
- PlayerLogic* player2Data = new Player2Logic;
+ PlayerLogic* player1Data = new PlayerLogic;
+ PlayerLogic* player2Data = new PlayerLogic;
  //set gamemode
  GameData->GameMode = 1;
  //set piece to s
@@ -191,7 +193,7 @@ TEST_CASE("ID 5.1 & 6.1 Simple Game is over, someone wins")
  GameBoardCBdata = nullptr;
  GameBoardCBdata = new GameBoardButtonCBdata{GameScreen->BoardButton, player1Data, player2Data, 1, GameData, 3, 3, Player1Controls, Player2Controls};
  GameBoardButtonPressedCB(NULL, GameBoardCBdata);
- //GameData->CheckOutcome();
+ GameData->CheckOutcome();
 
  REQUIRE(GameData->EndGame == true);
 }
@@ -213,8 +215,8 @@ TEST_CASE("ID 5.2 Board is filled & 5.3 Declare a draw in simple game")
             GameData->addMovetoList(i, j, 1, NULL);
     }
  }
- PlayerLogic* player1Data = new Player1Logic;
- PlayerLogic* player2Data = new Player2Logic;
+ PlayerLogic* player1Data = new PlayerLogic;
+ PlayerLogic* player2Data = new PlayerLogic;
  //since the gameboard is filled with s, there should be no found sequences, which means its a draw
  GameData->SequenceFinder(3, 3, player1Data, player2Data);
  REQUIRE(GameData->FoundSequences.size() == 0);
@@ -239,8 +241,8 @@ TEST_CASE("ID 7.2 Declare the winner")
  GameData->rows =3;
  GameData->cols=3;
  GameBoard* GameScreen = new GameBoard;
- PlayerLogic* player1Data = new Player1Logic;
- PlayerLogic* player2Data = new Player2Logic;
+ PlayerLogic* player1Data = new PlayerLogic;
+ PlayerLogic* player2Data = new PlayerLogic;
  //set gamemode
  GameData->GameMode = 1;
  //set piece to s
@@ -275,7 +277,6 @@ TEST_CASE("ID 7.2 Declare the winner")
  GameBoardCBdata = new GameBoardButtonCBdata{GameScreen->BoardButton, player1Data, player2Data, 1, GameData, 3, 3, Player1Controls, Player2Controls};
  GameBoardButtonPressedCB(NULL, GameBoardCBdata);
  //GameData->CheckOutcome();
-
  REQUIRE(GameData->EndGame == true);
  REQUIRE(player1Data->points == 1);
  REQUIRE(player2Data->points == 0);
@@ -300,8 +301,8 @@ TEST_CASE("ID 7.1 & 7.3 Declare a draw in general game") //Test if the filled up
             GameData->addMovetoList(i, j, 1, NULL);
     }
  }
- PlayerLogic* player1Data = new Player1Logic;
- PlayerLogic* player2Data = new Player2Logic;
+ PlayerLogic* player1Data = new PlayerLogic;
+ PlayerLogic* player2Data = new PlayerLogic;
  //since the gameboard is filled with s, there should be no found sequences, which means its a draw
  GameData->SequenceFinder(3, 3, player1Data, player2Data);
  REQUIRE(GameData->FoundSequences.size() == 0);
@@ -312,4 +313,48 @@ TEST_CASE("ID 7.1 & 7.3 Declare a draw in general game") //Test if the filled up
  REQUIRE(player2Data->points == 0);
 
 }
+
+
+TEST_CASE("8.1 & 8.2 CPU player is compitent")
+{
+ GameLogic* GameData;
+ GameData = new SimpleGameMode;
+ //GameData = new SimpleGameMode;
+ GameData->rows =3;
+ GameData->cols=3;
+ GameBoard* GameScreen = new GameBoard;
+ PlayerLogic* player1Data = new PlayerLogic;
+ CPULogic* player2Data = new CPULogic;
+ player2Data->CPUplayer = 2;
+ GameData->CPUplayernum =2;
+ //set gamemode
+ GameData->GameMode = 1;
+ //set piece to s
+ player1Data->SelectedPiece = 1;
+ //create the groups
+ Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
+ Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
+ //create the button pressed
+ //fill up board, but not filling in the 3rd col
+ for(int i =0; i < 2; i++)
+ {
+    for(int j=0; j < 3; j++)
+    {
+
+            GameData->addMovetoList(i, j, 1, NULL);
+    }
+ }
+
+
+ GameData->addMovetoList(2,3,1,NULL);
+ GameData->addMovetoList(2,2,0,NULL);
+ GameData->CPUseek(NULL);
+ GameData->CheckOutcome();
+ REQUIRE(GameData->EndGame == true);
+ REQUIRE(player1Data->points == 0);
+ REQUIRE(player2Data->points == 0);
+
+}
+
+
 
