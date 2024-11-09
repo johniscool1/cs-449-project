@@ -979,8 +979,12 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
   }
  }
  //look for the button
-  Fl_Toggle_Button* button = FindButton(win, CPUmove.x, CPUmove.y);
+ Fl_Toggle_Button* button;
+ if(!debug) {
+  button = FindButton(win, CPUmove.x, CPUmove.y);
   button->down_color(FL_GREEN);
+
+
   switch(CPUmove.piece) {
     case 0:
     button->label("O");
@@ -989,8 +993,10 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
     button->label("S");
     break;
   }
-  //keep button down
   button->deactivate();
+  }
+  //keep button down
+
  //CPU makes move
  addMovetoList(CPUmove.x, CPUmove.y, CPUmove.piece, button);
  printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
@@ -1071,7 +1077,8 @@ void GameLogic::HandleButtonPlayed(PlayerLogic* Player1Data, PlayerLogic* Player
  CheckOutcome();
  //Change the color of the buttons to indiacte they have been scored we also.
  //we also roate out the turn os that the player goes again
- if(Last_Player_Scored > 10 && Last_Player_Scored < 20) //player 1 scored
+ //added debug here becuase unit test will fail when trying to find the non-existent buttons
+ if(Last_Player_Scored > 10 && Last_Player_Scored < 20 && !debug) //player 1 scored
  {
     for(int i = 0; i < FoundSequences.size(); i++)
     {
@@ -1174,4 +1181,3 @@ void GameLogic::HandleButtonPlayed(PlayerLogic* Player1Data, PlayerLogic* Player
      }
     }
 }
-
