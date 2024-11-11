@@ -336,25 +336,18 @@ TEST_CASE("8.1 & 8.2 CPU player is compitent")
  //create the groups
  Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
  Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
- //create the button pressed
- //fill up board, but not filling in the 3rd col
- for(int i =0; i < 2; i++)
- {
-    for(int j=0; j < 3; j++)
-    {
 
-            GameData->addMovetoList(i, j, 1, NULL);
-    }
- }
-
-
- GameData->addMovetoList(2,3,1,NULL);
- GameData->addMovetoList(2,2,0,NULL);
+ GameData->CurrentTurn = 1;
+ GameData->addMovetoList(0,0,1,NULL);
+ GameData->addMovetoList(0,1,0,NULL);
+ GameData->CurrentTurn = 2;
  GameData->CPUseek(NULL);
+ GameData->CurrentTurn = 1;
+ GameData->SequenceFinder(3,3,player1Data,player2Data);
  GameData->CheckOutcome();
  REQUIRE(GameData->EndGame == true);
  REQUIRE(player1Data->points == 0);
- REQUIRE(player2Data->points == 0);
+ REQUIRE(player2Data->points == 1);
 
 }
 
