@@ -1054,7 +1054,7 @@ bool GameLogic::CheckIfScore(int rows, int cols)
 void GameLogic::printAllSequences() {
     printf("\n=== All Found Sequences (%zu total) ===\n", SpacesPlayed.size());
     for (int i = 0; i < SpacesPlayed.size(); i++) {
-        printf("Sequence[%d: x=%d, y=%d, piece=%d\n", i, SpacesPlayed[i].x, SpacesPlayed[i].y, SpacesPlayed[i].piece);
+        printf("Sequence[%d: x=%d, y=%d, piece=%d, player %d\n", i, SpacesPlayed[i].x, SpacesPlayed[i].y, SpacesPlayed[i].piece, SpacesPlayed[i].player);
     }
     printf("=====================================\n");
 }

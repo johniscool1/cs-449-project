@@ -72,20 +72,7 @@ struct MainMenuCBdata {
 };
 
 
-class Draw_lineP1 : public Fl_Widget {
-public:
-    Draw_lineP1(int X, int Y, int W, int H, const char*L=0) : Fl_Widget(X,Y,W,H,L) {
-    }
-    void draw() {
-        fl_color(FL_BLUE);
-        int x1 = x(),       y1 = y();
-        int x2 = w()-1, y2 = h();
 
-
-        fl_line(x1, y1, x2, y2);
-
-    }
-};
 
 
 

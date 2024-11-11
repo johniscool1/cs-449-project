@@ -7,6 +7,7 @@
 #include "FL/Fl_Window.H"
 
 bool debug = false;
+int CPUwaittime = 1;
 
 int main()
 {
