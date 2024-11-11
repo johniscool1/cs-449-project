@@ -276,12 +276,12 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
     //add artifical pause
     ButtonPressedData->P1Group->deactivate();
     Fl::wait();
-    sleep(1);
+    sleep(CPUwaittime);
 
   } else if (ButtonPressedData->GameData->CPUplayernum == 2)
   {
     Fl::wait();
-    sleep(1);
+    sleep(CPUwaittime);
     ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
     Fl::redraw();
 
@@ -289,7 +289,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
   } else if (ButtonPressedData->GameData->CPUplayernum == 3)
   {
     Fl::wait();
-    sleep(1);
+    sleep(CPUwaittime);
     ButtonPressedData->GameData->CPUseek(ButtonPressedData->GameScreen);
     Fl::redraw();
   }

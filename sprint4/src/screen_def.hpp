@@ -24,6 +24,7 @@
 #define GAMEBOARD_WINDOW_Y 700
 
 extern bool debug;
+extern int CPUwaittime;
 
 //Gameboard class for creating the gameboard
 class GameBoard

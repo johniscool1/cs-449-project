@@ -690,7 +690,7 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
    *
    */
 
- printf("Seeking\n");
+ //printf("Seeking\n");
  //create temp copy of FoundSequences to return it to later
  const vector <filledSpace> TempSpacesPlayed = SpacesPlayed;
  //keep track of who the current player was
@@ -704,7 +704,7 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
 
  //fill temp board with s to look for ez sequences
- printf("Seeking EZ s\n");
+ //printf("Seeking EZ s\n");
  CurrentTurn = 1;
  for(int i=0; i < cols; i++)
  {
@@ -775,7 +775,7 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
  SpacesPlayed.clear();
 
 
- printf("Seeking EZ o\n");
+ //printf("Seeking EZ o\n");
  //fill temp board with o to look for ez sequences
  CurrentTurn = 1;
  SpacesPlayed.clear();
@@ -889,7 +889,7 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
   }
   if(FoundSequences.size() == 0 || CPUmove.x > rows || CPUmove.x < 0 || (CPUmove.x == -1 && CPUmove.y == -1))
  {
-   printf("Giving up, rand placement\n");
+   //printf("Giving up, rand placement\n");
    SpacesPlayed.clear();
   SpacesPlayed = TempSpacesPlayed;
    bool exitLoop = false;
@@ -999,11 +999,11 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
 
  //CPU makes move
  addMovetoList(CPUmove.x, CPUmove.y, CPUmove.piece, button);
- printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
- printf("---------DONE----------\n");
- FILE *seqFile = fopen("debug.txt", "a");
- fprintf(seqFile, "%d, %d\n", CPUmove.x, CPUmove.y);
- fclose(seqFile);
+ //printf("Play here X: %d, Y: %d\n", CPUmove.x, CPUmove.y);
+ //printf("---------DONE----------\n");
+ //FILE *seqFile = fopen("debug.txt", "a");
+ //fprintf(seqFile, "%d, %d\n", CPUmove.x, CPUmove.y);
+ //fclose(seqFile);
 
  CPUlastXplayed = CPUmove.x;
  CPUlastYplayed = CPUmove.y;
