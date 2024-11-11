@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://schema.omg.org/spec/UML/2.1">
+  <xmi:Documentation exporter="umbrello uml modeller 2.38.5 (Applications 23.08.5) http://umbrello.kde.org" exporterVersion="2.0.4"/>
+  <uml:Model xmi:id="m1" name="UML Model">
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="folder" name="folder"/>
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="dataType" name="dataType"/>
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="destructor" name="destructor"/>
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="class-or-package" name="class-or-package"/>
+    <packagedElement xmi:type="uml:Stereotype" xmi:id="constructor" name="constructor"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="Logical_View" name="Logical View">
+      <uml:Package xmi:id="Datatypes" name="Datatypes" stereotype="folder">
+        <packagedElement xmi:type="uml:DataType" xmi:id="ugqcoGMNuB85K" name="char" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uq6SW0z8bmy6Q" name="int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uCuQyD2Jnlm06" name="float" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="u3tluFD3qu0IC" name="double" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="u6n4tRI0jPbe9" name="bool" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="ulfAo41guNZmf" name="string" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uPLqXNd7UMZ6f" name="unsigned char" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uOEsl6zURA2WG" name="signed char" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uchWVrHTu6Ehy" name="unsigned int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uqa5pTrQWRLky" name="signed int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uWp19vfeP252Z" name="short int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uRjshDON5ywnQ" name="unsigned short int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uHvebk11RO07A" name="signed short int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="u8FRH83VLIZBL" name="long int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uiOJwSfDTOZsE" name="signed long int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="u42iKBzsHbdIe" name="unsigned long int" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="ukTZVLv6Buhnr" name="long double" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uKrfM6e3hFzaz" name="wchar_t" stereotype="dataType"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="ufneWnwlOhugX" name="Fl_Toggle_Button*" stereotype="dataType" elementReference="u0Um1n4zTllTp"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uTnXYPSGLmFPK" name="vector&lt; filledSpace &gt;" stereotype="dataType" elementReference="usGWq8mag5aq1"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uJh2Ynzf3uKYm" name="PlayerLogic*" stereotype="dataType" elementReference="uYvcca921ccNm"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uzzajy56QPY4F" name="vector&lt; tempFilledSpace &gt;" stereotype="dataType" elementReference="usGWq8mag5aq1"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uapIpbseTfFJh" name="Fl_Double_Window*" stereotype="dataType" elementReference="uhE223N0SZKfR"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="utXMVIY47H93t" name="Fl_Button*" stereotype="dataType" elementReference="utkbMV2itMdx9"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uYwBHGDbSVFGi" name="GameLogic*" stereotype="dataType" elementReference="u87D8cZeRKBP1"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uNvDuZs2a8suQ" name="Fl_Window*" stereotype="dataType" elementReference="uICA0yhmVjJRn"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="unluQGB0qsv11" name="Fl_Counter*" stereotype="dataType" elementReference="uuKKYAIqWCthH"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uqIJim2n46thL" name="Fl_Round_Button*" stereotype="dataType" elementReference="uLZ50C76mglEN"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uIX8qYctvzrov" name="Fl_Choice*" stereotype="dataType" elementReference="umdJ18nxv6Z2J"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="uY9HYWY1DEzTx" name="const char*" stereotype="dataType" elementReference="ugqcoGMNuB85K"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="u9nyEgOVQzS6m" name="Fl_Group*" stereotype="dataType" elementReference="uz8JedTyynkgb"/>
+      </uml:Package>
+      <packagedElement xmi:type="uml:Class" xmi:id="u0Um1n4zTllTp" name="Fl_Toggle_Button"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="usGWq8mag5aq1" name="vector"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="uYvcca921ccNm" name="PlayerLogic" isAbstract="true">
+        <generalization xmi:type="uml:Generalization" xmi:id="uYIfmtnDnqUiN" general="uvOfBhGiG0Ruf"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="u5alPh5jspXhP" name="" client="u87D8cZeRKBP1" supplier="uI4yOioEiaDA9"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="u0aQwHBvie84A" name="" client="u87D8cZeRKBP1" supplier="u5alPh5jspXhP"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uhE223N0SZKfR" name="Fl_Double_Window"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uy3IXxeGUL0bk" name="GeneralGameMode">
+        <generalization xmi:type="uml:Generalization" xmi:id="uh9StbqZRNd4I" general="u87D8cZeRKBP1"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uwFPv7mm44h87" name="CheckOutcome"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="u87D8cZeRKBP1" name="GameLogic" isAbstract="true" comment="class to store game states">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uWhvQPr6dLhUd" name="CurrentTurn" comment="Player 1 goes first" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uvpuInHwzi3na" name="turn" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uQ3BcUszenSj0" name="GameMode" comment="1 for simple 0 for general game. set to 1 for default selected" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8zrzkDPpLMxk" name="Last_Player_Scored" comment="0= no one scored, XY= player x, scored y times" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uuCbxwSJwOm7W" name="EndGame" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8NOOpxtV7ZpS" name="rows" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uLfAP8TV9SkfJ" name="cols" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="unb0YRbrRZm6U" name="CPUpresent" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uHYItBgqdYda5" name="CPUplayernum" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uI8ExPrsnpJ1V" name="SpacesPlayed" comment="stores all the played spaces" type="uTnXYPSGLmFPK"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="umOpYa4XKW1y1" name="FoundSequences" comment="used to pass the buttons to the screen class" type="uzzajy56QPY4F"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uYdFJsnjFlJtA" name="CPUlastXplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="usEBGOkBUEi2C" name="CPUlastYplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uvWyrGZ1bRb5w" name="RotatePlayerTurn" comment="Decides whos turn it should be TODO: once the sequence finder is finished, re implement this to work with game rules"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u5LPDtYRHxFth" name="setGameMode" comment="sets the gamemode">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uODEYVcMgc1QB" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uV6GMIkvQXsDM" name="addMovetoList" comment="add a space played to the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uAWiTXq6tbPyd" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOLlVCzKohKJG" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uj1OCyPYHc94U" name="Piece" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uroXngxKzmQf6" name="Button_Used" visibility="private" type="ufneWnwlOhugX" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u3ZByzMuugRvz" name="GetWinner" comment="if it returns 0, there was a tie, otherwise returns the winner">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uk9bAb3VVinw7" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ucxpbPwOK0k9K" name="p1score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u6WvGi0hglqDk" name="p2score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uXDKwDw2PJph8" name="SequenceFinder" comment="find if a sequence was created using the size of the board and the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u3PnoABVbIfrV" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uBhxG0bvWAnAo" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uHwR5UGm8wcZJ" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyk4hz9HfQ3zz" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uhfTu91sp8aXV" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uF1qTTNVzXVUL" name="CheckOutcome" isAbstract="true" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uEp7HtXHbUslr" name="~ GameLogic" stereotype="destructor" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uzOQxC83EJUdS" name="CPUseek">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uKtUW9zAqtEfc" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uRs6fq0I5AHQH" name="FindButton">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOMqEPKgxZbO8" type="ufneWnwlOhugX" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ueo5AsgvOEFzU" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uontAEpvjpRb1" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ukpIqLFD63JDm" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ufmXemw84Ys4L" name="CheckIfScore">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uJqcxI0jhe745" type="u6n4tRI0jPbe9" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uwiz8AIrQ7D0q" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uVf9zgvOBI0Iw" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uNSTQjYoaWnK6" name="printAllSequences"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ucT7XsUQjc63a" name="HandleButtonPlayed">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u8UfRU5PZy4K0" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u1DfAdsW0WXzT" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyyVvqyCEzTVq" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <packagedElement xmi:type="uml:Class" xmi:id="u8Zwb7LF3eQZe" name="filledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uYi16z8tQ7aKu" name="Button" comment="used in a vector, stores data about the space a player uses" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="ulHLD9SIIHZIU" name="x" comment="location" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uTIJNKmOjwEWV" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u4ZmVrNgwCb5Q" name="piece" comment="what piece was played" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uizRJrX45juni" name="player" comment="what player placed it" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uuhFS4fSwWmXB" name="Scored" comment="has the space been scored on" type="u6n4tRI0jPbe9"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="uI4yOioEiaDA9" name="tempFilledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="umkWDmrszdCzc" name="Button" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uHg6927VHmVRH" name="x" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uJRhiCE2umRqH" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uWqBJ4Au3nhsi" name="piece" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u1ckBYussUDfo" name="player" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uQgCsruazvVcY" name="Scored" type="u6n4tRI0jPbe9"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uctO30axCBLKr" name="originalIndex" type="uq6SW0z8bmy6Q"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uc9VofAVGxv60" name="SimpleGameMode">
+        <generalization xmi:type="uml:Generalization" xmi:id="uiWem1i1cIEZ9" general="u87D8cZeRKBP1"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uf1KqPaTSq4d1" name="CheckOutcome"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uCkUaaE9cknNp" name="SelectedPieceCBdata" comment="used for RadioButtons to set the players current piece">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uFk6iGqqDKCrK" name="SelectedButton" type="utXMVIY47H93t"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ueXxnhvDY8J5g" name="piece" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u10xfDVT9BFmS" name="playerdata" type="uJh2Ynzf3uKYm"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="utkbMV2itMdx9" name="Fl_Button"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="umDu6fMGyGOIG" name="RandomGenerator">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uuOcG72k3VpyI" name="rd" visibility="private" type="uTWL4uK4i7SQ2"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uWp94d3rKD4IT" name="gen" visibility="private" type="ujBHDi09uMdne"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uXFzhZVRGga3a" name="RandomGenerator" stereotype="constructor"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="umCYCIIU4GJo6" name="getRandomNumber">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uiT2W0EBZ2agU" type="uq6SW0z8bmy6Q" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uJWlZe3kvpzIw" name="min" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uWb1I7kgJBRtl" name="max" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uIR38OBDYb6Y5" name="std" stereotype="class-or-package">
+        <packagedElement xmi:type="uml:Class" xmi:id="uTWL4uK4i7SQ2" name="random_device"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="ujBHDi09uMdne" name="mt19937"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uvOfBhGiG0Ruf" name="PlayerLogicBase">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ufnbdE6Nqdrwk" name="SelectedPiece" comment="s=1, o=0. Default selections is S so set to 1" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uoNpGWb4Gp3GY" name="points" type="uq6SW0z8bmy6Q"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uTtAUM4U8V8mo" name="ChangeSelectedPiece" comment="change what piece the player has selected on the gameboard">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uuCLu2qQr1xZ6" name="Selection" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uc441ll3s5m7h" name="addPoint"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uV9GDoRnQkNIm" name="CPULogic" comment="subclasses to store player specific data">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uMPnWlMUim2Kt" name="CPUplayer" comment="void CPUPlay(GameLogic* Gamedata);" type="uq6SW0z8bmy6Q"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="ugep9QYcRkHRA" name="CPUtempFilledSpace">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="urJanWw9O7Ilq" name="Button" type="ufneWnwlOhugX"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u5DRx2TxEsNxd" name="x" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uyBU6uXxkIjiN" name="y" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uDb6j4Ca6maEi" name="piece" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uYyeYaIwNkAPC" name="player" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uhcsAhhn76LZc" name="Scored" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uF2QuhxrQxI9s" name="originalIndex" type="uq6SW0z8bmy6Q"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="upbfue7rK0jUd" name="GameBoard" comment="Gameboard class for creating the gameboard">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ul8o24i8NTS1E" name="rows" comment="store how big the gameboard is" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ucSwBQcQxIPb6" name="cols" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u4TnorLm2V2Rd" name="EndOfGame" type="u6n4tRI0jPbe9"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u55gqwnY3bpOJ" name="GameBoardWin" comment="window used for gameboard" type="uapIpbseTfFJh"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uA8QayXcBMM3O" name="BoardButton" comment="buttons for the gameboard" type="ufneWnwlOhugX"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uZL7cYY5bK5WA" name="initwin" comment="function to intialize the gameboard"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uR2eIfA8uojrX" name="SetBoardDimensions">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ufV6WamYPvS5F" type="u6n4tRI0jPbe9" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uYeTLF3KNGOXW" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uScugsWQ7ZvEY" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uxyPWVYYXFbqK" name="DrawButtons" comment="draw all the buttons for gameplay">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uKqp8bqjzxFRq" name="player1data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uQIr9KrjKtwq2" name="player2data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uQCdg123ZxpCp" name="gameData" visibility="private" type="uYwBHGDbSVFGi" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="u7cecMDsfCV6M" name="show" comment="CB for when a button on the gameboard is pressed&#10;static void GameBoardButtonPressedCB(Fl_Widget*, void *data);"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="u0lYXeoSAd7qn" name="hide"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uc3R69zdkNy6o" name="MainMenuCBdata" comment="data used to pass to callback from the main menu">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u3HC5vkGSqxbV" name="window" comment="data used to pass to callback from the main menu" type="uNvDuZs2a8suQ"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uiGV3iskLZ6es" name="x" type="unluQGB0qsv11"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uEuufONsAvsqm" name="y" type="unluQGB0qsv11"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uT95WLuvlS2tX" name="SimpleGamemodeRB" type="uqIJim2n46thL"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ug7vUOtr7osR9" name="GeneralGamemodeRB" type="uqIJim2n46thL"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ui8zpNSYuRVTq" name="CPUselection" type="uIX8qYctvzrov"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uICA0yhmVjJRn" name="Fl_Window"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uuKKYAIqWCthH" name="Fl_Counter"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uLZ50C76mglEN" name="Fl_Round_Button">
+        <packagedElement xmi:type="uml:Class" xmi:id="u87D8cZeRKBP1" name="GameLogic" isAbstract="true" comment="class to store game states">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uWhvQPr6dLhUd" name="CurrentTurn" comment="Player 1 goes first" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uvpuInHwzi3na" name="turn" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uQ3BcUszenSj0" name="GameMode" comment="1 for simple 0 for general game. set to 1 for default selected" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8zrzkDPpLMxk" name="Last_Player_Scored" comment="0= no one scored, XY= player x, scored y times" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uuCbxwSJwOm7W" name="EndGame" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8NOOpxtV7ZpS" name="rows" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uLfAP8TV9SkfJ" name="cols" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="unb0YRbrRZm6U" name="CPUpresent" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uHYItBgqdYda5" name="CPUplayernum" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uI8ExPrsnpJ1V" name="SpacesPlayed" comment="stores all the played spaces" type="uTnXYPSGLmFPK"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="umOpYa4XKW1y1" name="FoundSequences" comment="used to pass the buttons to the screen class" type="uzzajy56QPY4F"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uYdFJsnjFlJtA" name="CPUlastXplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="usEBGOkBUEi2C" name="CPUlastYplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uvWyrGZ1bRb5w" name="RotatePlayerTurn" comment="Decides whos turn it should be TODO: once the sequence finder is finished, re implement this to work with game rules"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u5LPDtYRHxFth" name="setGameMode" comment="sets the gamemode">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uODEYVcMgc1QB" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uV6GMIkvQXsDM" name="addMovetoList" comment="add a space played to the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uAWiTXq6tbPyd" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOLlVCzKohKJG" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uj1OCyPYHc94U" name="Piece" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uroXngxKzmQf6" name="Button_Used" visibility="private" type="ufneWnwlOhugX" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u3ZByzMuugRvz" name="GetWinner" comment="if it returns 0, there was a tie, otherwise returns the winner">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uk9bAb3VVinw7" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ucxpbPwOK0k9K" name="p1score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u6WvGi0hglqDk" name="p2score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uXDKwDw2PJph8" name="SequenceFinder" comment="find if a sequence was created using the size of the board and the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u3PnoABVbIfrV" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uBhxG0bvWAnAo" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uHwR5UGm8wcZJ" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyk4hz9HfQ3zz" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uhfTu91sp8aXV" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uF1qTTNVzXVUL" name="CheckOutcome" isAbstract="true" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uEp7HtXHbUslr" name="~ GameLogic" stereotype="destructor" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uzOQxC83EJUdS" name="CPUseek">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uKtUW9zAqtEfc" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uRs6fq0I5AHQH" name="FindButton">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOMqEPKgxZbO8" type="ufneWnwlOhugX" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ueo5AsgvOEFzU" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uontAEpvjpRb1" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ukpIqLFD63JDm" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ufmXemw84Ys4L" name="CheckIfScore">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uJqcxI0jhe745" type="u6n4tRI0jPbe9" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uwiz8AIrQ7D0q" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uVf9zgvOBI0Iw" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uNSTQjYoaWnK6" name="printAllSequences"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ucT7XsUQjc63a" name="HandleButtonPlayed">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u8UfRU5PZy4K0" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u1DfAdsW0WXzT" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyyVvqyCEzTVq" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <packagedElement xmi:type="uml:Class" xmi:id="u8Zwb7LF3eQZe" name="filledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uYi16z8tQ7aKu" name="Button" comment="used in a vector, stores data about the space a player uses" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="ulHLD9SIIHZIU" name="x" comment="location" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uTIJNKmOjwEWV" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u4ZmVrNgwCb5Q" name="piece" comment="what piece was played" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uizRJrX45juni" name="player" comment="what player placed it" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uuhFS4fSwWmXB" name="Scored" comment="has the space been scored on" type="u6n4tRI0jPbe9"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="uI4yOioEiaDA9" name="tempFilledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="umkWDmrszdCzc" name="Button" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uHg6927VHmVRH" name="x" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uJRhiCE2umRqH" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uWqBJ4Au3nhsi" name="piece" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u1ckBYussUDfo" name="player" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uQgCsruazvVcY" name="Scored" type="u6n4tRI0jPbe9"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uctO30axCBLKr" name="originalIndex" type="uq6SW0z8bmy6Q"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="umdJ18nxv6Z2J" name="Fl_Choice"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uDxh9lyQXtl34" name="Draw_lineP1">
+        <generalization xmi:type="uml:Generalization" xmi:id="uGzJTYoLGvw0p" general="uwtcgF9Hyhf00"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="u9pAE7hThWLo2" name="Draw_lineP1" stereotype="constructor">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ukNyflkT4I3oV" name="X" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uCD2lOO5zcSMI" name="Y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uWdq58qI3K1OW" name="W" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ugUDFvR6QCw9a" name="H" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="unG4owFhPrL6A" name="L" visibility="private" type="uY9HYWY1DEzTx" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uUwl6JT6ZN5GF" name="draw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uwtcgF9Hyhf00" name="Fl_Widget">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ukqU8KJVCvOkw" name="GameScreen" type="uapIpbseTfFJh"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uVzgMqPdlTDdI" name="MMcounter_checkCBdata" comment="struct to hold counter button data">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uM48A70RAJaBG" name="counter" comment="struct to hold counter button data" type="unluQGB0qsv11"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="u9iyBgHbnWoRS" name="GameBoardButtonCBdata">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uzL5QsaT6slvz" name="Button" type="ufneWnwlOhugX"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uVWybEnTjeKRr" name="Player1Data" type="uJh2Ynzf3uKYm"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="ulfifDUvdgRs7" name="Player2Data" type="uJh2Ynzf3uKYm"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uYAsVmLlJMdy2" name="currentPlayer" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uRjtxTUKbd7bK" name="GameData" type="uYwBHGDbSVFGi"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u3fA4xV1QAs2Z" name="rows" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uJxWjFPmwwK5Q" name="cols" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uqRbqpbL6AEkt" name="P1Group" type="u9nyEgOVQzS6m"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uVosn3Vy5bbZi" name="P2Group" type="u9nyEgOVQzS6m"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="u87D8cZeRKBP1" name="GameLogic" isAbstract="true" comment="class to store game states">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uWhvQPr6dLhUd" name="CurrentTurn" comment="Player 1 goes first" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uvpuInHwzi3na" name="turn" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uQ3BcUszenSj0" name="GameMode" comment="1 for simple 0 for general game. set to 1 for default selected" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8zrzkDPpLMxk" name="Last_Player_Scored" comment="0= no one scored, XY= player x, scored y times" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uuCbxwSJwOm7W" name="EndGame" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u8NOOpxtV7ZpS" name="rows" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uLfAP8TV9SkfJ" name="cols" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="unb0YRbrRZm6U" name="CPUpresent" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uHYItBgqdYda5" name="CPUplayernum" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uI8ExPrsnpJ1V" name="SpacesPlayed" comment="stores all the played spaces" type="uTnXYPSGLmFPK"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="umOpYa4XKW1y1" name="FoundSequences" comment="used to pass the buttons to the screen class" type="uzzajy56QPY4F"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uYdFJsnjFlJtA" name="CPUlastXplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="usEBGOkBUEi2C" name="CPUlastYplayed" type="uq6SW0z8bmy6Q"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uvWyrGZ1bRb5w" name="RotatePlayerTurn" comment="Decides whos turn it should be TODO: once the sequence finder is finished, re implement this to work with game rules"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u5LPDtYRHxFth" name="setGameMode" comment="sets the gamemode">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uODEYVcMgc1QB" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uV6GMIkvQXsDM" name="addMovetoList" comment="add a space played to the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uAWiTXq6tbPyd" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOLlVCzKohKJG" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uj1OCyPYHc94U" name="Piece" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uroXngxKzmQf6" name="Button_Used" visibility="private" type="ufneWnwlOhugX" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="u3ZByzMuugRvz" name="GetWinner" comment="if it returns 0, there was a tie, otherwise returns the winner">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uk9bAb3VVinw7" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ucxpbPwOK0k9K" name="p1score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u6WvGi0hglqDk" name="p2score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uXDKwDw2PJph8" name="SequenceFinder" comment="find if a sequence was created using the size of the board and the SpacesPlayed vector">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u3PnoABVbIfrV" type="uq6SW0z8bmy6Q" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uBhxG0bvWAnAo" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uHwR5UGm8wcZJ" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyk4hz9HfQ3zz" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uhfTu91sp8aXV" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uF1qTTNVzXVUL" name="CheckOutcome" isAbstract="true" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uEp7HtXHbUslr" name="~ GameLogic" stereotype="destructor" isVirtual="true"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uzOQxC83EJUdS" name="CPUseek">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uKtUW9zAqtEfc" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uRs6fq0I5AHQH" name="FindButton">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uOMqEPKgxZbO8" type="ufneWnwlOhugX" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ueo5AsgvOEFzU" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uontAEpvjpRb1" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="ukpIqLFD63JDm" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ufmXemw84Ys4L" name="CheckIfScore">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uJqcxI0jhe745" type="u6n4tRI0jPbe9" direction="return"/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uwiz8AIrQ7D0q" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uVf9zgvOBI0Iw" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="uNSTQjYoaWnK6" name="printAllSequences"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="ucT7XsUQjc63a" name="HandleButtonPlayed">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u8UfRU5PZy4K0" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="u1DfAdsW0WXzT" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="uyyVvqyCEzTVq" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          </ownedOperation>
+          <packagedElement xmi:type="uml:Class" xmi:id="u8Zwb7LF3eQZe" name="filledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uYi16z8tQ7aKu" name="Button" comment="used in a vector, stores data about the space a player uses" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="ulHLD9SIIHZIU" name="x" comment="location" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uTIJNKmOjwEWV" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u4ZmVrNgwCb5Q" name="piece" comment="what piece was played" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uizRJrX45juni" name="player" comment="what player placed it" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uuhFS4fSwWmXB" name="Scored" comment="has the space been scored on" type="u6n4tRI0jPbe9"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="uI4yOioEiaDA9" name="tempFilledSpace">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="umkWDmrszdCzc" name="Button" type="ufneWnwlOhugX"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uHg6927VHmVRH" name="x" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uJRhiCE2umRqH" name="y" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uWqBJ4Au3nhsi" name="piece" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="u1ckBYussUDfo" name="player" type="uq6SW0z8bmy6Q"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uQgCsruazvVcY" name="Scored" type="u6n4tRI0jPbe9"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="uctO30axCBLKr" name="originalIndex" type="uq6SW0z8bmy6Q"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="uz8JedTyynkgb" name="Fl_Group"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="uZJrxDwVPTH9Z" name="CPUdualCBdata">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uKUCMQdlQJtIw" name="win" type="uapIpbseTfFJh"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uWrtmfj8ZJ1Ph" name="Player1Data" type="uJh2Ynzf3uKYm"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uef5tSP0fIVj0" name="Player2Data" type="uJh2Ynzf3uKYm"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uBsvYt7QlJn0K" name="GameData" type="uYwBHGDbSVFGi"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="ueYk22eKrLtjG" name="new_class"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="u87D8cZeRKBP1" name="GameLogic" isAbstract="true" comment="class to store game states">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uWhvQPr6dLhUd" name="CurrentTurn" comment="Player 1 goes first" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uvpuInHwzi3na" name="turn" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uQ3BcUszenSj0" name="GameMode" comment="1 for simple 0 for general game. set to 1 for default selected" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u8zrzkDPpLMxk" name="Last_Player_Scored" comment="0= no one scored, XY= player x, scored y times" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uuCbxwSJwOm7W" name="EndGame" type="u6n4tRI0jPbe9"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="u8NOOpxtV7ZpS" name="rows" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uLfAP8TV9SkfJ" name="cols" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="unb0YRbrRZm6U" name="CPUpresent" type="u6n4tRI0jPbe9"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uHYItBgqdYda5" name="CPUplayernum" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uI8ExPrsnpJ1V" name="SpacesPlayed" comment="stores all the played spaces" type="uTnXYPSGLmFPK"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="umOpYa4XKW1y1" name="FoundSequences" comment="used to pass the buttons to the screen class" type="uzzajy56QPY4F"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="uYdFJsnjFlJtA" name="CPUlastXplayed" type="uq6SW0z8bmy6Q"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="usEBGOkBUEi2C" name="CPUlastYplayed" type="uq6SW0z8bmy6Q"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uvWyrGZ1bRb5w" name="RotatePlayerTurn" comment="Decides whos turn it should be TODO: once the sequence finder is finished, re implement this to work with game rules"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="u5LPDtYRHxFth" name="setGameMode" comment="sets the gamemode">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uODEYVcMgc1QB" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uV6GMIkvQXsDM" name="addMovetoList" comment="add a space played to the SpacesPlayed vector">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uAWiTXq6tbPyd" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uOLlVCzKohKJG" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uj1OCyPYHc94U" name="Piece" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uroXngxKzmQf6" name="Button_Used" visibility="private" type="ufneWnwlOhugX" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="u3ZByzMuugRvz" name="GetWinner" comment="if it returns 0, there was a tie, otherwise returns the winner">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uk9bAb3VVinw7" type="uq6SW0z8bmy6Q" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ucxpbPwOK0k9K" name="p1score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="u6WvGi0hglqDk" name="p2score" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uXDKwDw2PJph8" name="SequenceFinder" comment="find if a sequence was created using the size of the board and the SpacesPlayed vector">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="u3PnoABVbIfrV" type="uq6SW0z8bmy6Q" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uBhxG0bvWAnAo" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uHwR5UGm8wcZJ" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uyk4hz9HfQ3zz" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uhfTu91sp8aXV" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uF1qTTNVzXVUL" name="CheckOutcome" isAbstract="true" isVirtual="true"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uEp7HtXHbUslr" name="~ GameLogic" stereotype="destructor" isVirtual="true"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uzOQxC83EJUdS" name="CPUseek">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uKtUW9zAqtEfc" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uRs6fq0I5AHQH" name="FindButton">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uOMqEPKgxZbO8" type="ufneWnwlOhugX" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ueo5AsgvOEFzU" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uontAEpvjpRb1" name="x" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="ukpIqLFD63JDm" name="y" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="ufmXemw84Ys4L" name="CheckIfScore">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uJqcxI0jhe745" type="u6n4tRI0jPbe9" direction="return"/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uwiz8AIrQ7D0q" name="rows" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uVf9zgvOBI0Iw" name="cols" visibility="private" type="uq6SW0z8bmy6Q" value=""/>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="uNSTQjYoaWnK6" name="printAllSequences"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="ucT7XsUQjc63a" name="HandleButtonPlayed">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="u8UfRU5PZy4K0" name="Player1Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="u1DfAdsW0WXzT" name="Player2Data" visibility="private" type="uJh2Ynzf3uKYm" value=""/>
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="uyyVvqyCEzTVq" name="win" visibility="private" type="uapIpbseTfFJh" value=""/>
+        </ownedOperation>
+        <packagedElement xmi:type="uml:Class" xmi:id="u8Zwb7LF3eQZe" name="filledSpace">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uYi16z8tQ7aKu" name="Button" comment="used in a vector, stores data about the space a player uses" type="ufneWnwlOhugX"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="ulHLD9SIIHZIU" name="x" comment="location" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uTIJNKmOjwEWV" name="y" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u4ZmVrNgwCb5Q" name="piece" comment="what piece was played" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uizRJrX45juni" name="player" comment="what player placed it" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uuhFS4fSwWmXB" name="Scored" comment="has the space been scored on" type="u6n4tRI0jPbe9"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="uI4yOioEiaDA9" name="tempFilledSpace">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="umkWDmrszdCzc" name="Button" type="ufneWnwlOhugX"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uHg6927VHmVRH" name="x" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uJRhiCE2umRqH" name="y" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uWqBJ4Au3nhsi" name="piece" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="u1ckBYussUDfo" name="player" type="uq6SW0z8bmy6Q"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uQgCsruazvVcY" name="Scored" type="u6n4tRI0jPbe9"/>
+          <ownedAttribute xmi:type="uml:Property" xmi:id="uctO30axCBLKr" name="originalIndex" type="uq6SW0z8bmy6Q"/>
+        </packagedElement>
+      </packagedElement>
+      <xmi:Extension extender="umbrello">
+        <diagrams resolution="96">
+          <diagram xmi.id="uB0WNJt3jujsF" name="class diagram" type="1" documentation="" backgroundcolor="#ffffff" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" griddotcolor="#d3d3d3" linecolor="#990000" linewidth="0" textcolor="#000000" usefillcolor="1" showattribassocs="1" showatts="1" showattsig="1" showops="1" showopsig="1" showpackage="1" showpubliconly="0" showscope="1" showstereotype="2" localid="-1" showgrid="0" snapgrid="0" snapcsgrid="0" snapx="25" snapy="25" zoom="64.7132" canvasheight="800" canvaswidth="1100" isopen="1">
+            <widgets>
+              <classwidget xmi.id="upbfue7rK0jUd" localid="u6Ibo80VHU0cT" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="54.3087" y="-37.8614" width="592" height="198" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
+              <classwidget xmi.id="uvOfBhGiG0Ruf" localid="uCNIxhrH5i9f4" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="359.076" y="-267.651" width="241" height="90" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
+              <classwidget xmi.id="u87D8cZeRKBP1" localid="uo5YA2hQeriFZ" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="743.596" y="-90.6825" width="645" height="468" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601" drawascircle="0"/>
+              <classwidget xmi.id="uy3IXxeGUL0bk" localid="uLATc7xQUlrwp" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="985.561" y="-306.595" width="135" height="45" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
+              <classwidget xmi.id="uV9GDoRnQkNIm" localid="uzbzSmq2nfPj8" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="181.578" y="-444.99" width="111" height="45" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
+              <interfacewidget xmi.id="uYvcca921ccNm" localid="ur9RLh6Zyf8lp" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="437.503" y="-434.472" width="83" height="27" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="0" showattsigs="601" drawascircle="0"/>
+              <classwidget xmi.id="uc9VofAVGxv60" localid="ul1Qtp9RQXmdn" textcolor="#000000" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="0" usesdiagramusefillcolor="0" fillcolor="#ffffc0" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" x="760.542" y="-306.485" width="128" height="45" isinstance="0" showstereotype="2" showoperations="1" showpubliconly="0" showopsigs="601" showpackage="1" showscope="1" showattributes="1" showattsigs="601"/>
+            </widgets>
+            <messages/>
+            <associations>
+              <assocwidget xmi.id="uYIfmtnDnqUiN" localid="uffLrVMJi3MTp" textcolor="none" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="1" usesdiagramusefillcolor="1" fillcolor="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" seqnum="" type="500" widgetaid="uYvcca921ccNm" widgetbid="uvOfBhGiG0Ruf" indexa="0" totalcounta="0" indexb="0" totalcountb="0">
+                <linepath layout="Direct">
+                  <startpoint startx="479.042" starty="-407.472"/>
+                  <endpoint endx="479.446" endy="-267.651"/>
+                </linepath>
+              </assocwidget>
+              <assocwidget xmi.id="uLiaENl8dJB7y" localid="ufBPJm1GXJ7Rk" textcolor="none" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="1" usesdiagramusefillcolor="1" fillcolor="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" seqnum="" type="511" widgetaid="uV9GDoRnQkNIm" widgetbid="uYvcca921ccNm" indexa="0" totalcounta="0" indexb="0" totalcountb="0">
+                <linepath layout="Direct">
+                  <startpoint startx="292.578" starty="-422.142"/>
+                  <endpoint endx="437.503" endy="-421.233"/>
+                </linepath>
+              </assocwidget>
+              <assocwidget xmi.id="uh9StbqZRNd4I" localid="uZA3N9KtDGYvj" textcolor="none" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="1" usesdiagramusefillcolor="1" fillcolor="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" seqnum="" type="500" widgetaid="uy3IXxeGUL0bk" widgetbid="u87D8cZeRKBP1" indexa="0" totalcounta="0" indexb="0" totalcountb="0">
+                <linepath layout="Direct">
+                  <startpoint startx="1053.75" starty="-261.595"/>
+                  <endpoint endx="1058.96" endy="-90.6825"/>
+                </linepath>
+              </assocwidget>
+              <assocwidget xmi.id="u8gfsDF9zEq6j" localid="uGp8FcgUOI5iA" textcolor="none" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="1" usesdiagramusefillcolor="1" fillcolor="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" seqnum="" type="509" visibilityA="0" visibilityB="0" changeabilityA="900" changeabilityB="900" roleAdoc="" roleBdoc="" documentation="" widgetaid="uy3IXxeGUL0bk" widgetbid="u87D8cZeRKBP1" indexa="0" totalcounta="0" indexb="0" totalcountb="0">
+                <linepath layout="Direct">
+                  <startpoint startx="1053.75" starty="-261.595"/>
+                  <endpoint endx="1058.96" endy="-90.6825"/>
+                </linepath>
+              </assocwidget>
+              <assocwidget xmi.id="uiWem1i1cIEZ9" localid="uNGa1FQtL7JSC" textcolor="none" linecolor="#990000" linewidth="0" usefillcolor="1" usesdiagramfillcolor="1" usesdiagramusefillcolor="1" fillcolor="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" autoresize="1" seqnum="" type="500" widgetaid="uc9VofAVGxv60" widgetbid="u87D8cZeRKBP1" indexa="0" totalcounta="0" indexb="0" totalcountb="0">
+                <linepath layout="Direct">
+                  <startpoint startx="837.262" starty="-261.485"/>
+                  <endpoint endx="933.816" endy="-90.6825"/>
+                </linepath>
+              </assocwidget>
+            </associations>
+          </diagram>
+        </diagrams>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Model" xmi:id="Use_Case_View" name="Use Case View"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="Component_View" name="Component View">
+      <uml:Package xmi:id="uUrUvVME9a9CU" name="/home/jchir/Nextcloud/cs-449/Project/sprint4/src" stereotype="folder">
+        <packagedElement xmi:type="uml:Artifact" xmi:id="us3G6sjvSXD31" name="game_logic.hpp" drawas="1"/>
+        <packagedElement xmi:type="uml:Artifact" xmi:id="uCbzPjF9Vc2Qm" name="playerlogic.hpp" drawas="1"/>
+        <packagedElement xmi:type="uml:Artifact" xmi:id="uMsv62YFBFMeb" name="screen_def.hpp" drawas="1"/>
+      </uml:Package>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Model" xmi:id="Deployment_View" name="Deployment View"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="Entity_Relationship_Model" name="Entity Relationship Model"/>
+  </uml:Model>
+  <xmi:Extension extender="umbrello">
+    <docsettings viewid="uB0WNJt3jujsF" documentation="" uniqueid="ufBPJm1GXJ7Rk"/>
+    <listview>
+      <listitem id="Views" type="800" open="1">
+        <listitem id="Component_View" type="821" open="1">
+          <listitem id="uUrUvVME9a9CU" type="820" open="0">
+            <listitem id="us3G6sjvSXD31" type="824" open="0"/>
+            <listitem id="uCbzPjF9Vc2Qm" type="824" open="0"/>
+            <listitem id="uMsv62YFBFMeb" type="824" open="0"/>
+          </listitem>
+        </listitem>
+        <listitem id="Deployment_View" type="827" open="1"/>
+        <listitem id="Entity_Relationship_Model" type="836" open="1"/>
+        <listitem id="Logical_View" type="801" open="1">
+          <listitem id="uB0WNJt3jujsF" type="807" label="class diagram" open="0"/>
+          <listitem id="uZJrxDwVPTH9Z" type="813" open="0">
+            <listitem id="uBsvYt7QlJn0K" type="814" open="0"/>
+            <listitem id="uWrtmfj8ZJ1Ph" type="814" open="0"/>
+            <listitem id="uef5tSP0fIVj0" type="814" open="0"/>
+            <listitem id="uKUCMQdlQJtIw" type="814" open="0"/>
+          </listitem>
+          <listitem id="uV9GDoRnQkNIm" type="813" open="0">
+            <listitem id="uMPnWlMUim2Kt" type="814" open="0"/>
+            <listitem id="ugep9QYcRkHRA" type="813" open="0">
+              <listitem id="urJanWw9O7Ilq" type="814" open="0"/>
+              <listitem id="uF2QuhxrQxI9s" type="814" open="0"/>
+              <listitem id="uDb6j4Ca6maEi" type="814" open="0"/>
+              <listitem id="uYyeYaIwNkAPC" type="814" open="0"/>
+              <listitem id="uhcsAhhn76LZc" type="814" open="0"/>
+              <listitem id="u5DRx2TxEsNxd" type="814" open="0"/>
+              <listitem id="uyBU6uXxkIjiN" type="814" open="0"/>
+            </listitem>
+          </listitem>
+          <listitem id="Datatypes" type="830" open="0">
+            <listitem id="u6n4tRI0jPbe9" type="829" open="0"/>
+            <listitem id="uY9HYWY1DEzTx" type="829" open="0"/>
+            <listitem id="u3tluFD3qu0IC" type="829" open="0"/>
+            <listitem id="utXMVIY47H93t" type="829" open="0"/>
+            <listitem id="uIX8qYctvzrov" type="829" open="0"/>
+            <listitem id="unluQGB0qsv11" type="829" open="0"/>
+            <listitem id="uapIpbseTfFJh" type="829" open="0"/>
+            <listitem id="u9nyEgOVQzS6m" type="829" open="0"/>
+            <listitem id="uqIJim2n46thL" type="829" open="0"/>
+            <listitem id="ufneWnwlOhugX" type="829" open="0"/>
+            <listitem id="uNvDuZs2a8suQ" type="829" open="0"/>
+            <listitem id="uCuQyD2Jnlm06" type="829" open="0"/>
+            <listitem id="uYwBHGDbSVFGi" type="829" open="0"/>
+            <listitem id="uq6SW0z8bmy6Q" type="829" open="0"/>
+            <listitem id="ukTZVLv6Buhnr" type="829" open="0"/>
+            <listitem id="u8FRH83VLIZBL" type="829" open="0"/>
+            <listitem id="uJh2Ynzf3uKYm" type="829" open="0"/>
+            <listitem id="uWp19vfeP252Z" type="829" open="0"/>
+            <listitem id="uOEsl6zURA2WG" type="829" open="0"/>
+            <listitem id="uqa5pTrQWRLky" type="829" open="0"/>
+            <listitem id="uiOJwSfDTOZsE" type="829" open="0"/>
+            <listitem id="uHvebk11RO07A" type="829" open="0"/>
+            <listitem id="ulfAo41guNZmf" type="829" open="0"/>
+            <listitem id="uPLqXNd7UMZ6f" type="829" open="0"/>
+            <listitem id="uchWVrHTu6Ehy" type="829" open="0"/>
+            <listitem id="u42iKBzsHbdIe" type="829" open="0"/>
+            <listitem id="uRjshDON5ywnQ" type="829" open="0"/>
+            <listitem id="uTnXYPSGLmFPK" type="829" open="0"/>
+            <listitem id="uzzajy56QPY4F" type="829" open="0"/>
+            <listitem id="uKrfM6e3hFzaz" type="829" open="0"/>
+          </listitem>
+          <listitem id="uDxh9lyQXtl34" type="813" open="0">
+            <listitem id="u9pAE7hThWLo2" type="815" open="0"/>
+            <listitem id="uUwl6JT6ZN5GF" type="815" open="0"/>
+          </listitem>
+          <listitem id="utkbMV2itMdx9" type="813" open="0"/>
+          <listitem id="umdJ18nxv6Z2J" type="813" open="0"/>
+          <listitem id="uuKKYAIqWCthH" type="813" open="0"/>
+          <listitem id="uhE223N0SZKfR" type="813" open="0"/>
+          <listitem id="uz8JedTyynkgb" type="813" open="0"/>
+          <listitem id="uLZ50C76mglEN" type="813" open="1"/>
+          <listitem id="u0Um1n4zTllTp" type="813" open="0"/>
+          <listitem id="uwtcgF9Hyhf00" type="813" open="0"/>
+          <listitem id="uICA0yhmVjJRn" type="813" open="0"/>
+          <listitem id="upbfue7rK0jUd" type="813" open="0">
+            <listitem id="uA8QayXcBMM3O" type="814" open="0"/>
+            <listitem id="ucSwBQcQxIPb6" type="814" open="0"/>
+            <listitem id="uxyPWVYYXFbqK" type="815" open="0"/>
+            <listitem id="u4TnorLm2V2Rd" type="814" open="0"/>
+            <listitem id="u55gqwnY3bpOJ" type="814" open="0"/>
+            <listitem id="u0lYXeoSAd7qn" type="815" open="0"/>
+            <listitem id="uZL7cYY5bK5WA" type="815" open="0"/>
+            <listitem id="ul8o24i8NTS1E" type="814" open="0"/>
+            <listitem id="uR2eIfA8uojrX" type="815" open="0"/>
+            <listitem id="u7cecMDsfCV6M" type="815" open="0"/>
+          </listitem>
+          <listitem id="u9iyBgHbnWoRS" type="813" open="0">
+            <listitem id="uzL5QsaT6slvz" type="814" open="0"/>
+            <listitem id="uJxWjFPmwwK5Q" type="814" open="0"/>
+            <listitem id="uYAsVmLlJMdy2" type="814" open="0"/>
+            <listitem id="uRjtxTUKbd7bK" type="814" open="0"/>
+            <listitem id="ukqU8KJVCvOkw" type="814" open="0"/>
+            <listitem id="uqRbqpbL6AEkt" type="814" open="0"/>
+            <listitem id="uVosn3Vy5bbZi" type="814" open="0"/>
+            <listitem id="uVWybEnTjeKRr" type="814" open="0"/>
+            <listitem id="ulfifDUvdgRs7" type="814" open="0"/>
+          </listitem>
+          <listitem id="u87D8cZeRKBP1" type="813" open="0">
+            <listitem id="uEp7HtXHbUslr" type="815" open="0"/>
+            <listitem id="uV6GMIkvQXsDM" type="815" open="0"/>
+            <listitem id="ufmXemw84Ys4L" type="815" open="0"/>
+            <listitem id="uF1qTTNVzXVUL" type="815" open="0"/>
+            <listitem id="uLfAP8TV9SkfJ" type="814" open="0"/>
+            <listitem id="uYdFJsnjFlJtA" type="814" open="0"/>
+            <listitem id="usEBGOkBUEi2C" type="814" open="0"/>
+            <listitem id="uHYItBgqdYda5" type="814" open="0"/>
+            <listitem id="unb0YRbrRZm6U" type="814" open="0"/>
+            <listitem id="uzOQxC83EJUdS" type="815" open="0"/>
+            <listitem id="uWhvQPr6dLhUd" type="814" open="0"/>
+            <listitem id="uuCbxwSJwOm7W" type="814" open="0"/>
+            <listitem id="u8Zwb7LF3eQZe" type="813" open="0">
+              <listitem id="uYi16z8tQ7aKu" type="814" open="0"/>
+              <listitem id="u4ZmVrNgwCb5Q" type="814" open="0"/>
+              <listitem id="uizRJrX45juni" type="814" open="0"/>
+              <listitem id="uuhFS4fSwWmXB" type="814" open="0"/>
+              <listitem id="ulHLD9SIIHZIU" type="814" open="0"/>
+              <listitem id="uTIJNKmOjwEWV" type="814" open="0"/>
+            </listitem>
+            <listitem id="uRs6fq0I5AHQH" type="815" open="0"/>
+            <listitem id="umOpYa4XKW1y1" type="814" open="0"/>
+            <listitem id="uQ3BcUszenSj0" type="814" open="0"/>
+            <listitem id="u3ZByzMuugRvz" type="815" open="0"/>
+            <listitem id="ucT7XsUQjc63a" type="815" open="0"/>
+            <listitem id="u8zrzkDPpLMxk" type="814" open="0"/>
+            <listitem id="uNSTQjYoaWnK6" type="815" open="0"/>
+            <listitem id="uvWyrGZ1bRb5w" type="815" open="0"/>
+            <listitem id="u8NOOpxtV7ZpS" type="814" open="0"/>
+            <listitem id="uXDKwDw2PJph8" type="815" open="0"/>
+            <listitem id="u5LPDtYRHxFth" type="815" open="0"/>
+            <listitem id="uI8ExPrsnpJ1V" type="814" open="0"/>
+            <listitem id="uI4yOioEiaDA9" type="813" open="0">
+              <listitem id="umkWDmrszdCzc" type="814" open="0"/>
+              <listitem id="uctO30axCBLKr" type="814" open="0"/>
+              <listitem id="uWqBJ4Au3nhsi" type="814" open="0"/>
+              <listitem id="u1ckBYussUDfo" type="814" open="0"/>
+              <listitem id="uQgCsruazvVcY" type="814" open="0"/>
+              <listitem id="uHg6927VHmVRH" type="814" open="0"/>
+              <listitem id="uJRhiCE2umRqH" type="814" open="0"/>
+            </listitem>
+            <listitem id="uvpuInHwzi3na" type="814" open="0"/>
+          </listitem>
+          <listitem id="uy3IXxeGUL0bk" type="813" open="1"/>
+          <listitem id="uc3R69zdkNy6o" type="813" open="0">
+            <listitem id="ui8zpNSYuRVTq" type="814" open="0"/>
+            <listitem id="ug7vUOtr7osR9" type="814" open="0"/>
+            <listitem id="uT95WLuvlS2tX" type="814" open="0"/>
+            <listitem id="u3HC5vkGSqxbV" type="814" open="0"/>
+            <listitem id="uiGV3iskLZ6es" type="814" open="0"/>
+            <listitem id="uEuufONsAvsqm" type="814" open="0"/>
+          </listitem>
+          <listitem id="uVzgMqPdlTDdI" type="813" open="0">
+            <listitem id="uM48A70RAJaBG" type="814" open="0"/>
+          </listitem>
+          <listitem id="ueYk22eKrLtjG" type="813" open="1"/>
+          <listitem id="uYvcca921ccNm" type="813" open="0"/>
+          <listitem id="uvOfBhGiG0Ruf" type="813" open="0">
+            <listitem id="uc441ll3s5m7h" type="815" open="0"/>
+            <listitem id="uTtAUM4U8V8mo" type="815" open="0"/>
+            <listitem id="uoNpGWb4Gp3GY" type="814" open="0"/>
+            <listitem id="ufnbdE6Nqdrwk" type="814" open="0"/>
+          </listitem>
+          <listitem id="umDu6fMGyGOIG" type="813" open="0">
+            <listitem id="uWp94d3rKD4IT" type="814" open="0"/>
+            <listitem id="umCYCIIU4GJo6" type="815" open="0"/>
+            <listitem id="uXFzhZVRGga3a" type="815" open="0"/>
+            <listitem id="uuOcG72k3VpyI" type="814" open="0"/>
+          </listitem>
+          <listitem id="uCkUaaE9cknNp" type="813" open="0">
+            <listitem id="ueXxnhvDY8J5g" type="814" open="0"/>
+            <listitem id="u10xfDVT9BFmS" type="814" open="0"/>
+            <listitem id="uFk6iGqqDKCrK" type="814" open="0"/>
+          </listitem>
+          <listitem id="uc9VofAVGxv60" type="813" open="0">
+            <listitem id="uf1KqPaTSq4d1" type="815" open="0"/>
+          </listitem>
+          <listitem id="uIR38OBDYb6Y5" type="813" open="0">
+            <listitem id="ujBHDi09uMdne" type="813" open="0"/>
+            <listitem id="uTWL4uK4i7SQ2" type="813" open="0"/>
+          </listitem>
+        </listitem>
+        <listitem id="Use_Case_View" type="802" open="1"/>
+      </listitem>
+    </listview>
+    <codegeneration>
+      <codegenerator language="C++"/>
+    </codegeneration>
+  </xmi:Extension>
+</xmi:XMI>
