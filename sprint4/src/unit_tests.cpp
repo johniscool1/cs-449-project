@@ -3,9 +3,11 @@
 #include "screen_def.hpp"
 #include "game_logic.hpp"
 
+using namespace std;
+
 
 bool debug = true;
-
+int CPUwaittime = 0;
 
 //gcc -g -o tests tests.cpp test_lib/catch_amalgamated.cpp screen_def.cpp game_logic.cpp game_logic.hpp -lfltk -lm -lstdc++
 
@@ -357,4 +359,57 @@ TEST_CASE("8.1 & 8.2 CPU player is compitent")
 }
 
 
+struct TempVect
+{
+        int x;
+        int y;
+};
 
+TEST_CASE("8.3 CPU v CPU")
+{
+ GameLogic* GameData;
+ GameData = new GeneralGameMode;
+ //GameData = new SimpleGameMode;
+ GameData->rows =10;
+ GameData->cols=10;
+ GameBoard* GameScreen = new GameBoard;
+ CPULogic* player1Data = new CPULogic;
+ player1Data->CPUplayer = 1;
+ CPULogic* player2Data = new CPULogic;
+ player2Data->CPUplayer = 2;
+ GameData->CPUplayernum =3;
+ //set gamemode
+ GameData->GameMode = 0;
+ Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
+ Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
+ GameScreen->BoardButton = new Fl_Toggle_Button(184, 226 ,40, 40, "");
+ while(!GameData->EndGame)
+ {
+  GameData->CPUseek(NULL);
+  GameData->RotatePlayerTurn();
+  GameData->CheckOutcome();
+ }
+ //remove duplicates
+ vector<TempVect> SpacesPlayedNoDupes;
+ for(int i=0; i < GameData->SpacesPlayed.size(); i++)
+ {
+   bool isDupe = false;
+   for(int j=0; j < SpacesPlayedNoDupes.size(); j++)
+   {
+     if(GameData->SpacesPlayed[i].x == SpacesPlayedNoDupes[j].x && GameData->SpacesPlayed[i].y == SpacesPlayedNoDupes[j].y)
+     {
+        isDupe = True;
+     }
+   }
+   if(!isDupe)
+   {
+      TempVect tempCont;
+      tempCont.x = GameData->SpacesPlayed[i].x;
+      tempCont.y = GameData->SpacesPlayed[i].y;
+      SpacesPlayedNoDupes.push_back(tempCont);
+   }
+ }
+
+ REQUIRE(SpacesPlayedNoDupes.size() == 100);
+
+}
