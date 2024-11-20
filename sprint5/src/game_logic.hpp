@@ -25,6 +25,13 @@ using namespace std;
 //class to store player states
 
 
+
+extern "C" {
+  extern int retrieveReplay(int *, int *, int *, int *, int *);
+  extern int addtofile(int *, int *, int *,int *,int *);
+  extern int createFile();
+}
+
 //class to store game states
 class GameLogic
 {
@@ -40,7 +47,7 @@ public:
  int CPUplayernum = 0;
 
 
- bool recordGame = true;
+ bool recordGame = false;
 
  int turnNum = 0;
 
@@ -143,5 +150,6 @@ public:
     }
 };
 
+void ReplayGame(Fl_Widget*, void * data);
 
 #endif

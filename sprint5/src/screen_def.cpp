@@ -114,7 +114,7 @@ void GameBoard::DrawButtons(PlayerLogic* player1data, PlayerLogic* player2data, 
    GameBoardButtonCBdata* cbGameButtonData = new GameBoardButtonCBdata{BoardButton, player1data, player2data, gameData->CurrentTurn, gameData, rows, cols, Player1Controls, Player2Controls, GameBoardWin};
 
    //set button callback
-   BoardButton->callback(GameBoardButtonPressedCB, cbGameButtonData);
+   BoardButton->callback( GameBoardButtonPressedCB, cbGameButtonData);
    //make the buttons parent windows to the board
    BoardButton->parent(GameBoardWin);
   }
@@ -149,6 +149,8 @@ void playGameButtonCB(Fl_Widget*, void* data)
  } else {
    GameData = new GeneralGameMode;
  }
+
+
 
  //GameLogic* GameData = new GameLogic;
  GameBoard* sosGameBoard = new GameBoard;
@@ -200,11 +202,18 @@ void playGameButtonCB(Fl_Widget*, void* data)
  sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
  //sosGameBoard.DrawSettings();
 
+ //check if we need to record
+ if(menuSettings->RECselection->value() == 1)
+ {
+   GameData->recordGame = true;
+   //record settings at index 999
+   cob_init(0, NULL);
 
- //check if game recorded
- cob_init(0, NULL);
- createFile();
-
+   createFile();
+   int lastIndex = 999;
+   int blank = 0;
+   addtofile(&lastIndex, &GameData->cols, &GameData->rows, &GameData->GameMode, &blank);
+ }
 
 
 
@@ -325,7 +334,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
 
  if(ButtonPressedData->GameData->recordGame)
  {
-   ButtonPressedData->GameData->RecordMove(ButtonX, ButtonY, ButtonPressedData->Player2Data->SelectedPiece);
+   ButtonPressedData->GameData->RecordMove(ButtonX, ButtonY, ButtonPressedData->Player1Data->SelectedPiece);
  }
  //printf("Piece: %s\n", piece);
  }
@@ -352,6 +361,7 @@ void GameBoardButtonPressedCB(Fl_Widget*, void* data)
  }
 
  ButtonThatWasPressed->label(piece);
+ ButtonThatWasPressed->labelcolor(FL_WHITE);
 
  //keep button down
  ButtonThatWasPressed->deactivate();
@@ -458,12 +468,20 @@ void game_main_menu()
  CPUsel->add("Player 1 and 2");
  CPUsel->value(0);
 
+ Fl_Choice* RECsel = new Fl_Choice(350, 240, 100, 30, "record");
+ RECsel->add("No");
+ RECsel->add("Yes");
+ RECsel->value(0);
+
+
+
  //play button
  Fl_Button *playButton = new Fl_Button(200, 350,300, 50, "Play");
- MainMenuCBdata* cbGameMenuData = new MainMenuCBdata{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB, CPUsel};
+ MainMenuCBdata* cbGameMenuData = new MainMenuCBdata{GMainMenu, UserInputX, UserInputY, SimpleGameModeRB, GeneralGameModeRB, CPUsel, RECsel};
  playButton->callback(playGameButtonCB, cbGameMenuData);
  //Fl_Button *resButton = new Fl_Button(200, 310,300, 50, "Set Resultion");
- Fl_Button *quitButton = new Fl_Button(200, 400,300, 50, "Quit");
+ Fl_Button *ReplayButton = new Fl_Button(200, 400,300, 50, "RePlay");
+ ReplayButton->callback(ReplayGame, cbGameMenuData);
 
 
  GMainMenu->end();

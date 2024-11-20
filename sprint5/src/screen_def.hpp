@@ -75,6 +75,7 @@ struct MainMenuCBdata {
     Fl_Round_Button* SimpleGamemodeRB;
     Fl_Round_Button* GeneralGamemodeRB;
     Fl_Choice* CPUselection;
+    Fl_Choice* RECselection;
 };
 
 

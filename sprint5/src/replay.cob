@@ -13,14 +13,14 @@
        FILE SECTION.
        FD FC-REPLAY-FILE.
        01 FS-REPLAY.
-           02 FS-REPLAY-TURN-NUM PIC 99.
+           02 FS-REPLAY-TURN-NUM PIC 999.
            02 FS-REPLAY-X PIC S99.
            02 FS-REPLAY-Y PIC S99.
            02 FS-REPLAY-PIECE PIC 9.
            02 FS-REPLAY-PLAYER PIC 9.
        WORKING-STORAGE SECTION.
       * 01 WS-REPLAY.
-       01 WS-REPLAY-TURN-NUM PIC 99.
+       01 WS-REPLAY-TURN-NUM PIC 999.
       *     02 WS-REPLAY-X PIC S99.
       *     02 WS-REPLAY-Y PIC S99.
       *    02 WS-REPLAY-PIECE PIC 9.
@@ -60,7 +60,7 @@
            CLOSE FC-REPLAY-FILE
            GOBACK.
        110-GET-ENTRY.
-           ENTRY "get-from-file" USING BY REFERENCE LS-TURN-NUM
+           ENTRY "retrieveReplay" USING BY REFERENCE LS-TURN-NUM
                                 BY REFERENCE LS-REPLAY-X
                                 BY REFERENCE LS-REPLAY-Y
                                 BY REFERENCE LS-REPLAY-PIECE
@@ -79,6 +79,7 @@
                         MOVE FS-REPLAY-PIECE TO LS-REPLAY-PIECE
                         MOVE FS-REPLAY-PLAYER TO LS-REPLAY-PLAYER
            END-START
+           CLOSE FC-REPLAY-FILE
            GOBACK.
        120-CREATE-FILE.
            ENTRY "createFile"

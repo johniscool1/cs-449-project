@@ -3,10 +3,7 @@
 
 using namespace std;
 
-extern "C" {
-  extern int addtofile(int *, int *, int *,int *,int *);
-  extern int createFile();
-}
+
 //DEBUG
 
 
@@ -1001,7 +998,7 @@ void GameLogic::CPUseek(Fl_Double_Window* win)
  Fl_Toggle_Button* button;
  if(!debug) {
   button = FindButton(win, CPUmove.x, CPUmove.y);
-  button->down_color(FL_GREEN);
+  //button->down_color(FL_GREEN);
 
 
   switch(CPUmove.piece) {
@@ -1204,3 +1201,105 @@ void GameLogic::HandleButtonPlayed(PlayerLogic* Player1Data, PlayerLogic* Player
      }
     }
 }
+
+void doNothing(void* data)
+{
+  return ;
+}
+
+void ReplayGame(Fl_Widget*, void* data)
+{
+  //init cb data
+  MainMenuCBdata* menuSettings = static_cast<MainMenuCBdata*>(data);
+  //hide menu
+  Fl_Window* win = static_cast<Fl_Double_Window*>(menuSettings->window); // Cast void* to Fl_Window*
+  win->hide();
+
+  GameLogic* GameData;
+  //retrieve settings
+  int settingsIndex = 999;
+  int blank = 0;
+  int tempCols, tempRows, tempGameMode = 0;
+  cob_init(0, NULL);
+  retrieveReplay(&settingsIndex, &tempCols, &tempRows, &tempGameMode, &blank);
+
+  //init window
+  if(tempGameMode == 0)
+ {
+   GameData = new SimpleGameMode;
+   GameData->setGameMode(1);
+ } else {
+   GameData = new GeneralGameMode;
+   GameData->setGameMode(0);
+ }
+ GameData->rows = tempRows;
+ GameData->cols = tempCols;
+
+ GameBoard* sosGameBoard = new GameBoard;
+
+ PlayerLogic* player1Data =new PlayerLogic;
+ PlayerLogic* player2Data =new PlayerLogic;
+
+ sosGameBoard->initwin();
+ sosGameBoard->SetBoardDimensions(tempCols,tempRows);
+
+ //set cpu player num to 3 to disable controls
+ GameData->CPUplayernum == 3;
+ sosGameBoard->DrawButtons(player1Data, player2Data, GameData);
+ GameData->CPUplayernum == 0;
+ sosGameBoard->GameBoardWin->show();
+
+ sosGameBoard->GameBoardWin->wait_for_expose();
+ Fl::flush();
+
+ //run loop until we reach end (end is when we hit an invalid record, which will be when x and y are both -1)
+
+ //we go until 999 becuase that is the highest record in the ISAM. We also start at 1 becuase thats the first index in ISAM
+ for(int i = 1; i < 999; i++)
+ {
+  int tempX, tempY, tempPiece, tempPlayer;
+
+  retrieveReplay(&i, &tempX, &tempY, &tempPiece, &tempPlayer);
+  //check if we've hit the end
+  if(tempX == -1 & tempY == -1)
+  {
+    break;
+  }
+  switch (tempPlayer) {
+    case 1:
+      GameData->CurrentTurn = 1;
+      player1Data->ChangeSelectedPiece(tempPiece);
+      break;
+    case 2:
+      GameData->CurrentTurn = 2;
+      player2Data->ChangeSelectedPiece(tempPiece);
+      break;
+  }
+  //find the button
+  Fl_Toggle_Button* button;
+  button = GameData->FindButton(sosGameBoard->GameBoardWin, tempX, tempY);
+
+  //add fake player groups
+  Fl_Group* Player1Controls = new Fl_Group(10, 100, 50, 100);
+  Fl_Group* Player2Controls = new Fl_Group(10, 100, 50, 100);
+
+
+  //inint CB data
+  GameBoardButtonCBdata* cbGameButtonData = new GameBoardButtonCBdata{button, player1Data, player2Data, GameData->CurrentTurn, GameData, tempRows, tempCols, Player1Controls, Player2Controls, sosGameBoard->GameBoardWin};
+
+  //play the button
+  GameBoardButtonPressedCB(NULL, cbGameButtonData);
+
+  sleep(1);
+  Fl::wait();
+ }
+
+
+
+
+
+
+}
+
+
+
