@@ -33,16 +33,6 @@
        01 LS-REPLAY-PIECE USAGE BINARY-LONG.
        01 LS-REPLAY-PLAYER USAGE BINARY-LONG.
        PROCEDURE DIVISION. 
-       main.
-           ENTRY "replay" USING BY REFERENCE LS-TURN-NUM
-           DISPLAY LS-TURN-NUM
-           move 5 to LS-TURN-NUM
-           DISPLAY LS-TURN-NUM
-           GOBACK. 
-       second.
-           entry "replay2" using BY REFERENCE LS-TURN-NUM
-           move 6 to LS-TURN-NUM
-           GOBACK.
        100-ADD-ENTRY.
            entry "addtofile" USING BY REFERENCE LS-TURN-NUM
                                 BY REFERENCE LS-REPLAY-X
