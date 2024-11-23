@@ -1290,8 +1290,10 @@ void ReplayGame(Fl_Widget*, void* data)
   //play the button
   GameBoardButtonPressedCB(NULL, cbGameButtonData);
 
-  sleep(1);
+
   Fl::wait();
+  sleep(1);
+
  }
 
 
